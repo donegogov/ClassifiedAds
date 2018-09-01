@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import {map} from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
-import { registerContentQuery } from '@angular/core/src/render3/instructions';
 
 @Injectable({
   providedIn: 'root'
