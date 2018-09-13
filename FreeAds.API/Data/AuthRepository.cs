@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using FreeAds.API.enums;
 using FreeAds.API.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -47,6 +48,7 @@ namespace FreeAds.API.Data
 
             user.PasswordHash = passwordHash;
             user.PasswordSalt = passwordSalt;
+            user.UserRole = Role.User();
 
             await _context.Users.AddAsync(user);
             await _context.SaveChangesAsync();

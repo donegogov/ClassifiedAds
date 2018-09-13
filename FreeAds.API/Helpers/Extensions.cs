@@ -1,3 +1,4 @@
+using System;
 using Microsoft.AspNetCore.Http;
 
 namespace FreeAds.API.Helpers
@@ -9,6 +10,13 @@ namespace FreeAds.API.Helpers
             response.Headers.Add("Application-Error", message);
             response.Headers.Add("Access-Control-Expose-Headers", "Application-Error");
             response.Headers.Add("Access-Control-Allow-Origin", "*");
+        }
+
+        public static int CalculateAge(this DateTime theDateTime)
+        {
+            var age = (DateTime.Today - theDateTime).Days;
+
+            return age;
         }
     }
 }
