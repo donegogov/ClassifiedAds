@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using FreeAds.API.enums;
 
 namespace FreeAds.API.Models

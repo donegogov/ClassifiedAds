@@ -48,7 +48,6 @@ namespace FreeAds.API.Data
 
             user.PasswordHash = passwordHash;
             user.PasswordSalt = passwordSalt;
-            user.UserRole = Role.User();
 
             await _context.Users.AddAsync(user);
             await _context.SaveChangesAsync();

@@ -35,11 +35,11 @@ namespace FreeAds.API.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetClassifiedAd(int id)
+        public async Task<IActionResult> GetClassifiedAdDetail(int id)
         {
-            var classifiedAds = await _repo.GetClassifiedAd(id);
+            var classifiedAds = await _repo.GetClassifiedAdDetail(id);
 
-            var classifiedAdsToReturn = _mapper.Map<ClassifiedAdsDto>(classifiedAds);
+            var classifiedAdsToReturn = _mapper.Map<ClassifiedAdsForDetailedDto>(classifiedAds);
 
             return Ok(classifiedAdsToReturn);
         }
@@ -49,7 +49,7 @@ namespace FreeAds.API.Controllers
         {
             var classifiedAds = await _repo.GetClassifiedAdsForUser(id);
 
-            var classifiedAdsToReturn = _mapper.Map<IEnumerable<ClassifiedAdsDto>>(classifiedAds);
+            var classifiedAdsToReturn = _mapper.Map<IEnumerable<ClassifiedAdsForUserDto>>(classifiedAds);
 
             return Ok(classifiedAdsToReturn);
         }
@@ -64,7 +64,7 @@ namespace FreeAds.API.Controllers
             return Ok(classifiedAdsToReturn);
         }
 
-        [HttpPost("add")]
+        [HttpPut("add")]
         public async Task<IActionResult> Register(ClassifiedAdsForRegisterDto classifiedAdsDto)
         {
 

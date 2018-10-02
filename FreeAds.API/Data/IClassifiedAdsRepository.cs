@@ -13,6 +13,6 @@ namespace FreeAds.API.Data
         Task<IEnumerable<ClassifiedAds>> GetClassifiedAds();
         Task<IEnumerable<ClassifiedAds>> SearchClassifiedAds(SearchQueryParametarsDto searchQueryParametars);
         Task<IEnumerable<ClassifiedAds>> GetClassifiedAdsForUser(int userId);
-        Task<ClassifiedAds> GetClassifiedAd(int id);
+        Task<ClassifiedAds> GetClassifiedAdDetail(int id);
     }
 }

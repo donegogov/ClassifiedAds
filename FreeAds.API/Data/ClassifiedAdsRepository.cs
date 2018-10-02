@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using FreeAds.API.Dtos;
+using FreeAds.API.Helpers;
 using FreeAds.API.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -37,7 +38,7 @@ namespace FreeAds.API.Data
             await _context.SaveChangesAsync();
         }
 
-        public async Task<ClassifiedAds> GetClassifiedAd(int id)
+        public async Task<ClassifiedAds> GetClassifiedAdDetail(int id)
         {
             var classifiedAd = await _context.ClassifiedAds.Include(p => p.Photos).FirstOrDefaultAsync(ca => ca.Id == id);
 
@@ -46,14 +47,14 @@ namespace FreeAds.API.Data
 
         public async Task<IEnumerable<ClassifiedAds>> GetClassifiedAds()
         {
-            var classifiedAds = await _context.ClassifiedAds.Where(vd => vd.ValidTo.Month > DateTime.Now.Month).ToListAsync();
+            var classifiedAds = await _context.ClassifiedAds.Where(vd => vd.DateAdded.CalculateValidTo()).Include(p => p.Photos).ToListAsync();
 
             return classifiedAds;
         }
 
         public async Task<IEnumerable<ClassifiedAds>> GetClassifiedAdsForUser(int userId)
         {
-            var classifiedAds = await _context.ClassifiedAds.Where(uid => uid.UserId == userId).ToListAsync();
+            var classifiedAds = await _context.ClassifiedAds.Where(uid => uid.UserId == userId).Include(p => p.Photos).ToListAsync();
 
             return classifiedAds;
         }

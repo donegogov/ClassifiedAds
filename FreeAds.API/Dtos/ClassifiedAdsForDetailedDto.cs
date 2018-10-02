@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using FreeAds.API.Models;
 
 namespace FreeAds.API.Dtos
@@ -12,7 +13,7 @@ namespace FreeAds.API.Dtos
         public string Category { get; set; }
         public DateTime DateAdded { get; set; }
         public DateTime ValidTo { get; set; }
-        //public ICollection<Photo> Photos { get; set; }
-        public User User { get; set; }
+        public ICollection<PhotoForDetailedDto> Photos { get; set; }
+        public int UserId {get; set; }
     }
 }

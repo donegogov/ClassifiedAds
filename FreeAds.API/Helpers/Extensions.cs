@@ -18,5 +18,15 @@ namespace FreeAds.API.Helpers
 
             return age;
         }
+
+        public static bool CalculateValidTo(this DateTime theDateTime)
+        {
+            var age = (DateTime.Today - theDateTime).Days;
+
+            if(age > 30)
+                return false;
+
+            return true;
+        }
     }
 }
