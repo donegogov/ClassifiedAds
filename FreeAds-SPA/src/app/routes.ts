@@ -9,6 +9,8 @@ import { ClassifiedAdsDetailComponent } from './classified-ads/classified-ads-de
 import { ClassifiedAdsDetailResolver } from './_resolvers/classified-ads-detail.resolver';
 import { AdsListResolver } from './_resolvers/ads-list.resolver';
 import { MemberEditComponent } from './member/member-edit/member-edit.component';
+import { MemberEditResolver } from './_resolvers/member-edit.resolver';
+import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
 
 export const appRoutes: Routes = [
     { path: '', component: HomeComponent },
@@ -19,7 +21,8 @@ export const appRoutes: Routes = [
         children: [
             { path: 'search-ads', component: SearchAdsComponent },
             { path: 'member-list', component: MemberListComponent, canActivate: [AuthGuard] },
-            { path: 'member/edit', component: MemberEditComponent },
+            { path: 'member/edit', component: MemberEditComponent, resolve: {user: MemberEditResolver},
+                canDeactivate: [PreventUnsavedChanges] },
             { path: 'create-ads', component: CreateAdsComponent },
             { path: 'ads-list', component: AdsListComponent,
                 resolve: {classifiedAdsList: AdsListResolver } },

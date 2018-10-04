@@ -25,7 +25,8 @@ namespace FreeAds.API.Helpers
                 .ForMember(dest => dest.Age, opt => {
                     opt.ResolveUsing(d => d.DateAdded.CalculateAge());
                 });
-            CreateMap<ClassifiedAds, ClassifiedAdsForDetailedDto>();    
+            CreateMap<ClassifiedAds, ClassifiedAdsForDetailedDto>();
+            CreateMap<UserForUpdateDto, User>();
         }
     }
 }

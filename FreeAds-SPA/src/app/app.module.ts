@@ -28,6 +28,8 @@ import { ClassifiedAdsDetailComponent } from './classified-ads/classified-ads-de
 import { ClassifiedAdsDetailResolver } from './_resolvers/classified-ads-detail.resolver';
 import { AdsListResolver } from './_resolvers/ads-list.resolver';
 import { MemberEditComponent } from './member/member-edit/member-edit.component';
+import { MemberEditResolver } from './_resolvers/member-edit.resolver';
+import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
 
 export function tokenGetter() {
     return localStorage.getItem('token');
@@ -71,7 +73,9 @@ export function tokenGetter() {
        UserService,
        ClassifiedAdsService,
        ClassifiedAdsDetailResolver,
-       AdsListResolver
+       AdsListResolver,
+       MemberEditResolver,
+       PreventUnsavedChanges
    ],
    bootstrap: [
       AppComponent
