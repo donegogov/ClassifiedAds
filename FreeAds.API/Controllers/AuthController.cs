@@ -57,7 +57,7 @@ namespace FreeAds.API.Controllers
             {
                 new Claim(ClaimTypes.NameIdentifier, userFromRepo.Id.ToString()),
                 new Claim(ClaimTypes.Name, userFromRepo.Username),
-                new Claim(ClaimTypes.Name, userFromRepo.UserRole)
+                //new Claim(ClaimTypes.Name, userFromRepo.UserRole)
             };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8

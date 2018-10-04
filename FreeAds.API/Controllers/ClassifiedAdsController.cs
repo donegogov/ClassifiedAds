@@ -54,6 +54,7 @@ namespace FreeAds.API.Controllers
             return Ok(classifiedAdsToReturn);
         }
 
+        // ova treba HttpGet
         [HttpPost("search")]
         public async Task<IActionResult> SearchClassifiedAdForUser(SearchQueryParametarsDto searchQueryParametars)
         {

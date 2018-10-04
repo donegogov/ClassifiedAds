@@ -1,0 +1,7 @@
+<div class="container mt-5">
+  <div class="row">
+    <div *ngFor="let classifiedAd of classifiedAdsList" class="col-lg-2 col-md-3 col-sm-6">
+      <app-classified-ads-card [classifiedAd]="classifiedAd"></app-classified-ads-card>
+    </div>
+  </div>
+</div>
