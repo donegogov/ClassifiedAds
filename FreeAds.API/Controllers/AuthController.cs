@@ -80,5 +80,23 @@ namespace FreeAds.API.Controllers
                 token = tokenHandler.WriteToken(token)
             });
         }
+
+        [HttpPost("token")]
+        public IActionResult CreateToken(UserForTokenDto userForToken)
+        {
+            if(int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value) != userForToken.id)
+                return Unauthorized();
+
+            var key = new SymmetricSecurityKey(Encoding.UTF8
+                .GetBytes(_config.GetSection("AppSettings:Token").Value));
+
+            var token = _repo.CreateToken(userForToken, key);
+
+            var tokenHandler = new JwtSecurityTokenHandler();
+
+            return Ok(new {
+                token = tokenHandler.WriteToken(token)
+            });
+        }
     }
 }

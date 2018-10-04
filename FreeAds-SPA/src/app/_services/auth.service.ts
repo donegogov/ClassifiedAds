@@ -3,6 +3,8 @@ import {map} from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import {JwtHelperService} from '@auth0/angular-jwt';
 import { environment } from '../../environments/environment';
+import { User } from '../_models/user';
+import { UserForToken } from '../_models/user-for-token';
 
 @Injectable({
   providedIn: 'root'
@@ -34,5 +36,22 @@ register(model: any) {
 loggedIn() {
   const token = localStorage.getItem('token');
   return !this.jwtHelper.isTokenExpired(token);
+}
+
+creteToken(idUser: number, usernameUser: string) {
+  const user: UserForToken = {
+    id: idUser,
+    username: usernameUser
+  };
+  return this.http.post(this.baseUrl + 'token', user).pipe(
+    map((response: any) => {
+      const token = response;
+      if (token) {
+        localStorage.removeItem('token');
+        localStorage.setItem('token', token.token);
+        this.decodedToken = this.jwtHelper.decodeToken(token.token);
+      }
+    })
+  );
 }
 }

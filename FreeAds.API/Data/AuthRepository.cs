@@ -1,8 +1,12 @@
 using System;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using FreeAds.API.Dtos;
 using FreeAds.API.enums;
 using FreeAds.API.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 
 namespace FreeAds.API.Data
 {
@@ -70,6 +74,33 @@ namespace FreeAds.API.Data
                 return true;
 
             return false;
+        }
+
+        public SecurityToken CreateToken(UserForTokenDto userForToken, 
+            SymmetricSecurityKey key) 
+        {
+            var claims = new[]
+            {
+                new Claim(ClaimTypes.NameIdentifier, userForToken.id.ToString()),
+                new Claim(ClaimTypes.Name, userForToken.Username),
+                //new Claim(ClaimTypes.Name, userFromRepo.UserRole)
+            };
+
+            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
+
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(claims),
+                Expires = DateTime.Now.AddDays(1),
+                SigningCredentials = creds
+            };
+            
+            var tokenHandler = new JwtSecurityTokenHandler();
+
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+
+            return token;
+
         }
     }
 }
