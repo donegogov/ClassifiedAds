@@ -52,6 +52,7 @@ namespace FreeAds.API.Data
 
             user.PasswordHash = passwordHash;
             user.PasswordSalt = passwordSalt;
+            user.UserRole = Role.User();
 
             await _context.Users.AddAsync(user);
             await _context.SaveChangesAsync();
@@ -77,13 +78,13 @@ namespace FreeAds.API.Data
         }
 
         public SecurityToken CreateToken(UserForTokenDto userForToken, 
-            SymmetricSecurityKey key) 
+            SymmetricSecurityKey key, string userRole) 
         {
             var claims = new[]
             {
                 new Claim(ClaimTypes.NameIdentifier, userForToken.id.ToString()),
                 new Claim(ClaimTypes.Name, userForToken.Username),
-                //new Claim(ClaimTypes.Name, userFromRepo.UserRole)
+                new Claim(ClaimTypes.Role, userRole)
             };
 
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);

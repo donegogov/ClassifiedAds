@@ -57,7 +57,7 @@ namespace FreeAds.API.Controllers
             {
                 new Claim(ClaimTypes.NameIdentifier, userFromRepo.Id.ToString()),
                 new Claim(ClaimTypes.Name, userFromRepo.Username),
-                //new Claim(ClaimTypes.Name, userFromRepo.UserRole)
+                new Claim(ClaimTypes.Role, userFromRepo.UserRole)
             };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8
@@ -86,11 +86,13 @@ namespace FreeAds.API.Controllers
         {
             if(int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value) != userForToken.id)
                 return Unauthorized();
-
+            
             var key = new SymmetricSecurityKey(Encoding.UTF8
                 .GetBytes(_config.GetSection("AppSettings:Token").Value));
 
-            var token = _repo.CreateToken(userForToken, key);
+            string userRole = User.FindFirst(ClaimTypes.Role).Value;
+
+            var token = _repo.CreateToken(userForToken, key, userRole);
 
             var tokenHandler = new JwtSecurityTokenHandler();
 

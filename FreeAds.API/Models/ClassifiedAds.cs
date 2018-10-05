@@ -14,6 +14,10 @@ namespace FreeAds.API.Models
         public string Category { get; set; }
         public DateTime DateAdded { get; set; }
         public DateTime ValidTo { get; set; }
+        [EmailAddress]
+        public string Email { get; set; }
+        [Phone]
+        public string Phone { get; set; }
         public ICollection<Photo> Photos { get; set; }
         public User User { get; set; }
         public int UserId { get; set; }
