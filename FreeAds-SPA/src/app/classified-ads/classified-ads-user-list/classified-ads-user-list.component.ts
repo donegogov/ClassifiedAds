@@ -16,7 +16,6 @@ export class ClassifiedAdsUserListComponent implements OnInit {
     private route: ActivatedRoute) { }
 
   ngOnInit() {
-    console.log('ClassifiedAdsUserListComponent');
     this.route.data.subscribe(data => {
       this.classifiedAdsForUser = data['classifiedAdsForUser'];
     });

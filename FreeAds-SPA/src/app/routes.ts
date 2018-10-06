@@ -14,6 +14,8 @@ import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
 import { ClassifiedAdsEditComponent } from './classified-ads/classified-ads-edit/classified-ads-edit.component';
 import { ClassifiedAdsUserListComponent } from './classified-ads/classified-ads-user-list/classified-ads-user-list.component';
 import { ClassifiedAdsUserListResolver } from './_resolvers/classified-ads-user-list.resolver';
+import { ClassifiedAdsForUserUpdateResolver } from './_resolvers/classified-ads-for-user-update.resolver';
+import { PreventUnsavedChangesEditClassifiedAds } from './_guards/prevent-unsaved-changes.edit-classified-ads.guard';
 
 export const appRoutes: Routes = [
     { path: '', component: HomeComponent },
@@ -31,9 +33,11 @@ export const appRoutes: Routes = [
                 resolve: {classifiedAdsList: AdsListResolver } },
             { path: 'ads-list/:id', component: ClassifiedAdsDetailComponent,
                 resolve: {classifiedAdsDetail: ClassifiedAdsDetailResolver } },
-            { path: 'classified-ads-user-list', component: ClassifiedAdsUserListComponent,
+            { path: 'classified-ads-user-list/:id', component: ClassifiedAdsUserListComponent,
                 resolve: {classifiedAdsForUser: ClassifiedAdsUserListResolver }},
-            { path: 'classified-ads-edit/:id', component: ClassifiedAdsEditComponent },
+            { path: 'classified-ads-edit/:id', component: ClassifiedAdsEditComponent,
+                resolve: {classifiedAdsDetail: ClassifiedAdsForUserUpdateResolver },
+                canDeactivate: [PreventUnsavedChangesEditClassifiedAds] },
         ]
     },
     { path: '**', redirectTo: '', pathMatch: 'full' }

@@ -1,3 +1,53 @@
-<p>
-  classified-ads-edit works!
-</p>
+<div class="container mt-4">
+    <div class="row mb-20">
+        <div class="col-sm-4">
+          <h1><strong>Your Ad</strong></h1>
+        </div>
+        <div class="col-sm-8">
+          <div *ngIf="editForm.dirty" class="alert alert-info">
+            <strong>Information:</strong> You have made changes. Any unsaved changes will be lost!
+          </div>
+        </div>
+      </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <form #editForm="ngForm" (ngSubmit)="updateClassifiedAd()">
+        <div class="card">
+          <div class="card-body">
+            <p>Photos update here</p>
+            <p class="card-title text-left mb-1 mt-4">
+              <strong>Title:</strong>
+              <input type="text" name="title" class="form-control" value="{{classifiedAdsForUserUpdate.title}}" 
+                [(ngModel)]="classifiedAdsForUserUpdate.title">
+            </p>
+            <p class="card-text text-left mt-2">
+              <strong>Description:</strong>
+              <input type="text" name="description" class="form-control" value="{{classifiedAdsForUserUpdate.description}}" 
+                [(ngModel)]="classifiedAdsForUserUpdate.description">
+            </p>
+            <p class="card-text text-left mt-2">
+              <strong>City:</strong>
+              <input type="text" name="city" class="form-control" value="{{classifiedAdsForUserUpdate.city}}" 
+                [(ngModel)]="classifiedAdsForUserUpdate.city">
+            </p>
+            <p class="card-text text-left mt-2">
+              <strong>Category:</strong>
+              <input type="text" name="category" class="form-control" value="{{classifiedAdsForUserUpdate.category}}" 
+                [(ngModel)]="classifiedAdsForUserUpdate.category">
+            </p>
+          </div>
+          <div class="card-footer">
+            <p><strong>Contact Informaton:</strong></p>
+            <strong>Email:</strong>
+            <input type="text" name="email" class="form-control" value="{{classifiedAdsForUserUpdate.email}}" 
+                [(ngModel)]="classifiedAdsForUserUpdate.email">
+            <strong>Phone:</strong>
+            <input type="text" name="phone" class="form-control" value="{{classifiedAdsForUserUpdate.phone}}" 
+                [(ngModel)]="classifiedAdsForUserUpdate.phone">
+            <button [disabled]="!editForm.dirty" class="btn btn-success btn-block">Save Changes</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

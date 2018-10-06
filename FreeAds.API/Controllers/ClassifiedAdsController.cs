@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
 using FreeAds.API.Data;
@@ -47,6 +48,11 @@ namespace FreeAds.API.Controllers
         [HttpGet("user/{id}")]
         public async Task<IActionResult> GetClassifiedAdForUser(int id)
         {
+            if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+            {
+                return Unauthorized();
+            }
+
             var classifiedAds = await _repo.GetClassifiedAdsForUser(id);
 
             var classifiedAdsToReturn = _mapper.Map<IEnumerable<ClassifiedAdsForUserDto>>(classifiedAds);
@@ -65,6 +71,7 @@ namespace FreeAds.API.Controllers
             return Ok(classifiedAdsToReturn);
         }
 
+        //nz dali treba HttpPut za dodavanje classified ads
         [HttpPut("add")]
         public async Task<IActionResult> Register(ClassifiedAdsForRegisterDto classifiedAdsDto)
         {
@@ -89,6 +96,26 @@ namespace FreeAds.API.Controllers
         public void Delete(int id)
         {
             _repo.Delete(id);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateClassifiedAds(int id, ClassifiedAdsForUserUpdate classifiedAdsForUserUpdate)
+        {
+            if(id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+            {
+                return Unauthorized();
+            }
+
+            var classifiedAdsForUserUpdateFromRepo = await _repo.GetClassifiedAdDetail(classifiedAdsForUserUpdate.Id);
+
+            _mapper.Map(classifiedAdsForUserUpdate, classifiedAdsForUserUpdateFromRepo);
+
+            if( await _repo.SaveAll())
+            {
+                return NoContent();
+            }
+
+            throw new Exception($"Updating classified ad {id} failed on save");
         }
     }
 }

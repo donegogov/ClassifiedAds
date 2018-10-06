@@ -33,6 +33,9 @@ import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
 import { ClassifiedAdsEditComponent } from './classified-ads/classified-ads-edit/classified-ads-edit.component';
 import { ClassifiedAdsUserListComponent } from './classified-ads/classified-ads-user-list/classified-ads-user-list.component';
 import { ClassifiedAdsUserListResolver } from './_resolvers/classified-ads-user-list.resolver';
+import { ClassifiedAdsUserListCardComponent } from './classified-ads/classified-ads-user-list-card/classified-ads-user-list-card.component';
+import { ClassifiedAdsForUserUpdateResolver } from './_resolvers/classified-ads-for-user-update.resolver';
+import { PreventUnsavedChangesEditClassifiedAds } from './_guards/prevent-unsaved-changes.edit-classified-ads.guard';
 
 export function tokenGetter() {
     return localStorage.getItem('token');
@@ -53,7 +56,8 @@ export function tokenGetter() {
       ClassifiedAdsDetailComponent,
       MemberEditComponent,
       ClassifiedAdsEditComponent,
-      ClassifiedAdsUserListComponent
+      ClassifiedAdsUserListComponent,
+      ClassifiedAdsUserListCardComponent
    ],
    imports: [
       BrowserModule,
@@ -81,7 +85,9 @@ export function tokenGetter() {
        AdsListResolver,
        MemberEditResolver,
        PreventUnsavedChanges,
-       ClassifiedAdsUserListResolver
+       ClassifiedAdsUserListResolver,
+       ClassifiedAdsForUserUpdateResolver,
+       PreventUnsavedChangesEditClassifiedAds
    ],
    bootstrap: [
       AppComponent

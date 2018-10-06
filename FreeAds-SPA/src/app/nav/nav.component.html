@@ -23,7 +23,7 @@
           <a class="dropdown-item" [routerLink]="['/member/edit']">
             <i class="fa fa-user"></i> Edit Profile
           </a>
-        <a class="dropdown-item" [routerLink]="['/classified-ads-user-list']">
+        <a class="dropdown-item" [routerLink]="['/classified-ads-user-list', authService.decodedToken.nameid]">
           <i class="fa fa-buysellads"></i> Edit Ads</a>
         <div class="dropdown-divider"></div>
         <a class="dropdown-item" (click)="logout()">
@@ -35,7 +35,8 @@
     <form *ngIf="!loggedIn()" #loginForm="ngForm" class="form-inline my-2 my-lg-0" (ngSubmit)="login()">
       <input class="form-control mr-sm-2" type="text" name="username" placeholder="Username" 
         required [(ngModel)]="model.username">
-      <input class="form-control mr-sm-2" type="password" name="password" placeholder="Password" required [(ngModel)]="model.password">
+      <input class="form-control mr-sm-2" type="password" name="password" placeholder="Password" 
+        required [(ngModel)]="model.password">
       <button [disabled]='!loginForm.valid' class="btn btn-success my-2 my-sm-0" type="submit">Login</button>
     </form>
   </div>

@@ -1,7 +1,7 @@
 <div class="container mt-5">
   <div class="row">
     <div *ngFor="let classifiedAdForUser of classifiedAdsForUser" class="col-lg-2 col-md-3 col-sm-6">
-      <p>{{classifiedAdForUser.id}}</p>
+      <app-classified-ads-user-list-card [classifiedAdsForUser]="classifiedAdForUser"></app-classified-ads-user-list-card>>
     </div>
   </div>
 </div>
