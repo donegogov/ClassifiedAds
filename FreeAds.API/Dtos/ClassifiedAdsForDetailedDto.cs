@@ -13,6 +13,8 @@ namespace FreeAds.API.Dtos
         public string Category { get; set; }
         public DateTime DateAdded { get; set; }
         public DateTime ValidTo { get; set; }
+        public string Email { get; set; }
+        public string Phone { get; set; }
         public ICollection<PhotoForDetailedDto> Photos { get; set; }
         public int UserId {get; set; }
     }

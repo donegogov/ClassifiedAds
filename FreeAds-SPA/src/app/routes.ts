@@ -11,6 +11,9 @@ import { AdsListResolver } from './_resolvers/ads-list.resolver';
 import { MemberEditComponent } from './member/member-edit/member-edit.component';
 import { MemberEditResolver } from './_resolvers/member-edit.resolver';
 import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
+import { ClassifiedAdsEditComponent } from './classified-ads/classified-ads-edit/classified-ads-edit.component';
+import { ClassifiedAdsUserListComponent } from './classified-ads/classified-ads-user-list/classified-ads-user-list.component';
+import { ClassifiedAdsUserListResolver } from './_resolvers/classified-ads-user-list.resolver';
 
 export const appRoutes: Routes = [
     { path: '', component: HomeComponent },
@@ -28,6 +31,9 @@ export const appRoutes: Routes = [
                 resolve: {classifiedAdsList: AdsListResolver } },
             { path: 'ads-list/:id', component: ClassifiedAdsDetailComponent,
                 resolve: {classifiedAdsDetail: ClassifiedAdsDetailResolver } },
+            { path: 'classified-ads-user-list', component: ClassifiedAdsUserListComponent,
+                resolve: {classifiedAdsForUser: ClassifiedAdsUserListResolver }},
+            { path: 'classified-ads-edit/:id', component: ClassifiedAdsEditComponent },
         ]
     },
     { path: '**', redirectTo: '', pathMatch: 'full' }

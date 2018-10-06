@@ -8,6 +8,8 @@ export interface ClassifiedAdsDetail {
     category: string;
     dataAdded: Date;
     validTo: Date;
+    email: string;
+    phone: string;
     photos: PhotoForDetail[];
     userId: number;
 }

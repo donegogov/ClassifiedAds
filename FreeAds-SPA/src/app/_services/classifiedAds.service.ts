@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ClassifiedAdsList } from '../_models/classified-ads-list';
 import { ClassifiedAdsDetail } from '../_models/classified-ads-detail';
+import { ClassifiedAdsForUser } from '../_models/classified-ads-for-user';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +20,10 @@ getClassifiedAds(): Observable<ClassifiedAdsList[]> {
 
 getClassifiedAdsDetail(id: number): Observable<ClassifiedAdsDetail> {
   return this.http.get<ClassifiedAdsDetail>(this.baseUrl + 'classifiedads/' + id);
+}
+
+getClassifiedAdsForUser(id: number): Observable<ClassifiedAdsForUser> {
+  return this.http.get<ClassifiedAdsForUser>(this.baseUrl + 'classifiedads/user/' + id);
 }
 
 }
