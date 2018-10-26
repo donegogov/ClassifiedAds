@@ -14,7 +14,9 @@
       <form #editForm="ngForm" (ngSubmit)="updateClassifiedAd()">
         <div class="card">
           <div class="card-body">
-            <p>Photos update here</p>
+            <p>
+              <app-photo-editor [photos]="classifiedAdsForUserUpdate.photos" [classifiedAdId]="classifiedAdsForUserUpdate.id"></app-photo-editor>
+            </p>
             <p class="card-title text-left mb-1 mt-4">
               <strong>Title:</strong>
               <input type="text" name="title" class="form-control" value="{{classifiedAdsForUserUpdate.title}}" 
@@ -22,8 +24,8 @@
             </p>
             <p class="card-text text-left mt-2">
               <strong>Description:</strong>
-              <input type="text" name="description" class="form-control" value="{{classifiedAdsForUserUpdate.description}}" 
-                [(ngModel)]="classifiedAdsForUserUpdate.description">
+              <textarea rows="5" name="description" class="form-control" value="{{classifiedAdsForUserUpdate.description}}" 
+                [(ngModel)]="classifiedAdsForUserUpdate.description"></textarea>
             </p>
             <p class="card-text text-left mt-2">
               <strong>City:</strong>

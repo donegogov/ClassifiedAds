@@ -28,6 +28,8 @@ namespace FreeAds.API.Helpers
             CreateMap<ClassifiedAds, ClassifiedAdsForDetailedDto>();
             CreateMap<UserForUpdateDto, User>();
             CreateMap<ClassifiedAdsForUserUpdate, ClassifiedAds>();
+            CreateMap<Photo, PhotoForReturnDto>();
+            CreateMap<PhotoForCreationDto, Photo>();
         }
     }
 }
