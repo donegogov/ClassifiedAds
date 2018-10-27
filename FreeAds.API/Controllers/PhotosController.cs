@@ -50,7 +50,7 @@ namespace FreeAds.API.Controllers
         }
 
         [HttpPost("{classifiedAdId}")]
-        public async Task<IActionResult> AddPhoto(int userId, int classifiedAdId, 
+        public async Task<IActionResult> AddPhoto(int userId, int classifiedAdId,
             [FromForm]PhotoForCreationDto photoForCreationDto)
         {
             if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
@@ -64,7 +64,7 @@ namespace FreeAds.API.Controllers
 
             var uploadResult = new ImageUploadResult();
 
-            if(file.Length > 0)
+            if (file.Length > 0)
             {
                 using (var stream = file.OpenReadStream())
                 {
@@ -83,15 +83,15 @@ namespace FreeAds.API.Controllers
 
             var photo = _mapper.Map<Photo>(photoForCreationDto);
 
-            if(!classifiedAdFromRepo.Photos.Any(p => p.IsMain))
+            if (!classifiedAdFromRepo.Photos.Any(p => p.IsMain))
                 photo.IsMain = true;
 
             classifiedAdFromRepo.Photos.Add(photo);
 
-            if(await _classifiedAdsRepo.SaveAll())
+            if (await _classifiedAdsRepo.SaveAll())
             {
                 var photoToReturn = _mapper.Map<PhotoForReturnDto>(photo);
-                return CreatedAtRoute("GetPhoto", new { id = photo.Id}, photoToReturn);
+                return CreatedAtRoute("GetPhoto", new { id = photo.Id }, photoToReturn);
             }
 
             return BadRequest("Could not add the photo");
@@ -128,6 +128,53 @@ namespace FreeAds.API.Controllers
                 return NoContent();
 
             return BadRequest("Could not set the photo to main");
+        }
+
+        [HttpDelete("{classifiedAdId}/{photoId}")]
+        public async Task<IActionResult> DeletePhoto(int userId, int classifiedAdId, int photoId)
+        {
+            if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+            {
+                return Unauthorized();
+            }
+
+            var classfiedAdFromRepo = await _classifiedAdsRepo.GetClassifiedAdDetail(classifiedAdId);
+
+            if (!classfiedAdFromRepo.Photos.Any(p => p.Id == photoId))
+            {
+                return Unauthorized();
+            }
+
+            var photoFromRepo = await _classifiedAdsRepo.GetPhoto(photoId);
+
+            if (photoFromRepo.IsMain)
+            {
+                return BadRequest("You cannot delete main photo");
+            }
+
+            if (photoFromRepo.PublicId != null)
+            {
+                var deleteParams = new DeletionParams(photoFromRepo.PublicId);
+
+                var result = _cloudinary.Destroy(deleteParams);
+
+                if (result.Result == "ok")
+                {
+                    _classifiedAdsRepo.Delete(photoFromRepo);
+                }
+            }
+
+            if(photoFromRepo.PublicId == null) 
+            {
+                _classifiedAdsRepo.Delete(photoFromRepo);
+            }
+
+            if (await _classifiedAdsRepo.SaveAll())
+            {
+                return Ok();
+            }
+
+            return BadRequest("Failed to delete the photo");
         }
     }
 }

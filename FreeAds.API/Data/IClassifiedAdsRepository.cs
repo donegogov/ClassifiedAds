@@ -8,7 +8,9 @@ namespace FreeAds.API.Data
     public interface IClassifiedAdsRepository
     {
         Task<ClassifiedAds> Add(ClassifiedAds classifiedAds);
-        void Delete(int id);
+        void Delete<T>(T entity) where T: class;
+        bool Delete(int id);
+        bool DeletePhoto(int id);
         Task<bool> SaveAll();
         Task<IEnumerable<ClassifiedAds>> GetClassifiedAds();
         Task<IEnumerable<ClassifiedAds>> SearchClassifiedAds(SearchQueryParametarsDto searchQueryParametars);

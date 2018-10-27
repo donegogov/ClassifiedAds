@@ -25,7 +25,12 @@ namespace FreeAds.API.Data
             return classifiedAds;
         }
 
-        public async void Delete(int id)
+        public void Delete<T>(T entity) where T : class
+        {
+            _context.Remove(entity);
+        }
+
+        public bool Delete(int id)
         {
             var classifiedAdsToDeleteAttach = new ClassifiedAds();
             classifiedAdsToDeleteAttach.Id = id;
@@ -35,7 +40,20 @@ namespace FreeAds.API.Data
 
             _context.ClassifiedAds.Remove(classifiedAdsToDeleteAttach);
 
-            await _context.SaveChangesAsync();
+            return true;
+        }
+
+        public bool DeletePhoto(int id)
+        {
+            var photoToDeleteAttach = new Photo();
+            photoToDeleteAttach.Id = id;
+
+            _context.Photos.Attach(photoToDeleteAttach);
+            //var classifiedAdsToDelete = await _context.ClassifiedAds.FirstOrDefaultAsync(ca => ca.Id == id);
+
+            _context.Photos.Remove(photoToDeleteAttach);
+
+            return true;
         }
 
         public async Task<ClassifiedAds> GetClassifiedAdDetail(int id)

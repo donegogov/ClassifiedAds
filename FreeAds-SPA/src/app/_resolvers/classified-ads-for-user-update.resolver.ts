@@ -16,6 +16,7 @@ export class ClassifiedAdsForUserUpdateResolver implements Resolve<ClassifiedAds
         return this.classifiedAdsService.getClassifiedAdsForUserUpdate(route.params['id']).pipe(
             catchError(error => {
                 this.alertify.error('Problem retrieving data ' + error);
+                console.log(error);
                 this.router.navigate(['/ads-list']);
                 return of(null);
             })

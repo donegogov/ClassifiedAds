@@ -39,4 +39,8 @@ setMainPhoto(userId: number, classifiedAdId: number, photoId: number) {
   return this.http.post(this.baseUrl + userId + '/photos/' + classifiedAdId + '/setMain/' + photoId, {});
 }
 
+deletePhoto(userId: number, classifiedAdId: number, photoId: number) {
+  return this.http.delete(this.baseUrl + userId + '/photos/' + classifiedAdId + '/' + photoId);
+}
+
 }
