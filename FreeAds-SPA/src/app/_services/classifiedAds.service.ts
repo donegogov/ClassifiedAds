@@ -35,4 +35,8 @@ updateClassifiedAd(id: number, classifiedAdsForUserUpdate: ClassifiedAdsForUserU
   return this.http.put(this.baseUrl + 'classifiedads/' + id, classifiedAdsForUserUpdate);
 }
 
+setMainPhoto(userId: number, classifiedAdId: number, photoId: number) {
+  return this.http.post(this.baseUrl + userId + '/photos/' + classifiedAdId + '/setMain/' + photoId, {});
+}
+
 }

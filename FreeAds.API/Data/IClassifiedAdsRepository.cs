@@ -15,5 +15,6 @@ namespace FreeAds.API.Data
         Task<IEnumerable<ClassifiedAds>> GetClassifiedAdsForUser(int userId);
         Task<ClassifiedAds> GetClassifiedAdDetail(int id);
         Task<Photo> GetPhoto(int id);
+        Task<Photo> GetMainPhotoForClassifiedAd(int classfiedAdId);
     }
 }

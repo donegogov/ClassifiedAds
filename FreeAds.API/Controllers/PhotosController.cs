@@ -96,5 +96,38 @@ namespace FreeAds.API.Controllers
 
             return BadRequest("Could not add the photo");
         }
+
+        [HttpPost("{classifiedAdId}/setMain/{photoId}")]
+        public async Task<IActionResult> SetMainPhoto(int userId, int photoId, int classifiedAdId)
+        {
+            if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+            {
+                return Unauthorized();
+            }
+
+            var classfiedAdFromRepo = await _classifiedAdsRepo.GetClassifiedAdDetail(classifiedAdId);
+
+            if (!classfiedAdFromRepo.Photos.Any(p => p.Id == photoId))
+            {
+                return Unauthorized();
+            }
+
+            var photoFromRepo = await _classifiedAdsRepo.GetPhoto(photoId);
+
+            if (photoFromRepo.IsMain)
+            {
+                return BadRequest("This is already main photo");
+            }
+
+            var currentMainPhoto = await _classifiedAdsRepo.GetMainPhotoForClassifiedAd(classifiedAdId);
+
+            currentMainPhoto.IsMain = false;
+            photoFromRepo.IsMain = true;
+
+            if (await _classifiedAdsRepo.SaveAll())
+                return NoContent();
+
+            return BadRequest("Could not set the photo to main");
+        }
     }
 }

@@ -88,5 +88,12 @@ namespace FreeAds.API.Data
 
             return photo;
         }
+
+        public async Task<Photo> GetMainPhotoForClassifiedAd(int classfiedAdId)
+        {
+            var mainPhoto = await _context.Photos.Where(p => p.ClassifiedAdsId == classfiedAdId).FirstOrDefaultAsync(p => p.IsMain);
+
+            return mainPhoto;
+        }
     }
 }
