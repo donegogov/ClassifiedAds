@@ -17,7 +17,9 @@ export class AdsListComponent implements OnInit {
 
   ngOnInit() {
     this.route.data.subscribe(data => {
-      this.classifiedAdsList = data['classifiedAdsList'];
+      // this.classifiedAdsList = data['classifiedAdsList'];
+      this.classifiedAdsService.changeClassifiedAdsListFromSearch(data['classifiedAdsList']);
+      this.classifiedAdsService.classifiedAdsFromSearch.subscribe(ca => this.classifiedAdsList = ca);
     });
   }
 

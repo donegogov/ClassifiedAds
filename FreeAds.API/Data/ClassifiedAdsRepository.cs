@@ -90,7 +90,7 @@ namespace FreeAds.API.Data
                         && (queryWords.Any(str => cal.Title.Contains(str, StringComparison.OrdinalIgnoreCase))
                         || queryWords.Any(str => cal.Description.Contains(str, StringComparison.OrdinalIgnoreCase)))
                 select cal
-                ).ToListAsync();
+                ).Include(p => p.Photos).ToListAsync();
 
             return ca;
         }

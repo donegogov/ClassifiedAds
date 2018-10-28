@@ -2,7 +2,7 @@ import {Routes} from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { MemberListComponent } from './member/member-list/member-list.component';
 import { CreateAdsComponent } from './create-ads/create-ads.component';
-import { SearchAdsComponent } from './search-ads/search-ads.component';
+import { SearchAdsComponent } from './classified-ads/search-ads/search-ads.component';
 import { AdsListComponent } from './classified-ads/ads-list/ads-list.component';
 import { AuthGuard } from './_guards/auth.guard';
 import { ClassifiedAdsDetailComponent } from './classified-ads/classified-ads-detail/classified-ads-detail.component';

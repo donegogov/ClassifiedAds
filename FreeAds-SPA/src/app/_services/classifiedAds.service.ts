@@ -1,17 +1,21 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { ClassifiedAdsList } from '../_models/classified-ads-list';
 import { ClassifiedAdsDetail } from '../_models/classified-ads-detail';
 import { ClassifiedAdsForUser } from '../_models/classified-ads-for-user';
 import { ClassifiedAdsForUserUpdate } from '../_models/classified-ads-for-user-update';
+import { SearchQueryParametars } from '../_models/search-query-parametars';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class ClassifiedAdsService {
   baseUrl = environment.apiUrl;
+  classifiedAdsFromSearch = new BehaviorSubject<ClassifiedAdsList[]>([]);
+  classifiedAdsList = this.classifiedAdsFromSearch.asObservable();
 
 constructor(private http: HttpClient) { }
 
@@ -41,6 +45,14 @@ setMainPhoto(userId: number, classifiedAdId: number, photoId: number) {
 
 deletePhoto(userId: number, classifiedAdId: number, photoId: number) {
   return this.http.delete(this.baseUrl + userId + '/photos/' + classifiedAdId + '/' + photoId);
+}
+
+searchQuery(searchQueryParametars: SearchQueryParametars): Observable<ClassifiedAdsList[]> {
+  return this.http.post<ClassifiedAdsList[]>(this.baseUrl + 'classifiedads/search', searchQueryParametars);
+}
+
+changeClassifiedAdsListFromSearch(classifiedAdsList: ClassifiedAdsList[]) {
+  this.classifiedAdsFromSearch.next(classifiedAdsList);
 }
 
 }

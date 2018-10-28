@@ -19,7 +19,7 @@ import { AlertifyService } from './_services/alertify.service';
 import { MemberListComponent } from './member/member-list/member-list.component';
 import { CreateAdsComponent } from './create-ads/create-ads.component';
 import { AdsListComponent } from './classified-ads/ads-list/ads-list.component';
-import { SearchAdsComponent } from './search-ads/search-ads.component';
+import { SearchAdsComponent } from './classified-ads/search-ads/search-ads.component';
 import { appRoutes } from './routes';
 import { AuthGuard } from './_guards/auth.guard';
 import { UserService } from './_services/user.service';
