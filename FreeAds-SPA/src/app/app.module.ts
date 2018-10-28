@@ -38,6 +38,8 @@ import { ClassifiedAdsUserListCardComponent } from './classified-ads/classified-
 import { ClassifiedAdsForUserUpdateResolver } from './_resolvers/classified-ads-for-user-update.resolver';
 import { PreventUnsavedChangesEditClassifiedAds } from './_guards/prevent-unsaved-changes.edit-classified-ads.guard';
 import { PhotoEditorComponent } from './classified-ads/photo-editor/photo-editor.component';
+import { GetCategoriesResolver } from './_resolvers/constant-resolvers/get-categories.resolver';
+import { GetCitiesResolver } from './_resolvers/constant-resolvers/get-cities.resolver';
 
 export function tokenGetter() {
     return localStorage.getItem('token');
@@ -91,7 +93,9 @@ export function tokenGetter() {
        PreventUnsavedChanges,
        ClassifiedAdsUserListResolver,
        ClassifiedAdsForUserUpdateResolver,
-       PreventUnsavedChangesEditClassifiedAds
+       PreventUnsavedChangesEditClassifiedAds,
+       GetCategoriesResolver,
+       GetCitiesResolver
    ],
    bootstrap: [
       AppComponent

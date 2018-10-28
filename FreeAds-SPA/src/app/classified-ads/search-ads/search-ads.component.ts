@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SearchQueryParametars } from 'src/app/_models/search-query-parametars';
 import { ClassifiedAdsService } from 'src/app/_services/classifiedAds.service';
 import { AlertifyService } from 'src/app/_services/alertify.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { ClassifiedAdsList } from 'src/app/_models/classified-ads-list';
 import { ConstantService } from 'src/app/_services/constant.service';
 import { Cities } from 'src/app/_models/constants/cities';
@@ -23,38 +23,45 @@ export class SearchAdsComponent implements OnInit {
     private classifiedAdsService: ClassifiedAdsService,
     private alertify: AlertifyService,
     private router: Router,
-    private constantService: ConstantService
+    private constantService: ConstantService,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit() {
+    this.route.data.subscribe(data => {
+      // console.log(data);
+      this.categories = data['categories'];
+      console.log(data['categories']);
+    });
     this.searchQueryParametars = {
       query: '',
       city: 'Alamo',
       category: 'TV'
     };
-    this.loadCities();
-    this.loadCategories();
-    console.log(this.categories);
+    this.route.data.subscribe(data => {
+      this.cities = data['cities'];
+    });
+    // this.loadCities();
   }
 
-  loadCities() {
-    this.constantService.getCities().subscribe(res => {
-      this.cities = res;
-    }, error => {
-      console.log(error);
-    });
-  }
+  // loadCities() {
+  //   this.constantService.getCities().subscribe(res => {
+  //     this.cities = res;
+  //   }, error => {
+  //     console.log(error);
+  //   });
+  // }
 
-  loadCategories() {
-    this.constantService.getCategories().subscribe(res => {
-      this.categories = res;
-    }, error => {
-      console.log(error);
-    });
-  }
+  // loadCategories() {
+  //   this.constantService.getCategories().subscribe(res => {
+  //     this.categories = res;
+  //   }, error => {
+  //     console.log(error);
+  //   });
+  // }
 
   searchClassifiedAds() {
-    console.log(this.searchQueryParametars);
+    // console.log(this.searchQueryParametars);
     this.classifiedAdsService.searchQuery(this.searchQueryParametars).subscribe(
       res => {
         this.classifiedAdsService.changeClassifiedAdsListFromSearch(res);

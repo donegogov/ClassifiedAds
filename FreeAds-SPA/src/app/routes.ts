@@ -16,6 +16,8 @@ import { ClassifiedAdsUserListComponent } from './classified-ads/classified-ads-
 import { ClassifiedAdsUserListResolver } from './_resolvers/classified-ads-user-list.resolver';
 import { ClassifiedAdsForUserUpdateResolver } from './_resolvers/classified-ads-for-user-update.resolver';
 import { PreventUnsavedChangesEditClassifiedAds } from './_guards/prevent-unsaved-changes.edit-classified-ads.guard';
+import { GetCitiesResolver } from './_resolvers/constant-resolvers/get-cities.resolver';
+import { GetCategoriesResolver } from './_resolvers/constant-resolvers/get-categories.resolver';
 
 export const appRoutes: Routes = [
     { path: '', component: HomeComponent },
@@ -24,13 +26,19 @@ export const appRoutes: Routes = [
         runGuardsAndResolvers: 'always',
         canActivate: [AuthGuard],
         children: [
-            { path: 'search-ads', component: SearchAdsComponent },
+            { path: 'search-ads', component: SearchAdsComponent,
+                resolve: { categories: GetCategoriesResolver,
+                    cities: GetCitiesResolver }
+            },
             { path: 'member-list', component: MemberListComponent, canActivate: [AuthGuard] },
-            { path: 'member/edit', component: MemberEditComponent, resolve: {user: MemberEditResolver},
+            { path: 'member/edit', component: MemberEditComponent,
+                resolve: {user: MemberEditResolver},
                 canDeactivate: [PreventUnsavedChanges] },
             { path: 'create-ads', component: CreateAdsComponent },
             { path: 'ads-list', component: AdsListComponent,
-                resolve: {classifiedAdsList: AdsListResolver } },
+                resolve: {classifiedAdsList: AdsListResolver,
+                    categories: GetCategoriesResolver,
+                    cities: GetCitiesResolver } },
             { path: 'ads-list/:id', component: ClassifiedAdsDetailComponent,
                 resolve: {classifiedAdsDetail: ClassifiedAdsDetailResolver } },
             { path: 'classified-ads-user-list/:id', component: ClassifiedAdsUserListComponent,
