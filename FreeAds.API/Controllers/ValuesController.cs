@@ -20,6 +20,22 @@ namespace FreeAds.API.Controllers
             _context = context;
         }
 
+        [HttpGet("cities")]
+        public async Task<IActionResult> GetCities()
+        {
+            var cities = await _context.Cities.ToListAsync();
+
+            return Ok(cities);
+        }
+
+        [HttpGet("categories")]
+        public async Task<IActionResult> GetCategories()
+        {
+            var categories = await _context.Categories.ToListAsync();
+
+            return Ok(categories);
+        }
+
         // GET api/values
         [HttpGet]
         public async Task<IActionResult> GetValues()

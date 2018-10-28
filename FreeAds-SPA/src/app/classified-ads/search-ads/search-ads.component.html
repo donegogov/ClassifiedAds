@@ -3,29 +3,29 @@
     <div class="">
       <div class="form-group mb-4 col-sm-3">
         <select class="form-control" name="city" [(ngModel)]="searchQueryParametars.city">
-          <option selected value="Waterford">Waterford</option>
-          <option value="Bancroft">Bancroft</option>
-          <option value="Alamo">Alamo</option>
-          <option value="Martinez">Martinez</option>
+          <option *ngFor="let city of cities" 
+            value="{{city.cityValue}}" 
+            [selected]="searchQueryParametars.city==city.cityName ? true : null">
+            {{city.cityName}}
+          </option>
         </select>
       </div>
     </div>
     <div class="">
       <div class="form-group mb-4 col-sm-3">
         <select class="form-control" name="category" [(ngModel)]="searchQueryParametars.category">
-          <option selected value="PC">PC</option>
-          <option value="Lap Top">Lap Top</option>
-          <option value="TV">TV</option>
-          <option value="Phone">Phone</option>
+          <option *ngFor="let category of categories" 
+            value="{{category.categoryValue}}" 
+            [selected]="searchQueryParametars.category == category.categoryName ? true : null">
+            {{category.categoryName}}
+          </option>
         </select>
       </div>
     </div>
     <div class="">
       <div class="form-group mb-4 col-sm-3">
         <input class="form-control" type="text" name="query" class="form-control mr-sm-2" placeholder="Search Query"
-          [(ngModel)]="searchQueryParametars.query" 
-          (keyup)="onKey($event)"
-          required >
+          [(ngModel)]="searchQueryParametars.query" (keyup)="onKey($event)" required>
       </div>
     </div>
     <div class="">

@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using FreeAds.API.Models;
+using FreeAds.API.Models.Constants;
 using Newtonsoft.Json;
 
 namespace FreeAds.API.Data
@@ -34,11 +36,84 @@ namespace FreeAds.API.Data
 
         private void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
         {
-            using(var hmac = new System.Security.Cryptography.HMACSHA512())
+            using (var hmac = new System.Security.Cryptography.HMACSHA512())
             {
                 passwordSalt = hmac.Key;
                 passwordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
             }
+        }
+
+        public void SeedCategories()
+        {
+            /*
+            List<String> CategoryName = new List<String>();
+            List<String> CategoryValue = new List<String>();
+
+            CategoryName.Add("PC");
+            CategoryValue.Add("PC");
+
+            CategoryName.Add("Lap Top");
+            CategoryValue.Add("Lap Top");
+
+            CategoryName.Add("TV");
+            CategoryValue.Add("TV");
+
+            CategoryName.Add("Phone");
+            CategoryValue.Add("Phone");
+            */
+
+            Dictionary<String, String> Category = new Dictionary<string, string>();
+            Category.Add("PC", "PC");
+            Category.Add("Lap Top", "Lap Top");
+            Category.Add("TV", "TV");
+            Category.Add("Phone", "Phone");
+
+            foreach (KeyValuePair<string, string> entry in Category)
+            {
+                // do something with entry.Value or entry.Key
+                _context.Categories.Add(
+                    new Category(entry.Value, entry.Key)
+                    );
+            }
+
+            _context.SaveChanges();
+        }
+
+        public void SeedCites()
+        {
+            /*
+            List<String> CategoryName = new List<String>();
+            List<String> CategoryValue = new List<String>();
+
+            CategoryName.Add("PC");
+            CategoryValue.Add("PC");
+
+            CategoryName.Add("Lap Top");
+            CategoryValue.Add("Lap Top");
+
+            CategoryName.Add("TV");
+            CategoryValue.Add("TV");
+
+            CategoryName.Add("Phone");
+            CategoryValue.Add("Phone");
+            */
+
+            Dictionary<String, String> City = new Dictionary<string, string>();
+            City.Add("Waterford", "Waterford");
+            City.Add("Bancroft", "Bancroft");
+            City.Add("Alamo", "Alamo");
+            City.Add("Martinez", "Martinez");
+
+
+            foreach (KeyValuePair<string, string> entry in City)
+            {
+                // do something with entry.Value or entry.Key
+                _context.Cities.Add(
+                    new City(entry.Value, entry.Key)
+                    );
+            }
+
+            _context.SaveChanges();
         }
     }
 }

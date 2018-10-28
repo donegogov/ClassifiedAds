@@ -4,6 +4,9 @@ import { ClassifiedAdsService } from 'src/app/_services/classifiedAds.service';
 import { AlertifyService } from 'src/app/_services/alertify.service';
 import { Router } from '@angular/router';
 import { ClassifiedAdsList } from 'src/app/_models/classified-ads-list';
+import { ConstantService } from 'src/app/_services/constant.service';
+import { Cities } from 'src/app/_models/constants/cities';
+import { Categories } from 'src/app/_models/constants/categories';
 
 @Component({
   selector: 'app-search-ads',
@@ -13,11 +16,14 @@ import { ClassifiedAdsList } from 'src/app/_models/classified-ads-list';
 export class SearchAdsComponent implements OnInit {
   searchQueryParametars: SearchQueryParametars;
   // classifiedAdsFromSearch: ClassifiedAdsList[];
+  cities: Cities[];
+  categories: Categories[];
 
   constructor(
     private classifiedAdsService: ClassifiedAdsService,
     private alertify: AlertifyService,
-    private router: Router
+    private router: Router,
+    private constantService: ConstantService
   ) {}
 
   ngOnInit() {
@@ -26,6 +32,25 @@ export class SearchAdsComponent implements OnInit {
       city: 'Alamo',
       category: 'TV'
     };
+    this.loadCities();
+    this.loadCategories();
+    console.log(this.categories);
+  }
+
+  loadCities() {
+    this.constantService.getCities().subscribe(res => {
+      this.cities = res;
+    }, error => {
+      console.log(error);
+    });
+  }
+
+  loadCategories() {
+    this.constantService.getCategories().subscribe(res => {
+      this.categories = res;
+    }, error => {
+      console.log(error);
+    });
   }
 
   searchClassifiedAds() {

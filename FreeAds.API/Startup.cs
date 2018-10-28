@@ -88,6 +88,8 @@ namespace FreeAds.API
 
             //app.UseHttpsRedirection();
             //seeder.SeedUsers();
+            //seeder.SeedCategories();
+            //seeder.SeedCites();
             app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             app.UseAuthentication();
             app.UseMvc();
