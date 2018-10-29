@@ -20,7 +20,7 @@ namespace FreeAds.API.Data
         {
             await _context.ClassifiedAds.AddAsync(classifiedAds);
 
-            await _context.SaveChangesAsync();
+            //await _context.SaveChangesAsync();
 
             return classifiedAds;
         }

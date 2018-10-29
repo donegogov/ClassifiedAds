@@ -72,24 +72,36 @@ namespace FreeAds.API.Controllers
         }
 
         //nz dali treba HttpPut za dodavanje classified ads
-        [HttpPut("add")]
-        public async Task<IActionResult> Register(ClassifiedAdsForRegisterDto classifiedAdsDto)
+        [HttpPut("add/{userId}")]
+        public async Task<IActionResult> Register(int userId, ClassifiedAdsForRegisterDto classifiedAdForRegisterDto)
         {
+            if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+            {
+                return Unauthorized();
+            }
 
             ClassifiedAds classifiedAd = new ClassifiedAds
             {
-                Title = classifiedAdsDto.Title,
-                Description = classifiedAdsDto.Description,
-                City = classifiedAdsDto.City,
-                Category = classifiedAdsDto.Category,
-                DateAdded = DateTime.Today,
+                Title = classifiedAdForRegisterDto.Title,
+                Description = classifiedAdForRegisterDto.Description,
+                City = classifiedAdForRegisterDto.City,
+                Category = classifiedAdForRegisterDto.Category,
+                Email = classifiedAdForRegisterDto.Email,
+                Phone = classifiedAdForRegisterDto.Phone,
+                DateAdded = DateTime.Now,
                 ValidTo = DateTime.Today.AddMonths(1),
-                UserId = classifiedAdsDto.UserId
+                UserId = userId
             };
 
             await _repo.Add(classifiedAd);
 
-            return StatusCode(201);
+            if (await _repo.SaveAll()) {
+                var classifiedAdsToReturn = _mapper.Map<ClassifiedAdsForRegisterDto>(classifiedAd);
+
+                return Ok(classifiedAdsToReturn);
+            }
+
+            return BadRequest("Failed to add the Classified Ad");
         }
 
         [HttpDelete("{id}")]

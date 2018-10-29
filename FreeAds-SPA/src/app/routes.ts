@@ -1,7 +1,7 @@
 import {Routes} from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { MemberListComponent } from './member/member-list/member-list.component';
-import { CreateAdsComponent } from './create-ads/create-ads.component';
+import { CreateAdsComponent } from './classified-ads/create-ads/create-ads.component';
 import { SearchAdsComponent } from './classified-ads/search-ads/search-ads.component';
 import { AdsListComponent } from './classified-ads/ads-list/ads-list.component';
 import { AuthGuard } from './_guards/auth.guard';
@@ -34,7 +34,8 @@ export const appRoutes: Routes = [
             { path: 'member/edit', component: MemberEditComponent,
                 resolve: {user: MemberEditResolver},
                 canDeactivate: [PreventUnsavedChanges] },
-            { path: 'create-ads', component: CreateAdsComponent },
+            { path: 'create-ads', component: CreateAdsComponent,
+                resolve: {categories: GetCategoriesResolver, cities: GetCitiesResolver }},
             { path: 'ads-list', component: AdsListComponent,
                 resolve: {classifiedAdsList: AdsListResolver,
                     categories: GetCategoriesResolver,

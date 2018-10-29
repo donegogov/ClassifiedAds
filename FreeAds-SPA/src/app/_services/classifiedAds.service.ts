@@ -7,6 +7,7 @@ import { ClassifiedAdsDetail } from '../_models/classified-ads-detail';
 import { ClassifiedAdsForUser } from '../_models/classified-ads-for-user';
 import { ClassifiedAdsForUserUpdate } from '../_models/classified-ads-for-user-update';
 import { SearchQueryParametars } from '../_models/search-query-parametars';
+import { ClassifiedAdsForRegister } from '../_models/classified-ads-models/classified-ads-for-register';
 
 
 @Injectable({
@@ -53,6 +54,10 @@ searchQuery(searchQueryParametars: SearchQueryParametars): Observable<Classified
 
 changeClassifiedAdsListFromSearch(classifiedAdsList: ClassifiedAdsList[]) {
   this.classifiedAdsFromSearch.next(classifiedAdsList);
+}
+
+createClassifiedAds(id: number, classifiedAdsForRegister: ClassifiedAdsForRegister): Observable<ClassifiedAdsForRegister> {
+  return this.http.put<ClassifiedAdsForRegister>(this.baseUrl + 'classifiedads/add/' + id, classifiedAdsForRegister);
 }
 
 }

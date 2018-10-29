@@ -1,0 +1,60 @@
+<div class="container mt-4">
+  <div class="row mb-20">
+    <div class="col-sm-4">
+      <h1><strong>Create Ad</strong></h1>
+    </div>
+    <div class="col-sm-8">
+      <div *ngIf="createForm.dirty" class="alert alert-info">
+        <strong>Information:</strong> You have made changes. Any unsaved changes will be lost!
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <form #createForm="ngForm" (ngSubmit)="createClassifiedAd()">
+        <div class="card">
+          <div class="card-body">
+            <p>
+              Photos will go here
+            </p>
+            <p class="card-title text-left mb-1 mt-4">
+              <strong>Title:</strong>
+              <input type="text" name="title" class="form-control" value="Title" [(ngModel)]="classifiedAdsForRegister.title">
+            </p>
+            <p class="card-text text-left mt-2">
+              <strong>Description:</strong>
+              <textarea rows="5" name="description" class="form-control" value="Description" [(ngModel)]="classifiedAdsForRegister.description"></textarea>
+            </p>
+            <p class="card-text text-left mt-2">
+              <strong>City:</strong>
+              <select class="form-control" name="city" [(ngModel)]="classifiedAdsForRegister.city">
+                <option *ngFor="let city of cities" value="{{city.cityValue}}" 
+                  [selected]="classifiedAdsForRegister.city==city.cityName ? true : null">
+                  {{city.cityName}}
+                </option>
+              </select>
+            </p>
+            <p class="card-text text-left mt-2">
+              <strong>Category:</strong>
+              <select class="form-control" name="category" [(ngModel)]="classifiedAdsForRegister.category">
+                  <option *ngFor="let category of categories" 
+                    value="{{category.categoryValue}}" 
+                    [selected]="classifiedAdsForRegister.category == category.categoryName ? true : null">
+                    {{category.categoryName}}
+                  </option>
+              </select>
+            </p>
+          </div>
+          <div class="card-footer">
+            <p><strong>Contact Informaton:</strong></p>
+            <strong>Email:</strong>
+            <input type="text" name="email" class="form-control" value="Email" [(ngModel)]="classifiedAdsForRegister.email">
+            <strong>Phone:</strong>
+            <input type="text" name="phone" class="form-control" value="078111111" [(ngModel)]="classifiedAdsForRegister.phone">
+            <button [disabled]="!createForm.dirty" class="btn btn-success btn-block">Save Changes</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

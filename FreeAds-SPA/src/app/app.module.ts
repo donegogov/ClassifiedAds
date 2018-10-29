@@ -17,7 +17,7 @@ import { AuthService } from './_services/auth.service';
 import { ErrorInterceptorProvider } from './_services/error.interceptor';
 import { AlertifyService } from './_services/alertify.service';
 import { MemberListComponent } from './member/member-list/member-list.component';
-import { CreateAdsComponent } from './create-ads/create-ads.component';
+import { CreateAdsComponent } from './classified-ads/create-ads/create-ads.component';
 import { AdsListComponent } from './classified-ads/ads-list/ads-list.component';
 import { SearchAdsComponent } from './classified-ads/search-ads/search-ads.component';
 import { appRoutes } from './routes';
@@ -63,7 +63,7 @@ export function tokenGetter() {
       ClassifiedAdsUserListComponent,
       ClassifiedAdsUserListCardComponent,
       PhotoEditorComponent
-   ],
+    ],
    imports: [
       BrowserModule,
       HttpClientModule,

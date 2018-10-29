@@ -31,7 +31,6 @@ export class SearchAdsComponent implements OnInit {
     this.route.data.subscribe(data => {
       // console.log(data);
       this.categories = data['categories'];
-      console.log(data['categories']);
     });
     this.searchQueryParametars = {
       query: '',
@@ -87,11 +86,11 @@ export class SearchAdsComponent implements OnInit {
   }
 
   loadClassifiedAds() {
-    this.classifiedAdsService.getClassifiedAds().subscribe((classifiedAdsList: ClassifiedAdsList[]) => {
-      this.classifiedAdsService.changeClassifiedAdsListFromSearch(classifiedAdsList);
+    this.classifiedAdsService.getClassifiedAds()
+      .subscribe((classifiedAdsList: ClassifiedAdsList[]) => {
+        this.classifiedAdsService.changeClassifiedAdsListFromSearch(classifiedAdsList);
     }, error => {
       this.alertify.error(error);
-      console.log(error);
     });
   }
 }
