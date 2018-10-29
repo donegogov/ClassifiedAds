@@ -40,6 +40,7 @@ import { PreventUnsavedChangesEditClassifiedAds } from './_guards/prevent-unsave
 import { PhotoEditorComponent } from './classified-ads/photo-editor/photo-editor.component';
 import { GetCategoriesResolver } from './_resolvers/constant-resolvers/get-categories.resolver';
 import { GetCitiesResolver } from './_resolvers/constant-resolvers/get-cities.resolver';
+import { CreateAdsPhotoEditorComponent } from './classified-ads/create-ads-photo-editor/create-ads-photo-editor.component';
 
 export function tokenGetter() {
     return localStorage.getItem('token');
@@ -62,7 +63,8 @@ export function tokenGetter() {
       ClassifiedAdsEditComponent,
       ClassifiedAdsUserListComponent,
       ClassifiedAdsUserListCardComponent,
-      PhotoEditorComponent
+      PhotoEditorComponent,
+      CreateAdsPhotoEditorComponent
     ],
    imports: [
       BrowserModule,

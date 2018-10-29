@@ -7,6 +7,7 @@ import { Cities } from 'src/app/_models/constants/cities';
 import { Categories } from 'src/app/_models/constants/categories';
 import { ActivatedRoute } from '@angular/router';
 import { NgForm } from '@angular/forms';
+import { CreateAdsPhotoEditorComponent } from '../create-ads-photo-editor/create-ads-photo-editor.component';
 
 @Component({
   selector: 'app-create-ads',
@@ -14,6 +15,7 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./create-ads.component.css']
 })
 export class CreateAdsComponent implements OnInit {
+  @ViewChild(CreateAdsPhotoEditorComponent) uploaderChild: CreateAdsPhotoEditorComponent;
   @ViewChild('createForm') createForm: NgForm;
   classifiedAdsForRegister: ClassifiedAdsForRegister;
   cities: Cities[];
@@ -41,6 +43,8 @@ export class CreateAdsComponent implements OnInit {
       this.createForm.reset();
       console.log('Next = ');
       console.log(next);
+      this.uploaderChild.initializeUploaderUrl(next.id);
+      this.uploaderChild.uploader.uploadAll();
     }, error => {
       console.log(error);
     });

@@ -18,6 +18,7 @@ import { ClassifiedAdsForUserUpdateResolver } from './_resolvers/classified-ads-
 import { PreventUnsavedChangesEditClassifiedAds } from './_guards/prevent-unsaved-changes.edit-classified-ads.guard';
 import { GetCitiesResolver } from './_resolvers/constant-resolvers/get-cities.resolver';
 import { GetCategoriesResolver } from './_resolvers/constant-resolvers/get-categories.resolver';
+import { CreateAdsPhotoEditorComponent } from './classified-ads/create-ads-photo-editor/create-ads-photo-editor.component';
 
 export const appRoutes: Routes = [
     { path: '', component: HomeComponent },
@@ -47,6 +48,7 @@ export const appRoutes: Routes = [
             { path: 'classified-ads-edit/:id', component: ClassifiedAdsEditComponent,
                 resolve: {classifiedAdsDetail: ClassifiedAdsForUserUpdateResolver },
                 canDeactivate: [PreventUnsavedChangesEditClassifiedAds] },
+            { path:'create-ads-photo-editor', component: CreateAdsPhotoEditorComponent },
         ]
     },
     { path: '**', redirectTo: '', pathMatch: 'full' }
