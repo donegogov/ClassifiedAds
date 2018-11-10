@@ -12,7 +12,7 @@ export class AdsListResolver implements Resolve<ClassifiedAdsList[]> {
         private alertify: AlertifyService) {}
 
     resolve(route: ActivatedRouteSnapshot): Observable<ClassifiedAdsList[]> {
-        return this.classifiedAdsService.getClassifiedAds().pipe(
+        return this.classifiedAdsService.getRelevantClassifiedAds().pipe(
             catchError(error => {
                 this.alertify.error('Problem retrieving data ' + error);
                 this.router.navigate(['/home']);

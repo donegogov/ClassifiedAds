@@ -70,6 +70,16 @@ namespace FreeAds.API.Data
             return classifiedAds;
         }
 
+        public async Task<IEnumerable<ClassifiedAds>> GetRelevantClassifiedAds(string city)
+        {
+            var classifiedAds = await _context.ClassifiedAds.Where(vd => vd.DateAdded.CalculateValidTo()).OrderByDescending(ca => ca.City.Equals(city)).Include(p => p.Photos).ToListAsync();
+            
+            //classifiedAds = classifiedAds.OrderByDescending(ca => ca.City.Equals(city)).ToList();
+            //var top5ClassifiedAdsOrderByCity = await classifiedAds.OrderBy(ca => ca.City.Equals(city)).Take(5).ToListAsync();
+
+            return classifiedAds;
+        }
+
         public async Task<IEnumerable<ClassifiedAds>> GetClassifiedAdsForUser(int userId)
         {
             var classifiedAds = await _context.ClassifiedAds.Where(uid => uid.UserId == userId).Include(p => p.Photos).ToListAsync();

@@ -20,6 +20,7 @@ namespace FreeAds.API.Controllers
             _context = context;
         }
 
+        [AllowAnonymous]
         [HttpGet("cities")]
         public async Task<IActionResult> GetCities()
         {

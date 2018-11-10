@@ -19,9 +19,13 @@ import { PreventUnsavedChangesEditClassifiedAds } from './_guards/prevent-unsave
 import { GetCitiesResolver } from './_resolvers/constant-resolvers/get-cities.resolver';
 import { GetCategoriesResolver } from './_resolvers/constant-resolvers/get-categories.resolver';
 import { CreateAdsPhotoEditorComponent } from './classified-ads/create-ads-photo-editor/create-ads-photo-editor.component';
+import { RegisterComponent } from './register/register.component';
 
 export const appRoutes: Routes = [
-    { path: '', component: HomeComponent },
+    { path: '', component: HomeComponent,
+        resolve: { 
+            cities: GetCitiesResolver }
+    },
     {
         path: '',
         runGuardsAndResolvers: 'always',

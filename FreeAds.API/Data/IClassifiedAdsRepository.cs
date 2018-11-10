@@ -13,6 +13,7 @@ namespace FreeAds.API.Data
         bool DeletePhoto(int id);
         Task<bool> SaveAll();
         Task<IEnumerable<ClassifiedAds>> GetClassifiedAds();
+        Task<IEnumerable<ClassifiedAds>> GetRelevantClassifiedAds(string city);
         Task<IEnumerable<ClassifiedAds>> SearchClassifiedAds(SearchQueryParametarsDto searchQueryParametars);
         Task<IEnumerable<ClassifiedAds>> GetClassifiedAdsForUser(int userId);
         Task<ClassifiedAds> GetClassifiedAdDetail(int id);

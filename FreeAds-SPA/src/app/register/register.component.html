@@ -1,18 +1,42 @@
 <form #registerForm="ngForm" (ngSubmit)="register()">
   <h2 class="text-center text-primary">Sign Up</h2>
-  <hr>
+  <hr />
 
   <div class="form-group">
-    <input type="text" class="form-control" required name="username" [(ngModel)]="model.username" placeholder="Username">
+    <strong>Username:</strong>
+    <input
+      type="text"
+      class="form-control"
+      required
+      name="username"
+      [(ngModel)]="model.username"
+      placeholder="Username"
+    />
   </div>
-
   <div class="form-group">
-    <input type="password" class="form-control" required name="password" [(ngModel)]="model.password" placeholder="Password">
+    <strong>City:</strong>
+    <select class="form-control" name="city" [(ngModel)]="model.city">
+      <option *ngFor="let city of cities" value="{{city.cityValue}}">
+        {{ city.cityName }}
+      </option>
+    </select>
+  </div>
+  <div class="form-group">
+    <strong>Password:</strong>
+    <input
+      type="password"
+      class="form-control"
+      required
+      name="password"
+      [(ngModel)]="model.password"
+      placeholder="Password"
+    />
   </div>
 
   <div class="form-group text-center">
-    <button class="btn btn-success" type="submit">Register</button>
-    <button class="btn btn-default" type="button" (click)="cancel()">Cancel</button>
+    <button class="btn btn-success mr-2" type="submit">Register</button>
+    <button class="btn btn-default" type="button" (click)="cancel()">
+      Cancel
+    </button>
   </div>
-  
 </form>

@@ -34,10 +34,11 @@ namespace FreeAds.API.Controllers
 
             if (await _repo.UserExists(userForRegisterDto.Username))
                 return BadRequest("Username already exists");
-
+            
             var userToCreate = new User
             {
-                Username = userForRegisterDto.Username
+                Username = userForRegisterDto.Username,
+                City = userForRegisterDto.City
             };
 
             var createdUser = await _repo.Register(userToCreate, userForRegisterDto.Password);
@@ -57,7 +58,8 @@ namespace FreeAds.API.Controllers
             {
                 new Claim(ClaimTypes.NameIdentifier, userFromRepo.Id.ToString()),
                 new Claim(ClaimTypes.Name, userFromRepo.Username),
-                new Claim(ClaimTypes.Role, userFromRepo.UserRole)
+                new Claim(ClaimTypes.Role, userFromRepo.UserRole),
+                new Claim(ClaimTypes.StateOrProvince, userFromRepo.City)
             };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8

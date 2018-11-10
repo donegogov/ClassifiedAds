@@ -35,6 +35,18 @@ namespace FreeAds.API.Controllers
             return Ok(classifiedAdsToReturn);
         }
 
+        [HttpGet("relevant")]
+        public async Task<IActionResult> GetRelevantClassifiedAds()
+        {
+            var city = User.FindFirst(ClaimTypes.StateOrProvince).Value;
+
+            var classifiedAds = await _repo.GetRelevantClassifiedAds(city);
+
+            var classifiedAdsToReturn = _mapper.Map<IEnumerable<ClassifiedAdsDto>>(classifiedAds);
+
+            return Ok(classifiedAdsToReturn);
+        }
+
         [HttpGet("{id}")]
         public async Task<IActionResult> GetClassifiedAdDetail(int id)
         {

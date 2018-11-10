@@ -20,6 +20,10 @@ export class ClassifiedAdsService {
 
 constructor(private http: HttpClient) { }
 
+getRelevantClassifiedAds(): Observable<ClassifiedAdsList[]> {
+  return this.http.get<ClassifiedAdsList[]>(this.baseUrl + 'classifiedads/relevant');
+}
+
 getClassifiedAds(): Observable<ClassifiedAdsList[]> {
   return this.http.get<ClassifiedAdsList[]>(this.baseUrl + 'classifiedads');
 }
