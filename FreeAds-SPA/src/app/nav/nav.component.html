@@ -1,16 +1,16 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-primary">
   <div class="container">
-    <a class="navbar-brand" [routerLink]="['/home']">Free Ads</a>
+    <a class="navbar-brand" [routerLink]="['/home']">Free Classified Ads App</a>
 
     <ul *ngIf="loggedIn()" class="navbar-nav mr-auto">
       <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link" [routerLink]="['/ads-list']">Ads List</a>
+        <a class="nav-link" [routerLink]="['/ads-list']">Classified Ads</a>
       </li>
 <!--       <li class="nav-item" routerLinkActive="active">
         <a class="nav-link" [routerLink]="['/member-list']">Members</a>
       </li> -->
       <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link" [routerLink]="['/create-ads']">Create New Ads</a>
+        <a class="nav-link" [routerLink]="['/create-ads']">Create New Classified Ad</a>
       </li>
     </ul>
 
