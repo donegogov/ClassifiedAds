@@ -26,27 +26,29 @@ export const appRoutes: Routes = [
         resolve: { 
             cities: GetCitiesResolver }
     },
+    { path: 'ads-list', component: AdsListComponent,
+                resolve: {classifiedAdsList: AdsListResolver,
+                    categories: GetCategoriesResolver,
+                    cities: GetCitiesResolver } },
+    { path: 'ads-list/:id', component: ClassifiedAdsDetailComponent,
+        resolve: {classifiedAdsDetail: ClassifiedAdsDetailResolver } 
+    },
+    { path: 'search-ads', component: SearchAdsComponent,
+        resolve: { categories: GetCategoriesResolver,
+            cities: GetCitiesResolver }
+    },
     {
         path: '',
         runGuardsAndResolvers: 'always',
         canActivate: [AuthGuard],
         children: [
-            { path: 'search-ads', component: SearchAdsComponent,
-                resolve: { categories: GetCategoriesResolver,
-                    cities: GetCitiesResolver }
-            },
+            
             { path: 'member-list', component: MemberListComponent, canActivate: [AuthGuard] },
             { path: 'member/edit', component: MemberEditComponent,
                 resolve: {user: MemberEditResolver},
                 canDeactivate: [PreventUnsavedChanges] },
             { path: 'create-ads', component: CreateAdsComponent,
                 resolve: {categories: GetCategoriesResolver, cities: GetCitiesResolver }},
-            { path: 'ads-list', component: AdsListComponent,
-                resolve: {classifiedAdsList: AdsListResolver,
-                    categories: GetCategoriesResolver,
-                    cities: GetCitiesResolver } },
-            { path: 'ads-list/:id', component: ClassifiedAdsDetailComponent,
-                resolve: {classifiedAdsDetail: ClassifiedAdsDetailResolver } },
             { path: 'classified-ads-user-list/:id', component: ClassifiedAdsUserListComponent,
                 resolve: {classifiedAdsForUser: ClassifiedAdsUserListResolver }},
             { path: 'classified-ads-edit/:id', component: ClassifiedAdsEditComponent,

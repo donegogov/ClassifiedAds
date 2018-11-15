@@ -29,6 +29,7 @@ namespace FreeAds.API.Controllers
             return Ok(cities);
         }
 
+        [AllowAnonymous]
         [HttpGet("categories")]
         public async Task<IActionResult> GetCategories()
         {

@@ -25,6 +25,7 @@ namespace FreeAds.API.Controllers
             _repo = repo;
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> GetClassifiedAds()
         {
@@ -34,7 +35,7 @@ namespace FreeAds.API.Controllers
 
             return Ok(classifiedAdsToReturn);
         }
-
+        
         [HttpGet("relevant")]
         public async Task<IActionResult> GetRelevantClassifiedAds()
         {
@@ -47,6 +48,7 @@ namespace FreeAds.API.Controllers
             return Ok(classifiedAdsToReturn);
         }
 
+        [AllowAnonymous]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetClassifiedAdDetail(int id)
         {
@@ -72,7 +74,7 @@ namespace FreeAds.API.Controllers
             return Ok(classifiedAdsToReturn);
         }
 
-        // ova treba HttpGet
+        [AllowAnonymous]
         [HttpPost("search")]
         public async Task<IActionResult> SearchClassifiedAdForUser(SearchQueryParametarsDto searchQueryParametars)
         {
@@ -83,7 +85,6 @@ namespace FreeAds.API.Controllers
             return Ok(classifiedAdsToReturn);
         }
 
-        //nz dali treba HttpPut za dodavanje classified ads
         [HttpPut("add/{userId}")]
         public async Task<IActionResult> Register(int userId, ClassifiedAdsForRegisterDto classifiedAdForRegisterDto)
         {
