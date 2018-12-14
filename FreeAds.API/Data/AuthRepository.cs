@@ -78,13 +78,14 @@ namespace FreeAds.API.Data
         }
 
         public SecurityToken CreateToken(UserForTokenDto userForToken, 
-            SymmetricSecurityKey key, string userRole) 
+            SymmetricSecurityKey key, string userRole, string city) 
         {
             var claims = new[]
             {
                 new Claim(ClaimTypes.NameIdentifier, userForToken.id.ToString()),
                 new Claim(ClaimTypes.Name, userForToken.Username),
-                new Claim(ClaimTypes.Role, userRole)
+                new Claim(ClaimTypes.Role, userRole),
+                new Claim(ClaimTypes.StateOrProvince, city)
             };
 
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);

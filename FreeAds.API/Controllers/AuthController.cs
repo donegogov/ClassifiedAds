@@ -93,8 +93,9 @@ namespace FreeAds.API.Controllers
                 .GetBytes(_config.GetSection("AppSettings:Token").Value));
 
             string userRole = User.FindFirst(ClaimTypes.Role).Value;
+            string city = User.FindFirst(ClaimTypes.StateOrProvince).Value;
 
-            var token = _repo.CreateToken(userForToken, key, userRole);
+            var token = _repo.CreateToken(userForToken, key, userRole, city);
 
             var tokenHandler = new JwtSecurityTokenHandler();
 

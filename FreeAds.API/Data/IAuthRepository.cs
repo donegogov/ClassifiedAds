@@ -11,6 +11,6 @@ namespace FreeAds.API.Data
          Task<User> Login(string username, string password);
          Task<bool> UserExists(string username);
          SecurityToken CreateToken(UserForTokenDto userForToken, 
-            SymmetricSecurityKey key, string userRole);
+            SymmetricSecurityKey key, string userRole, string city);
     }
 }

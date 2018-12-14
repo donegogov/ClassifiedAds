@@ -13,7 +13,7 @@ export class AdsListResolver implements Resolve<ClassifiedAdsList[]> {
         private alertify: AlertifyService, private authService: AuthService) {}
 
     resolve(route: ActivatedRouteSnapshot): Observable<ClassifiedAdsList[]> {
-        if (this.authService.loggedIn) {
+        if (!this.authService.loggedIn()) {
             return this.classifiedAdsService.getClassifiedAds().pipe(
                 catchError(error => {
                     this.alertify.error('Problem retrieving data ' + error);
