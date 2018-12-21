@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using FreeAds.API.Dtos;
+using FreeAds.API.Helpers;
 using FreeAds.API.Models;
 
 namespace FreeAds.API.Data
@@ -12,8 +13,8 @@ namespace FreeAds.API.Data
         bool Delete(int id);
         bool DeletePhoto(int id);
         Task<bool> SaveAll();
-        Task<IEnumerable<ClassifiedAds>> GetClassifiedAds();
-        Task<IEnumerable<ClassifiedAds>> GetRelevantClassifiedAds(string city);
+        Task<PagedList<ClassifiedAds>> GetClassifiedAds(ClassifiedAdsParams classifiedAdsParams);
+        Task<PagedList<ClassifiedAds>> GetRelevantClassifiedAds(string city, ClassifiedAdsParams classifiedAdsParams);
         Task<IEnumerable<ClassifiedAds>> SearchClassifiedAds(SearchQueryParametarsDto searchQueryParametars);
         Task<IEnumerable<ClassifiedAds>> GetClassifiedAdsForUser(int userId);
         Task<ClassifiedAds> GetClassifiedAdDetail(int id);

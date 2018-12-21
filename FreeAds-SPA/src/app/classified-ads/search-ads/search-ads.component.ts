@@ -7,6 +7,7 @@ import { ClassifiedAdsList } from 'src/app/_models/classified-ads-list';
 import { ConstantService } from 'src/app/_services/constant.service';
 import { Cities } from 'src/app/_models/constants/cities';
 import { Categories } from 'src/app/_models/constants/categories';
+import { PaginatedResult } from 'src/app/_models/pagination';
 
 @Component({
   selector: 'app-search-ads',
@@ -87,8 +88,8 @@ export class SearchAdsComponent implements OnInit {
 
   loadClassifiedAds() {
     this.classifiedAdsService.getClassifiedAds()
-      .subscribe((classifiedAdsList: ClassifiedAdsList[]) => {
-        this.classifiedAdsService.changeClassifiedAdsListFromSearch(classifiedAdsList);
+      .subscribe((classifiedAdsList: PaginatedResult<ClassifiedAdsList[]>) => {
+        this.classifiedAdsService.changeClassifiedAdsListFromSearch(classifiedAdsList.result);
     }, error => {
       this.alertify.error(error);
     });

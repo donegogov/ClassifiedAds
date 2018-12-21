@@ -9,12 +9,15 @@ import { AuthService } from '../_services/auth.service';
 
 @Injectable()
 export class AdsListResolver implements Resolve<ClassifiedAdsList[]> {
+    pageNumber = 1;
+    pageSize = 12;
+
     constructor(private classifiedAdsService: ClassifiedAdsService, private router: Router,
         private alertify: AlertifyService, private authService: AuthService) {}
 
     resolve(route: ActivatedRouteSnapshot): Observable<ClassifiedAdsList[]> {
         if (!this.authService.loggedIn()) {
-            return this.classifiedAdsService.getClassifiedAds().pipe(
+            return this.classifiedAdsService.getClassifiedAds(this.pageNumber, this.pageSize).pipe(
                 catchError(error => {
                     this.alertify.error('Problem retrieving data ' + error);
                     this.router.navigate(['/home']);
@@ -22,7 +25,8 @@ export class AdsListResolver implements Resolve<ClassifiedAdsList[]> {
                 })
             );
         }
-        return this.classifiedAdsService.getRelevantClassifiedAds().pipe(
+        console.log(this.pageNumber, + ' ' + this.pageSize);
+        return this.classifiedAdsService.getRelevantClassifiedAds(this.pageNumber, this.pageSize).pipe(
             catchError(error => {
                 this.alertify.error('Problem retrieving data ' + error);
                 this.router.navigate(['/home']);

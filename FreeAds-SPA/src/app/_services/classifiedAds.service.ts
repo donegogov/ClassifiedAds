@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { ClassifiedAdsList } from '../_models/classified-ads-list';
 import { ClassifiedAdsDetail } from '../_models/classified-ads-detail';
@@ -8,6 +8,8 @@ import { ClassifiedAdsForUser } from '../_models/classified-ads-for-user';
 import { ClassifiedAdsForUserUpdate } from '../_models/classified-ads-for-user-update';
 import { SearchQueryParametars } from '../_models/search-query-parametars';
 import { ClassifiedAdsForRegister } from '../_models/classified-ads-models/classified-ads-for-register';
+import { PaginatedResult } from '../_models/pagination';
+import { map } from 'rxjs/operators';
 
 
 @Injectable({
@@ -20,12 +22,52 @@ export class ClassifiedAdsService {
 
 constructor(private http: HttpClient) { }
 
-getRelevantClassifiedAds(): Observable<ClassifiedAdsList[]> {
-  return this.http.get<ClassifiedAdsList[]>(this.baseUrl + 'classifiedads/relevant');
+getRelevantClassifiedAds(page?, itemsPerPage?): Observable<PaginatedResult<ClassifiedAdsList[]>> {
+  const paginatedResult: PaginatedResult<ClassifiedAdsList[]> = new PaginatedResult<ClassifiedAdsList[]>();
+
+  let params = new HttpParams();
+
+  if (page != null && itemsPerPage != null) {
+    params = params.append('pageNumber', page);
+    params = params.append('pageSize', itemsPerPage);
+  }
+
+  return this.http.get<ClassifiedAdsList[]>(this.baseUrl + 'classifiedads/relevant', {observe: 'response', params})
+  .pipe(
+    map(response => {
+      console.log(response);
+      paginatedResult.result = response.body;
+      if (response.headers.get('Pagination') != null) {
+        paginatedResult.pagination = JSON.parse(response.headers.get('Pagination'));
+        console.log(paginatedResult.pagination);
+      }
+      return paginatedResult;
+    })
+  );
 }
 
-getClassifiedAds(): Observable<ClassifiedAdsList[]> {
-  return this.http.get<ClassifiedAdsList[]>(this.baseUrl + 'classifiedads');
+getClassifiedAds(page?, itemsPerPage?): Observable<PaginatedResult<ClassifiedAdsList[]>> {
+  const paginatedResult: PaginatedResult<ClassifiedAdsList[]> = new PaginatedResult<ClassifiedAdsList[]>();
+
+  let params = new HttpParams();
+
+  if (page != null && itemsPerPage != null) {
+    params = params.append('pageNumber', page);
+    params = params.append('pageSize', itemsPerPage);
+  }
+
+  return this.http.get<ClassifiedAdsList[]>(this.baseUrl + 'classifiedads', {observe: 'response', params})
+    .pipe(
+      map(response => {
+        console.log(response);
+        paginatedResult.result = response.body;
+        if (response.headers.get('Pagination') != null) {
+          paginatedResult.pagination = JSON.parse(response.headers.get('Pagination'));
+          console.log(paginatedResult.pagination);
+        }
+        return paginatedResult;
+      })
+    );
 }
 
 getClassifiedAdsDetail(id: number): Observable<ClassifiedAdsDetail> {

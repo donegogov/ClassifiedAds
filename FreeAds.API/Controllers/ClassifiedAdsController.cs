@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using FreeAds.API.Data;
 using FreeAds.API.Dtos;
+using FreeAds.API.Helpers;
 using FreeAds.API.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -27,23 +28,27 @@ namespace FreeAds.API.Controllers
 
         [AllowAnonymous]
         [HttpGet]
-        public async Task<IActionResult> GetClassifiedAds()
+        public async Task<IActionResult> GetClassifiedAds([FromQuery]ClassifiedAdsParams classifiedAdsParams)
         {
-            var classifiedAds = await _repo.GetClassifiedAds();
+            var classifiedAds = await _repo.GetClassifiedAds(classifiedAdsParams);
 
             var classifiedAdsToReturn = _mapper.Map<IEnumerable<ClassifiedAdsDto>>(classifiedAds);
+
+            Response.AddPagination(classifiedAds.CurrentPage, classifiedAds.PageSize, classifiedAds.TotalCount, classifiedAds.TotalPages);
 
             return Ok(classifiedAdsToReturn);
         }
         
         [HttpGet("relevant")]
-        public async Task<IActionResult> GetRelevantClassifiedAds()
+        public async Task<IActionResult> GetRelevantClassifiedAds([FromQuery]ClassifiedAdsParams classifiedAdsParams)
         {
             var city = User.FindFirst(ClaimTypes.StateOrProvince).Value;
 
-            var classifiedAds = await _repo.GetRelevantClassifiedAds(city);
+            var classifiedAds = await _repo.GetRelevantClassifiedAds(city, classifiedAdsParams);
 
             var classifiedAdsToReturn = _mapper.Map<IEnumerable<ClassifiedAdsDto>>(classifiedAds);
+
+            Response.AddPagination(classifiedAds.CurrentPage, classifiedAds.PageSize, classifiedAds.TotalCount, classifiedAds.TotalPages);
 
             return Ok(classifiedAdsToReturn);
         }

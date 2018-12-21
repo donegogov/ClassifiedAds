@@ -63,21 +63,21 @@ namespace FreeAds.API.Data
             return classifiedAd;
         }
 
-        public async Task<IEnumerable<ClassifiedAds>> GetClassifiedAds()
+        public async Task<PagedList<ClassifiedAds>> GetClassifiedAds(ClassifiedAdsParams classifiedAdsParams)
         {
-            var classifiedAds = await _context.ClassifiedAds.Where(vd => vd.DateAdded.CalculateValidTo()).Include(p => p.Photos).ToListAsync();
+            var classifiedAds = _context.ClassifiedAds.Where(vd => vd.DateAdded.CalculateValidTo()).Include(p => p.Photos);
 
-            return classifiedAds;
+            return await PagedList<ClassifiedAds>.CreateAsync(classifiedAds, classifiedAdsParams.PageNumber, classifiedAdsParams.PageSize);
         }
 
-        public async Task<IEnumerable<ClassifiedAds>> GetRelevantClassifiedAds(string city)
+        public async Task<PagedList<ClassifiedAds>> GetRelevantClassifiedAds(string city, ClassifiedAdsParams classifiedAdsParams)
         {
-            var classifiedAds = await _context.ClassifiedAds.Where(vd => vd.DateAdded.CalculateValidTo()).OrderByDescending(ca => ca.City.Equals(city)).Include(p => p.Photos).ToListAsync();
+            var classifiedAds = _context.ClassifiedAds.Where(vd => vd.DateAdded.CalculateValidTo()).OrderByDescending(ca => ca.City.Equals(city)).Include(p => p.Photos);
+
+            return await PagedList<ClassifiedAds>.CreateAsync(classifiedAds, classifiedAdsParams.PageNumber, classifiedAdsParams.PageSize);
             
             //classifiedAds = classifiedAds.OrderByDescending(ca => ca.City.Equals(city)).ToList();
             //var top5ClassifiedAdsOrderByCity = await classifiedAds.OrderBy(ca => ca.City.Equals(city)).Take(5).ToListAsync();
-
-            return classifiedAds;
         }
 
         public async Task<IEnumerable<ClassifiedAds>> GetClassifiedAdsForUser(int userId)

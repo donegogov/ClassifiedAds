@@ -23,7 +23,7 @@ import { RegisterComponent } from './register/register.component';
 
 export const appRoutes: Routes = [
     { path: '', component: HomeComponent,
-        resolve: { 
+        resolve: {
             cities: GetCitiesResolver }
     },
     { path: 'ads-list', component: AdsListComponent,
@@ -31,7 +31,7 @@ export const appRoutes: Routes = [
                     categories: GetCategoriesResolver,
                     cities: GetCitiesResolver } },
     { path: 'ads-list/:id', component: ClassifiedAdsDetailComponent,
-        resolve: {classifiedAdsDetail: ClassifiedAdsDetailResolver } 
+        resolve: {classifiedAdsDetail: ClassifiedAdsDetailResolver }
     },
     { path: 'search-ads', component: SearchAdsComponent,
         resolve: { categories: GetCategoriesResolver,
@@ -42,7 +42,6 @@ export const appRoutes: Routes = [
         runGuardsAndResolvers: 'always',
         canActivate: [AuthGuard],
         children: [
-            
             { path: 'member-list', component: MemberListComponent, canActivate: [AuthGuard] },
             { path: 'member/edit', component: MemberEditComponent,
                 resolve: {user: MemberEditResolver},
@@ -54,7 +53,7 @@ export const appRoutes: Routes = [
             { path: 'classified-ads-edit/:id', component: ClassifiedAdsEditComponent,
                 resolve: {classifiedAdsDetail: ClassifiedAdsForUserUpdateResolver },
                 canDeactivate: [PreventUnsavedChangesEditClassifiedAds] },
-            { path:'create-ads-photo-editor', component: CreateAdsPhotoEditorComponent },
+            { path: 'create-ads-photo-editor', component: CreateAdsPhotoEditorComponent },
         ]
     },
     { path: '**', redirectTo: '', pathMatch: 'full' }
