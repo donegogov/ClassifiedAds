@@ -147,5 +147,73 @@ namespace FreeAds.API.Controllers
 
             throw new Exception($"Updating classified ad {id} failed on save");
         }
+
+        [Produces("application/json")]
+        [HttpPost("{userId}/like/{classifiedAdId}")]
+        public async Task<IActionResult> LikeClassifiedAd(int userId, int classifiedAdId)
+        {
+            if(userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+            {
+                return Unauthorized();
+            }
+
+            var like = await _repo.GetLike(userId, classifiedAdId);
+
+            if (like != null)
+            {
+                _repo.Delete(like);
+
+                if (await _repo.SaveAll())
+                    return Ok("You have disliked classified ad ");
+                
+                return BadRequest("Failed to unlike the classified ad");
+            }
+
+            if( await _repo.GetClassifiedAdDetail(classifiedAdId) == null)
+                return NotFound();
+
+            like = new Like
+            {
+                LikerUserId = userId,
+                LikedClassifiedAdsId = classifiedAdId
+            };
+
+            _repo.Add<Like>(like);
+
+            if (await _repo.SaveAll())
+                return Ok("You have liked classified ad ");
+
+            return BadRequest("Failed to like the classified ad");
+        }
+
+        [HttpGet("user/likes")]
+        public async Task<IActionResult> GetLikedClassifiedAds([FromQuery]ClassifiedAdsParams classifiedAdsParams)
+        {
+            if(classifiedAdsParams.userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+            {
+                return Unauthorized();
+            }
+
+            var classifiedAds = await _repo.GetUserLikedClassifiedAds(classifiedAdsParams);
+
+            var classifiedAdsToReturn = _mapper.Map<IEnumerable<ClassifiedAdsDto>>(classifiedAds);
+
+            Response.AddPagination(classifiedAds.CurrentPage, classifiedAds.PageSize, classifiedAds.TotalCount, classifiedAds.TotalPages);
+
+            return Ok(classifiedAdsToReturn);
+        }
+
+        [AllowAnonymous]
+        [Produces("application/json")]
+        [HttpGet("likes/{classifiedAdId}")]
+        public async Task<IActionResult> GetNumberOfLikesClassifiedAds(int classifiedAdId)
+        {
+            if( await _repo.GetClassifiedAdDetail(classifiedAdId) == null)
+                return NotFound();
+
+            var classifiedAds = await _repo.GetNumberOfLikesOfClassifiedAd(classifiedAdId);
+
+            return Ok(classifiedAds);
+        }
     }
 }

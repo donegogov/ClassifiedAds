@@ -70,6 +70,20 @@ namespace FreeAds.API.Data
             return await PagedList<ClassifiedAds>.CreateAsync(classifiedAds, classifiedAdsParams.PageNumber, classifiedAdsParams.PageSize);
         }
 
+        public async Task<PagedList<ClassifiedAds>> GetUserLikedClassifiedAds(ClassifiedAdsParams classifiedAdsParams)
+        {
+            var userLikes = await GetUserLikesClassifiedAds(classifiedAdsParams.userId);
+
+            var classifiedAds = _context.ClassifiedAds.Where(ca => userLikes.Contains(ca.Id)).Include(p => p.Photos).AsQueryable();
+
+            return await PagedList<ClassifiedAds>.CreateAsync(classifiedAds, classifiedAdsParams.PageNumber, classifiedAdsParams.PageSize);
+        }
+
+        public async Task<IEnumerable<int>> GetUserLikesClassifiedAds(int userId)
+        {
+            return await _context.Likes.Where(l => l.LikerUserId == userId).Select(l => l.LikedClassifiedAdsId).ToListAsync();
+        }
+
         public async Task<PagedList<ClassifiedAds>> GetRelevantClassifiedAds(string city, ClassifiedAdsParams classifiedAdsParams)
         {
             var classifiedAds = _context.ClassifiedAds.Where(vd => vd.DateAdded.CalculateValidTo()).OrderByDescending(ca => ca.City.Equals(city)).Include(p => p.Photos);
@@ -122,6 +136,22 @@ namespace FreeAds.API.Data
             var mainPhoto = await _context.Photos.Where(p => p.ClassifiedAdsId == classfiedAdId).FirstOrDefaultAsync(p => p.IsMain);
 
             return mainPhoto;
+        }
+
+        public async Task<Like> GetLike(int userId, int classifiedAdId)
+        {
+            return await _context.Likes.FirstOrDefaultAsync(l => l.LikerUserId == userId && l.LikedClassifiedAdsId == classifiedAdId);
+        }
+
+        public void Add<T>(T entity) where T : class
+        {
+            _context.Add(entity);
+        }
+
+        public async Task<int> GetNumberOfLikesOfClassifiedAd(int classifiedAdId)
+        {
+            return await _context.Likes.CountAsync(l => l.LikedClassifiedAdsId == classifiedAdId);
+
         }
     }
 }

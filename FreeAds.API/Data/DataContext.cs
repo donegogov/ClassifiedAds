@@ -14,5 +14,24 @@ namespace FreeAds.API.Data
         public DbSet<Photo> Photos { get; set; }
         public DbSet<City> Cities { get; set; }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<Like> Likes { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.Entity<Like>()
+                .HasKey(k => new { k.LikerUserId, k.LikedClassifiedAdsId });
+
+            builder.Entity<Like>()
+                .HasOne(u => u.LikerUser)
+                .WithMany(ca => ca.LikedClassifiedAds)
+                .HasForeignKey(fk => fk.LikerUserId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<Like>()
+                .HasOne(ca => ca.LikedClassifiedAds)
+                .WithMany(u => u.LikersUsers)
+                .HasForeignKey(fk => fk.LikedClassifiedAdsId)
+                .OnDelete(DeleteBehavior.Restrict);
+        }
     }
 }

@@ -10,6 +10,7 @@ namespace FreeAds.API.Helpers
             get { return pageSize;}
             set { pageSize = (value > MaxPageSize) ? MaxPageSize : value;}
         }
-        
+
+        public int userId { get; set; }        
     }
 }

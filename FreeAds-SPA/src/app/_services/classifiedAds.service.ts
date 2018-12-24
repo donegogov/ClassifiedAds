@@ -106,4 +106,12 @@ createClassifiedAds(id: number, classifiedAdsForRegister: ClassifiedAdsForRegist
   return this.http.put<ClassifiedAdsForRegister>(this.baseUrl + 'classifiedads/add/' + id, classifiedAdsForRegister);
 }
 
+sendLike(userId: number, classifiedAdId: number) {
+  return this.http.post(this.baseUrl + 'classifiedads/' + userId + '/like/' + classifiedAdId, {});
+}
+
+getNumberOfLikes(classifiedAdId: number) {
+  return this.http.get(this.baseUrl + 'classifiedads/likes/' + classifiedAdId);
+}
+
 }

@@ -8,6 +8,7 @@ namespace FreeAds.API.Data
 {
     public interface IClassifiedAdsRepository
     {
+        void Add<T>(T entity) where T: class;
         Task<ClassifiedAds> Add(ClassifiedAds classifiedAds);
         void Delete<T>(T entity) where T: class;
         bool Delete(int id);
@@ -20,5 +21,9 @@ namespace FreeAds.API.Data
         Task<ClassifiedAds> GetClassifiedAdDetail(int id);
         Task<Photo> GetPhoto(int id);
         Task<Photo> GetMainPhotoForClassifiedAd(int classfiedAdId);
+        Task<Like> GetLike(int userId, int classifiedAdId);
+        Task<PagedList<ClassifiedAds>> GetUserLikedClassifiedAds(ClassifiedAdsParams classifiedAdsParams);
+        Task<int> GetNumberOfLikesOfClassifiedAd(int classifiedAdId);
+
     }
 }

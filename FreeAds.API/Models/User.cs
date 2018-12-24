@@ -13,5 +13,6 @@ namespace FreeAds.API.Models
         public byte[] PasswordSalt { get; set; }
         public string UserRole { get; set; }
         public ICollection<ClassifiedAds> ClassifiedAds { get; set; }
+        public ICollection<Like> LikedClassifiedAds { get; set; }
     }
 }

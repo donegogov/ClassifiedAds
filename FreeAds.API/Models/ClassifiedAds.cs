@@ -21,5 +21,6 @@ namespace FreeAds.API.Models
         public ICollection<Photo> Photos { get; set; }
         public User User { get; set; }
         public int UserId { get; set; }
+        public ICollection<Like> LikersUsers { get; set; }
     }
 }
