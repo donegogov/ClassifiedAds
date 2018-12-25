@@ -96,8 +96,11 @@ deletePhoto(userId: number, classifiedAdId: number, photoId: number) {
 }
 
 searchQuery(searchQueryParametars: SearchQueryParametars, userId?: number): Observable<ClassifiedAdsList[]> {
-
-  return this.http.post<ClassifiedAdsList[]>(this.baseUrl + 'classifiedads/search/' + userId, searchQueryParametars);
+  if (userId != null) {
+    return this.http.post<ClassifiedAdsList[]>(this.baseUrl + 'classifiedads/search/' + userId, searchQueryParametars);
+  } else {
+    return this.http.post<ClassifiedAdsList[]>(this.baseUrl + 'classifiedads/search/', searchQueryParametars);
+  }
 }
 
 changeClassifiedAdsListFromSearch(classifiedAdsList: ClassifiedAdsList[]) {

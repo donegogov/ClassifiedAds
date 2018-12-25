@@ -5,6 +5,8 @@ import { AlertifyService } from '../../_services/alertify.service';
 import { ClassifiedAdsService } from '../../_services/classifiedAds.service';
 import { AuthService } from '../../_services/auth.service';
 import { NgForm } from '@angular/forms';
+import { Cities } from 'src/app/_models/constants/cities';
+import { Categories } from 'src/app/_models/constants/categories';
 
 @Component({
   selector: 'app-classified-ads-edit',
@@ -12,6 +14,8 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./classified-ads-edit.component.css']
 })
 export class ClassifiedAdsEditComponent implements OnInit {
+  cities: Cities[];
+  categories: Categories[];
   @ViewChild('editForm') editForm: NgForm;
   classifiedAdsForUserUpdate: ClassifiedAdsForUserUpdate;
   @HostListener('window:beforeunload', ['$event'])
@@ -27,6 +31,13 @@ export class ClassifiedAdsEditComponent implements OnInit {
   ngOnInit() {
     this.route.data.subscribe(data => {
       this.classifiedAdsForUserUpdate = data['classifiedAdsDetail'];
+    });
+    this.route.data.subscribe(data => {
+      this.cities = data['cities'];
+    });
+    this.route.data.subscribe(data => {
+      // console.log(data);
+      this.categories = data['categories'];
     });
   }
 

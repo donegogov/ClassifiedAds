@@ -51,7 +51,9 @@ export const appRoutes: Routes = [
             { path: 'classified-ads-user-list/:id', component: ClassifiedAdsUserListComponent,
                 resolve: {classifiedAdsForUser: ClassifiedAdsUserListResolver }},
             { path: 'classified-ads-edit/:id', component: ClassifiedAdsEditComponent,
-                resolve: {classifiedAdsDetail: ClassifiedAdsForUserUpdateResolver },
+                resolve: {classifiedAdsDetail: ClassifiedAdsForUserUpdateResolver,
+                    categories: GetCategoriesResolver,
+                    cities: GetCitiesResolver },
                 canDeactivate: [PreventUnsavedChangesEditClassifiedAds] },
             { path: 'create-ads-photo-editor', component: CreateAdsPhotoEditorComponent },
         ]

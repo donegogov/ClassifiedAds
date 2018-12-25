@@ -64,15 +64,27 @@ export class SearchAdsComponent implements OnInit {
 
   searchClassifiedAds() {
     // console.log(this.searchQueryParametars);
-    this.classifiedAdsService.searchQuery(this.searchQueryParametars, this.authService.decodedToken.nameid).subscribe(
-      res => {
-        this.classifiedAdsService.changeClassifiedAdsListFromSearch(res);
-      },
-      error => {
-        this.alertify.error(error);
-        console.log(error);
-      }
-    );
+    if (this.authService.loggedIn()) {
+      this.classifiedAdsService.searchQuery(this.searchQueryParametars, this.authService.decodedToken.nameid).subscribe(
+        res => {
+          this.classifiedAdsService.changeClassifiedAdsListFromSearch(res);
+        },
+        error => {
+          this.alertify.error(error);
+          console.log(error);
+        }
+      );
+    } else {
+      this.classifiedAdsService.searchQuery(this.searchQueryParametars).subscribe(
+        res => {
+          this.classifiedAdsService.changeClassifiedAdsListFromSearch(res);
+        },
+        error => {
+          this.alertify.error(error);
+          console.log(error);
+        }
+      );
+    }
   }
 
   refreshAdsList(query: string) {
