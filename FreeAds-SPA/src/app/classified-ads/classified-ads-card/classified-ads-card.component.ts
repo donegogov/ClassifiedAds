@@ -38,4 +38,8 @@ export class ClassifiedAdsCardComponent implements OnInit {
     });
   }
 
+  loggedIn() {
+    return this.authService.loggedIn();
+  }
+
 }

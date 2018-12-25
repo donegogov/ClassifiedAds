@@ -123,14 +123,15 @@ namespace FreeAds.API
             seeder.SeedCites();
             app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             app.UseAuthentication();
-            app.UseDefaultFiles();
-            app.UseStaticFiles();
-            app.UseMvc(routes => {
+            //app.UseDefaultFiles();
+            //app.UseStaticFiles();
+            app.UseMvc();
+            /* app.UseMvc(routes => {
                 routes.MapSpaFallbackRoute(
                     name: "spa-fallback",
                     defaults: new { controller = "Fallback", action = "Index"}
                 );
-            });
+            }); */
         }
     }
 }
