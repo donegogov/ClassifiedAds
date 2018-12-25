@@ -10,6 +10,7 @@ import { SearchQueryParametars } from '../_models/search-query-parametars';
 import { ClassifiedAdsForRegister } from '../_models/classified-ads-models/classified-ads-for-register';
 import { PaginatedResult } from '../_models/pagination';
 import { map } from 'rxjs/operators';
+import { AuthService } from './auth.service';
 
 
 @Injectable({
@@ -20,9 +21,9 @@ export class ClassifiedAdsService {
   classifiedAdsFromSearch = new BehaviorSubject<ClassifiedAdsList[]>([]);
   classifiedAdsList = this.classifiedAdsFromSearch.asObservable();
 
-constructor(private http: HttpClient) { }
+constructor(private http: HttpClient, private authService: AuthService) { }
 
-getRelevantClassifiedAds(page?, itemsPerPage?): Observable<PaginatedResult<ClassifiedAdsList[]>> {
+getRelevantClassifiedAds(page?, itemsPerPage?, userId?: number): Observable<PaginatedResult<ClassifiedAdsList[]>> {
   const paginatedResult: PaginatedResult<ClassifiedAdsList[]> = new PaginatedResult<ClassifiedAdsList[]>();
 
   let params = new HttpParams();
@@ -30,6 +31,10 @@ getRelevantClassifiedAds(page?, itemsPerPage?): Observable<PaginatedResult<Class
   if (page != null && itemsPerPage != null) {
     params = params.append('pageNumber', page);
     params = params.append('pageSize', itemsPerPage);
+  }
+
+  if (userId != null) {
+    params = params.append('userId', userId.toString());
   }
 
   return this.http.get<ClassifiedAdsList[]>(this.baseUrl + 'classifiedads/relevant', {observe: 'response', params})
@@ -90,8 +95,9 @@ deletePhoto(userId: number, classifiedAdId: number, photoId: number) {
   return this.http.delete(this.baseUrl + userId + '/photos/' + classifiedAdId + '/' + photoId);
 }
 
-searchQuery(searchQueryParametars: SearchQueryParametars): Observable<ClassifiedAdsList[]> {
-  return this.http.post<ClassifiedAdsList[]>(this.baseUrl + 'classifiedads/search', searchQueryParametars);
+searchQuery(searchQueryParametars: SearchQueryParametars, userId?: number): Observable<ClassifiedAdsList[]> {
+
+  return this.http.post<ClassifiedAdsList[]>(this.baseUrl + 'classifiedads/search/' + userId, searchQueryParametars);
 }
 
 changeClassifiedAdsListFromSearch(classifiedAdsList: ClassifiedAdsList[]) {

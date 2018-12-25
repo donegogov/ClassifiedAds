@@ -8,6 +8,7 @@ import { ConstantService } from 'src/app/_services/constant.service';
 import { Cities } from 'src/app/_models/constants/cities';
 import { Categories } from 'src/app/_models/constants/categories';
 import { PaginatedResult } from 'src/app/_models/pagination';
+import { AuthService } from 'src/app/_services/auth.service';
 
 @Component({
   selector: 'app-search-ads',
@@ -23,6 +24,7 @@ export class SearchAdsComponent implements OnInit {
   constructor(
     private classifiedAdsService: ClassifiedAdsService,
     private alertify: AlertifyService,
+    private authService: AuthService,
     private router: Router,
     private constantService: ConstantService,
     private route: ActivatedRoute
@@ -62,7 +64,7 @@ export class SearchAdsComponent implements OnInit {
 
   searchClassifiedAds() {
     // console.log(this.searchQueryParametars);
-    this.classifiedAdsService.searchQuery(this.searchQueryParametars).subscribe(
+    this.classifiedAdsService.searchQuery(this.searchQueryParametars, this.authService.decodedToken.nameid).subscribe(
       res => {
         this.classifiedAdsService.changeClassifiedAdsListFromSearch(res);
       },

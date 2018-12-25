@@ -16,7 +16,7 @@ namespace FreeAds.API.Data
         Task<bool> SaveAll();
         Task<PagedList<ClassifiedAds>> GetClassifiedAds(ClassifiedAdsParams classifiedAdsParams);
         Task<PagedList<ClassifiedAds>> GetRelevantClassifiedAds(string city, ClassifiedAdsParams classifiedAdsParams);
-        Task<IEnumerable<ClassifiedAds>> SearchClassifiedAds(SearchQueryParametarsDto searchQueryParametars);
+        Task<IEnumerable<ClassifiedAds>> SearchClassifiedAds(SearchQueryParametarsDto searchQueryParametars, int? userId);
         Task<IEnumerable<ClassifiedAds>> GetClassifiedAdsForUser(int userId);
         Task<ClassifiedAds> GetClassifiedAdDetail(int id);
         Task<Photo> GetPhoto(int id);

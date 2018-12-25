@@ -86,7 +86,7 @@ namespace FreeAds.API.Data
 
         public async Task<PagedList<ClassifiedAds>> GetRelevantClassifiedAds(string city, ClassifiedAdsParams classifiedAdsParams)
         {
-            var classifiedAds = _context.ClassifiedAds.Where(vd => vd.DateAdded.CalculateValidTo()).OrderByDescending(ca => ca.City.Equals(city)).Include(p => p.Photos);
+            var classifiedAds = _context.ClassifiedAds.Where(vd => vd.DateAdded.CalculateValidTo() && vd.UserId != classifiedAdsParams.userId).OrderByDescending(ca => ca.City.Equals(city)).Include(p => p.Photos);
 
             return await PagedList<ClassifiedAds>.CreateAsync(classifiedAds, classifiedAdsParams.PageNumber, classifiedAdsParams.PageSize);
             
@@ -101,7 +101,7 @@ namespace FreeAds.API.Data
             return classifiedAds;
         }
 
-        public async Task<IEnumerable<ClassifiedAds>> SearchClassifiedAds(SearchQueryParametarsDto searchQueryParametars)
+        public async Task<IEnumerable<ClassifiedAds>> SearchClassifiedAds(SearchQueryParametarsDto searchQueryParametars, int? userId)
         {
             char[] delimiterChars = { ' ', ',', '.', ':', '\t' };
 
@@ -115,6 +115,13 @@ namespace FreeAds.API.Data
                         || queryWords.Any(str => cal.Description.Contains(str, StringComparison.OrdinalIgnoreCase)))
                 select cal
                 ).Include(p => p.Photos).ToListAsync();
+
+            if (userId != null)
+            {
+                var caToReturn = ca.Where(cads => cads.UserId != userId);
+
+                return caToReturn;
+            }
 
             return ca;
         }

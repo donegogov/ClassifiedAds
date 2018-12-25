@@ -38,10 +38,15 @@ namespace FreeAds.API.Controllers
 
             return Ok(classifiedAdsToReturn);
         }
-        
+
         [HttpGet("relevant")]
         public async Task<IActionResult> GetRelevantClassifiedAds([FromQuery]ClassifiedAdsParams classifiedAdsParams)
         {
+            if (classifiedAdsParams.userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+            {
+                return Unauthorized();
+            }
+
             var city = User.FindFirst(ClaimTypes.StateOrProvince).Value;
 
             var classifiedAds = await _repo.GetRelevantClassifiedAds(city, classifiedAdsParams);
@@ -80,10 +85,18 @@ namespace FreeAds.API.Controllers
         }
 
         [AllowAnonymous]
-        [HttpPost("search")]
-        public async Task<IActionResult> SearchClassifiedAdForUser(SearchQueryParametarsDto searchQueryParametars)
+        [HttpPost("search/{userId?}")]
+        public async Task<IActionResult> SearchClassifiedAdForUser(SearchQueryParametarsDto searchQueryParametars, int? userId = null)
         {
-            var classifiedAds = await _repo.SearchClassifiedAds(searchQueryParametars);
+            if (userId != null)
+            {
+                if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                {
+                    return Unauthorized();
+                }
+            }
+
+            var classifiedAds = await _repo.SearchClassifiedAds(searchQueryParametars, userId);
 
             var classifiedAdsToReturn = _mapper.Map<IEnumerable<ClassifiedAdsDto>>(classifiedAds);
 
@@ -113,7 +126,8 @@ namespace FreeAds.API.Controllers
 
             await _repo.Add(classifiedAd);
 
-            if (await _repo.SaveAll()) {
+            if (await _repo.SaveAll())
+            {
                 var classifiedAdsToReturn = _mapper.Map<ClassifiedAdsForRegisterDto>(classifiedAd);
 
                 return Ok(classifiedAdsToReturn);
@@ -131,7 +145,7 @@ namespace FreeAds.API.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateClassifiedAds(int id, ClassifiedAdsForUserUpdate classifiedAdsForUserUpdate)
         {
-            if(id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+            if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
             {
                 return Unauthorized();
             }
@@ -140,7 +154,7 @@ namespace FreeAds.API.Controllers
 
             _mapper.Map(classifiedAdsForUserUpdate, classifiedAdsForUserUpdateFromRepo);
 
-            if( await _repo.SaveAll())
+            if (await _repo.SaveAll())
             {
                 return NoContent();
             }
@@ -152,7 +166,7 @@ namespace FreeAds.API.Controllers
         [HttpPost("{userId}/like/{classifiedAdId}")]
         public async Task<IActionResult> LikeClassifiedAd(int userId, int classifiedAdId)
         {
-            if(userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+            if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
             {
                 return Unauthorized();
             }
@@ -165,11 +179,11 @@ namespace FreeAds.API.Controllers
 
                 if (await _repo.SaveAll())
                     return Ok("You have disliked classified ad ");
-                
+
                 return BadRequest("Failed to unlike the classified ad");
             }
 
-            if( await _repo.GetClassifiedAdDetail(classifiedAdId) == null)
+            if (await _repo.GetClassifiedAdDetail(classifiedAdId) == null)
                 return NotFound();
 
             like = new Like
@@ -189,7 +203,7 @@ namespace FreeAds.API.Controllers
         [HttpGet("user/likes")]
         public async Task<IActionResult> GetLikedClassifiedAds([FromQuery]ClassifiedAdsParams classifiedAdsParams)
         {
-            if(classifiedAdsParams.userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+            if (classifiedAdsParams.userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
             {
                 return Unauthorized();
             }
@@ -208,7 +222,7 @@ namespace FreeAds.API.Controllers
         [HttpGet("likes/{classifiedAdId}")]
         public async Task<IActionResult> GetNumberOfLikesClassifiedAds(int classifiedAdId)
         {
-            if( await _repo.GetClassifiedAdDetail(classifiedAdId) == null)
+            if (await _repo.GetClassifiedAdDetail(classifiedAdId) == null)
                 return NotFound();
 
             var classifiedAds = await _repo.GetNumberOfLikesOfClassifiedAd(classifiedAdId);

@@ -25,7 +25,8 @@ export class AdsListResolver implements Resolve<ClassifiedAdsList[]> {
                 })
             );
         }
-        return this.classifiedAdsService.getRelevantClassifiedAds(this.pageNumber, this.pageSize).pipe(
+        return this.classifiedAdsService.getRelevantClassifiedAds(this.pageNumber, this.pageSize,
+                    this.authService.decodedToken.nameid).pipe(
             catchError(error => {
                 this.alertify.error('Problem retrieving data ' + error);
                 this.router.navigate(['/home']);
