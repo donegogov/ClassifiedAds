@@ -41,12 +41,12 @@ export class CreateAdsComponent implements OnInit {
     this.classifiedAdsService.createClassifiedAds(this.authServoce.decodedToken.nameid, this.classifiedAdsForRegister).subscribe(next => {
       this.alertify.success('Successfuly created classified ad');
       this.createForm.reset();
-      console.log('Next = ');
-      console.log(next);
+      // console.log('Next = ');
+      // console.log(next);
       this.uploaderChild.initializeUploaderUrl(next.id);
       this.uploaderChild.uploader.uploadAll();
     }, error => {
-      console.log(error);
+      // console.log(error);
     });
   }
 

@@ -35,11 +35,9 @@ getRelevantClassifiedAds(page?, itemsPerPage?): Observable<PaginatedResult<Class
   return this.http.get<ClassifiedAdsList[]>(this.baseUrl + 'classifiedads/relevant', {observe: 'response', params})
   .pipe(
     map(response => {
-      console.log(response);
       paginatedResult.result = response.body;
       if (response.headers.get('Pagination') != null) {
         paginatedResult.pagination = JSON.parse(response.headers.get('Pagination'));
-        console.log(paginatedResult.pagination);
       }
       return paginatedResult;
     })
@@ -59,11 +57,9 @@ getClassifiedAds(page?, itemsPerPage?): Observable<PaginatedResult<ClassifiedAds
   return this.http.get<ClassifiedAdsList[]>(this.baseUrl + 'classifiedads', {observe: 'response', params})
     .pipe(
       map(response => {
-        console.log(response);
         paginatedResult.result = response.body;
         if (response.headers.get('Pagination') != null) {
           paginatedResult.pagination = JSON.parse(response.headers.get('Pagination'));
-          console.log(paginatedResult.pagination);
         }
         return paginatedResult;
       })

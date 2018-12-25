@@ -23,8 +23,6 @@ export class AdsListComponent implements OnInit {
       this.classifiedAdsService.changeClassifiedAdsListFromSearch(data['classifiedAdsList'].result);
       this.classifiedAdsService.classifiedAdsFromSearch.subscribe(ca => this.classifiedAdsList = ca);
       this.pagination = data['classifiedAdsList'].pagination;
-      console.log(data['classifiedAdsList']);
-      console.log(this.pagination);
     });
   }
 
@@ -40,7 +38,6 @@ export class AdsListComponent implements OnInit {
       this.pagination = res.pagination;
     }, error => {
       this.alertify.error(error);
-      console.log(error);
     });
   }
 

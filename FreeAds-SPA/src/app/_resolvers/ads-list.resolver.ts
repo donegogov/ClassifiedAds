@@ -25,7 +25,6 @@ export class AdsListResolver implements Resolve<ClassifiedAdsList[]> {
                 })
             );
         }
-        console.log(this.pageNumber, + ' ' + this.pageSize);
         return this.classifiedAdsService.getRelevantClassifiedAds(this.pageNumber, this.pageSize).pipe(
             catchError(error => {
                 this.alertify.error('Problem retrieving data ' + error);

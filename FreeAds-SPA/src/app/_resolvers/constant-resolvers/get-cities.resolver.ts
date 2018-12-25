@@ -14,7 +14,6 @@ export class GetCitiesResolver implements Resolve<Cities[]> {
     resolve(route: ActivatedRouteSnapshot): Observable<Cities[]> {
         return this.constantService.getCities().pipe(
             catchError(error => {
-                console.log(error);
                 this.alertify.error('Problem retrieving data ' + error);
                 this.router.navigate(['/home']);
                 return of(null);

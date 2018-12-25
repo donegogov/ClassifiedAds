@@ -2,6 +2,7 @@
   {
     "Username": "Meyers",
     "Password": "password",
+    "City": "Alamo",
     "ClassifiedAds": [
       {
         "Title": "Pariatur voluptate deserunt pariatur mollit cupidatat ex quis consequat duis.",
@@ -152,6 +153,7 @@
   {
     "Username": "Roberts",
     "Password": "password",
+    "City": "Alamo",
     "ClassifiedAds": [
       {
         "Title": "Aliqua officia ipsum aute pariatur minim esse nisi consectetur.",
@@ -194,6 +196,7 @@
   {
     "Username": "Ball",
     "Password": "password",
+    "City": "Alamo",
     "ClassifiedAds": [
       {
         "Title": "Incididunt consequat non sint sit adipisicing id mollit ut aute irure dolor magna aute.",
@@ -344,6 +347,7 @@
   {
     "Username": "Cole",
     "Password": "password",
+    "City": "Alamo",
     "ClassifiedAds": [
       {
         "Title": "Lorem ad culpa duis eiusmod est labore ipsum aliquip adipisicing et sunt exercitation excepteur.",
@@ -422,6 +426,7 @@
   {
     "Username": "Duran",
     "Password": "password",
+    "City": "Alamo",
     "ClassifiedAds": [
       {
         "Title": "Minim sunt ullamco fugiat ullamco fugiat est elit incididunt incididunt aute.",

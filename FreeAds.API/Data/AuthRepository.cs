@@ -52,7 +52,6 @@ namespace FreeAds.API.Data
 
             user.PasswordHash = passwordHash;
             user.PasswordSalt = passwordSalt;
-            user.UserRole = Role.User();
 
             await _context.Users.AddAsync(user);
             await _context.SaveChangesAsync();
@@ -84,7 +83,6 @@ namespace FreeAds.API.Data
             {
                 new Claim(ClaimTypes.NameIdentifier, userForToken.id.ToString()),
                 new Claim(ClaimTypes.Name, userForToken.Username),
-                new Claim(ClaimTypes.Role, userRole),
                 new Claim(ClaimTypes.StateOrProvince, city)
             };
 
