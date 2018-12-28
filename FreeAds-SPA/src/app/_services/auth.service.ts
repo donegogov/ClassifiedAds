@@ -5,6 +5,7 @@ import {JwtHelperService} from '@auth0/angular-jwt';
 import { environment } from '../../environments/environment';
 import { User } from '../_models/user';
 import { UserForToken } from '../_models/user-for-token';
+import { UserForRegister } from '../_models/user-for-register';
 
 @Injectable({
   providedIn: 'root'
@@ -28,8 +29,8 @@ login(model: any) {
   );
 }
 
-register(model: any) {
-  return this.http.post(this.baseUrl + 'register', model);
+register(user: UserForRegister) {
+  return this.http.post(this.baseUrl + 'register', user);
 }
 
 loggedIn() {
