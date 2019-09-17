@@ -43,9 +43,9 @@ export const appRoutes: Routes = [
         canActivate: [AuthGuard],
         children: [
             { path: 'member-list', component: MemberListComponent, canActivate: [AuthGuard] },
-            { path: 'member/edit', component: MemberEditComponent,
+            /* { path: 'member/edit', component: MemberEditComponent,
                 resolve: {user: MemberEditResolver},
-                canDeactivate: [PreventUnsavedChanges] },
+                canDeactivate: [PreventUnsavedChanges] }, */
             { path: 'create-ads', component: CreateAdsComponent,
                 resolve: {categories: GetCategoriesResolver, cities: GetCitiesResolver }},
             { path: 'classified-ads-user-list/:id', component: ClassifiedAdsUserListComponent,

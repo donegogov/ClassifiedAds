@@ -16,7 +16,7 @@ import { Categories } from 'src/app/_models/constants/categories';
 export class ClassifiedAdsEditComponent implements OnInit {
   cities: Cities[];
   categories: Categories[];
-  @ViewChild('editForm') editForm: NgForm;
+  @ViewChild('editForm', { static: true }) editForm: NgForm;
   classifiedAdsForUserUpdate: ClassifiedAdsForUserUpdate;
   @HostListener('window:beforeunload', ['$event'])
   unloadNotification($event: any) {

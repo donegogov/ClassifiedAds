@@ -15,8 +15,8 @@ import { CreateAdsPhotoEditorComponent } from '../create-ads-photo-editor/create
   styleUrls: ['./create-ads.component.css']
 })
 export class CreateAdsComponent implements OnInit {
-  @ViewChild(CreateAdsPhotoEditorComponent) uploaderChild: CreateAdsPhotoEditorComponent;
-  @ViewChild('createForm') createForm: NgForm;
+  @ViewChild(CreateAdsPhotoEditorComponent, { static: true }) uploaderChild: CreateAdsPhotoEditorComponent;
+  @ViewChild('createForm', { static: true }) createForm: NgForm;
   classifiedAdsForRegister: ClassifiedAdsForRegister;
   cities: Cities[];
   categories: Categories[];

@@ -16,6 +16,7 @@ export class RegisterComponent implements OnInit {
   user: UserForRegister;
   cities: Cities[];
   registerForm: FormGroup;
+  submited: boolean;
 
   constructor(private authService: AuthService, private alertify: AlertifyService,
     private route: ActivatedRoute, private fb: FormBuilder, private router: Router) { }
@@ -25,6 +26,7 @@ export class RegisterComponent implements OnInit {
       this.cities = data['cities'];
     });
     this.createRegisterForm();
+    this.submited = false;
   }
 
   createRegisterForm() {
@@ -41,6 +43,7 @@ export class RegisterComponent implements OnInit {
   }
 
   register() {
+    this.submited = true;
     if (this.registerForm.valid) {
       this.user = Object.assign({}, this.registerForm.value);
       this.authService.register(this.user).subscribe(() => {
@@ -52,10 +55,11 @@ export class RegisterComponent implements OnInit {
           this.router.navigate(['/ads-list']);
         });
       });
-    }
+    } 
   }
 
   cancel() {
+    this.submited = false;
     this.cancelRegister.emit(false);
   }
 

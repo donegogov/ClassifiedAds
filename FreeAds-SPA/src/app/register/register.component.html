@@ -7,8 +7,9 @@
     <input
       [ngClass]="{
         'is-invalid':
-          registerForm.get('username').errors &&
-          registerForm.get('username').touched
+          (registerForm.get('username').errors &&
+          registerForm.get('username').touched) ||
+          (submited && registerForm.get('username').errors)
       }"
       type="text"
       class="form-control"
@@ -24,7 +25,8 @@
       formControlName="city"
       [ngClass]="{
         'is-invalid':
-          registerForm.get('city').errors && registerForm.get('city').touched
+          (registerForm.get('city').errors && registerForm.get('city').touched) ||
+          (submited && registerForm.get('city').errors)
       }"
     >
       <option *ngFor="let city of cities" value="{{ city.cityValue }}">
@@ -38,8 +40,9 @@
     <input
       [ngClass]="{
         'is-invalid':
-          registerForm.get('password').errors &&
-          registerForm.get('password').touched
+          (registerForm.get('password').errors &&
+          registerForm.get('password').touched) ||
+          (submited && registerForm.get('password').errors)
       }"
       type="password"
       class="form-control"
@@ -49,8 +52,9 @@
     <div
       class="invalid-feedback"
       *ngIf="
-        registerForm.get('password').hasError('required') &&
-        registerForm.get('password').touched
+        (registerForm.get('password').hasError('required') &&
+        registerForm.get('password').touched) ||
+        (submited && registerForm.get('password').hasError('required'))
       "
     >
       Password is required
@@ -58,8 +62,8 @@
     <div
       class="invalid-feedback"
       *ngIf="
-        registerForm.get('password').hasError('minlength') &&
-        registerForm.get('password').touched
+        (registerForm.get('password').hasError('minlength') &&
+        registerForm.get('password').touched)
       "
     >
       Password must be at least 8 characters long
@@ -67,8 +71,8 @@
     <div
       class="invalid-feedback"
       *ngIf="
-        registerForm.get('password').hasError('maxlength') &&
-        registerForm.get('password').touched
+        (registerForm.get('password').hasError('maxlength') &&
+        registerForm.get('password').touched)
       "
     >
       Password cannot exceed 20 characters
@@ -79,10 +83,10 @@
     <input
       [ngClass]="{
         'is-invalid':
-          registerForm.get('confirmPassword').errors &&
+          (registerForm.get('confirmPassword').errors &&
           registerForm.get('confirmPassword').touched
           || registerForm.get('confirmPassword').touched &&
-          registerForm.hasError('mismatch')
+          registerForm.hasError('mismatch'))
       }"
       type="password"
       class="form-control"
@@ -92,8 +96,9 @@
     <div
       class="invalid-feedback"
       *ngIf="
-        registerForm.get('confirmPassword').hasError('required') &&
-        registerForm.get('confirmPassword').touched
+        (registerForm.get('confirmPassword').hasError('required') &&
+        registerForm.get('confirmPassword').touched) ||
+        (submited && registerForm.get('confirmPassword').hasError('required'))
       "
     >
       Password is required
@@ -101,8 +106,8 @@
     <div
       class="invalid-feedback"
       *ngIf="
-        registerForm.hasError('mismatch') &&
-        registerForm.get('password').touched
+        (registerForm.hasError('mismatch') &&
+        registerForm.get('password').touched)
       "
     >
       Passwords must match

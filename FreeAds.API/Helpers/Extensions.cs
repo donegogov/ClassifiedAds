@@ -34,7 +34,7 @@ namespace FreeAds.API.Helpers
         {
             var age = (DateTime.Today - theDateTime).Days;
 
-            if(age > 30)
+            if(age > 365)
                 return false;
 
             return true;
