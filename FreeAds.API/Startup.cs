@@ -36,7 +36,7 @@ namespace FreeAds.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<DataContext>(x => x.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
                 .AddJsonOptions(opt => {
                     opt.SerializerSettings.ReferenceLoopHandling = 
                         Newtonsoft.Json.ReferenceLoopHandling.Ignore;
@@ -46,7 +46,7 @@ namespace FreeAds.API
             services.AddCors();
             services.Configure<CloudinarySettings>(Configuration.GetSection("CloudinarySettings"));
             services.AddTransient<Seed>();
-            services.AddAutoMapper();
+            services.AddAutoMapper(typeof(ClassifiedAdsRepository).Assembly);
             services.AddScoped<IAuthRepository, AuthRepository>();
             services.AddScoped<IUsersRepository, UserRepository>();
             services.AddScoped<IClassifiedAdsRepository, ClassifiedAdsRepository>();
@@ -66,8 +66,8 @@ namespace FreeAds.API
 
         public void ConfigureDevelopmentServices(IServiceCollection services)
         {
-            services.AddDbContext<DataContext>(x => x.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
+            services.AddDbContext<DataContext>(x => x.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
                 .AddJsonOptions(opt => {
                     opt.SerializerSettings.ReferenceLoopHandling = 
                         Newtonsoft.Json.ReferenceLoopHandling.Ignore;
@@ -75,7 +75,7 @@ namespace FreeAds.API
             services.AddCors();
             services.Configure<CloudinarySettings>(Configuration.GetSection("CloudinarySettings"));
             services.AddTransient<Seed>();
-            services.AddAutoMapper();
+            services.AddAutoMapper(typeof(ClassifiedAdsRepository).Assembly);
             services.AddScoped<IAuthRepository, AuthRepository>();
             services.AddScoped<IUsersRepository, UserRepository>();
             services.AddScoped<IClassifiedAdsRepository, ClassifiedAdsRepository>();
@@ -94,7 +94,7 @@ namespace FreeAds.API
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, Seed seeder)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -118,9 +118,9 @@ namespace FreeAds.API
             }
 
             //app.UseHttpsRedirection();
-            seeder.SeedUsers();
-            seeder.SeedCategories();
-            seeder.SeedCites();
+            //seeder.SeedUsers();
+            //seeder.SeedCategories();
+            //seeder.SeedCites();
             app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             app.UseAuthentication();
             //app.UseDefaultFiles();

@@ -15,7 +15,7 @@ namespace FreeAds.API.Helpers
                     opt.MapFrom(src => src.Photos.FirstOrDefault(p => p.IsMain).Url);
                 })
                 .ForMember(dest => dest.Age, opt => {
-                    opt.ResolveUsing(d => d.DateAdded.CalculateAge());
+                    opt.MapFrom(d => d.DateAdded.CalculateAge());
                 });
             CreateMap<Photo, PhotoForDetailedDto>();
             CreateMap<ClassifiedAds, ClassifiedAdsForUserDto>()
@@ -23,7 +23,7 @@ namespace FreeAds.API.Helpers
                     opt.MapFrom(src => src.Photos.FirstOrDefault(p => p.IsMain).Url);
                 })
                 .ForMember(dest => dest.Age, opt => {
-                    opt.ResolveUsing(d => d.DateAdded.CalculateAge());
+                    opt.MapFrom(d => d.DateAdded.CalculateAge());
                 });
             CreateMap<ClassifiedAds, ClassifiedAdsForDetailedDto>();
             CreateMap<UserForUpdateDto, User>();

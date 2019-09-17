@@ -9,15 +9,16 @@ namespace FreeAds.API.Data
 {
     public class Seed
     {
-        private readonly DataContext _context;
+        //.net core 2.1
+        /* private readonly DataContext _context;
         public Seed(DataContext context)
         {
             _context = context;
-        }
+        } */
 
-        public void SeedUsers()
+        public static void SeedUsers(DataContext context)
         {
-            if (!_context.Users.Any())
+            if (!context.Users.Any())
             {
                 var userData = System.IO.File.ReadAllText("Data/UserSeedData.json");
                 var users = JsonConvert.DeserializeObject<List<User>>(userData);
@@ -31,14 +32,14 @@ namespace FreeAds.API.Data
                     user.PasswordSalt = passwordSalt;
                     user.Username = user.Username.ToLower();
 
-                    _context.Users.Add(user);
+                    context.Users.Add(user);
                 }
 
-                _context.SaveChanges();
+                context.SaveChanges();
             }
         }
 
-        private void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
+        private static void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
         {
             using (var hmac = new System.Security.Cryptography.HMACSHA512())
             {
@@ -47,9 +48,9 @@ namespace FreeAds.API.Data
             }
         }
 
-        public void SeedCategories()
+        public static void SeedCategories(DataContext context)
         {
-            if (!_context.Categories.Any())
+            if (!context.Categories.Any())
             {
                 /*
                 List<String> CategoryName = new List<String>();
@@ -77,18 +78,18 @@ namespace FreeAds.API.Data
                 foreach (KeyValuePair<string, string> entry in Category)
                 {
                     // do something with entry.Value or entry.Key
-                    _context.Categories.Add(
+                    context.Categories.Add(
                         new Category(entry.Value, entry.Key)
                         );
                 }
 
-                _context.SaveChanges();
+                context.SaveChanges();
             }
         }
 
-        public void SeedCites()
+        public static void SeedCites(DataContext context)
         {
-            if (!_context.Cities.Any())
+            if (!context.Cities.Any())
             {
                 /*
                 List<String> CategoryName = new List<String>();
@@ -117,12 +118,12 @@ namespace FreeAds.API.Data
                 foreach (KeyValuePair<string, string> entry in City)
                 {
                     // do something with entry.Value or entry.Key
-                    _context.Cities.Add(
+                    context.Cities.Add(
                         new City(entry.Value, entry.Key)
                         );
                 }
 
-                _context.SaveChanges();
+                context.SaveChanges();
             }
         }
     }
