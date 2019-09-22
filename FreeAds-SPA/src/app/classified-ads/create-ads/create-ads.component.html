@@ -5,53 +5,184 @@
     </div>
     <div class="col-sm-8">
       <div *ngIf="createForm.dirty" class="alert alert-info">
-        <strong>Information:</strong> You have made changes. Any unsaved changes will be lost!
+        <strong>Information:</strong> You have made changes. Any unsaved changes
+        will be lost!
+        <p></p>
       </div>
     </div>
   </div>
   <div class="row">
     <div class="col-sm-12">
-      <form #createForm="ngForm" (ngSubmit)="createClassifiedAd()">
+      <form
+        #createForm="ngForm"
+        (ngSubmit)="createForm.form.valid && createClassifiedAd()"
+      >
         <div class="card">
           <div class="card-body">
             <p>
               <app-create-ads-photo-editor></app-create-ads-photo-editor>
             </p>
-            <p class="card-title text-left mb-1 mt-4">
+            <div class="card-title text-left mb-1 mt-4">
               <strong>Title:</strong>
-              <input type="text" name="title" class="form-control" value="Title" [(ngModel)]="classifiedAdsForRegister.title">
-            </p>
-            <p class="card-text text-left mt-2">
+              <input
+                type="text"
+                name="title"
+                class="form-control"
+                value="Title"
+                [(ngModel)]="classifiedAdsForRegister.title"
+                #title="ngModel"
+                [ngClass]="{
+                  'is-invalid': createForm.submitted && title.invalid
+                }"
+                required
+              />
+              <div
+                *ngIf="createForm.submitted && title.invalid"
+                class="invalid-feedback"
+              >
+                <div *ngIf="title.errors['required']">Title is required</div>
+              </div>
+            </div>
+            <div class="card-text text-left mt-2">
               <strong>Description:</strong>
-              <textarea rows="5" name="description" class="form-control" value="Description" [(ngModel)]="classifiedAdsForRegister.description"></textarea>
-            </p>
-            <p class="card-text text-left mt-2">
+              <textarea
+                rows="5"
+                name="description"
+                class="form-control"
+                value="Description"
+                [(ngModel)]="classifiedAdsForRegister.description"
+                #description="ngModel"
+                [ngClass]="{
+                  'is-invalid': createForm.submitted && description.invalid
+                }"
+                required
+              ></textarea>
+              <div
+                *ngIf="createForm.submitted && description.invalid"
+                class="invalid-feedback"
+              >
+                <div *ngIf="description.errors['required']">
+                  Description is required
+                </div>
+              </div>
+            </div>
+            <div class="card-text text-left mt-2">
               <strong>City:</strong>
-              <select class="form-control" name="city" [(ngModel)]="classifiedAdsForRegister.city">
-                <option *ngFor="let city of cities" value="{{city.cityValue}}" 
-                  [selected]="classifiedAdsForRegister.city==city.cityName ? true : null">
-                  {{city.cityName}}
+              <select
+                class="form-control"
+                name="city"
+                [(ngModel)]="classifiedAdsForRegister.city"
+                #city="ngModel"
+                [ngClass]="{
+                  'is-invalid': createForm.submitted && city.invalid
+                }"
+                required
+              >
+                <option
+                  *ngFor="let city of cities"
+                  value="{{ city.cityValue }}"
+                  [selected]="
+                    classifiedAdsForRegister.city == city.cityName ? true : null
+                  "
+                >
+                  {{ city.cityName }}
                 </option>
               </select>
-            </p>
-            <p class="card-text text-left mt-2">
+              <div
+                *ngIf="createForm.submitted && city.invalid"
+                class="invalid-feedback"
+              >
+                <div *ngIf="city.errors['required']">City is required</div>
+              </div>
+            </div>
+            <div class="card-text text-left mt-2">
               <strong>Category:</strong>
-              <select class="form-control" name="category" [(ngModel)]="classifiedAdsForRegister.category">
-                  <option *ngFor="let category of categories" 
-                    value="{{category.categoryValue}}" 
-                    [selected]="classifiedAdsForRegister.category == category.categoryName ? true : null">
-                    {{category.categoryName}}
-                  </option>
+              <select
+                class="form-control"
+                name="category"
+                [(ngModel)]="classifiedAdsForRegister.category"
+                #category="ngModel"
+                [ngClass]="{
+                  'is-invalid': createForm.submitted && category.invalid
+                }"
+                required
+              >
+                <option
+                  *ngFor="let category of categories"
+                  value="{{ category.categoryValue }}"
+                  [selected]="
+                    classifiedAdsForRegister.category == category.categoryName
+                      ? true
+                      : null
+                  "
+                >
+                  {{ category.categoryName }}
+                </option>
               </select>
-            </p>
+              <div
+                *ngIf="createForm.submitted && category.invalid"
+                class="invalid-feedback"
+              >
+                <div *ngIf="category.errors['required']">Category is required</div>
+              </div>
+            </div>
           </div>
           <div class="card-footer">
             <p><strong>Contact Informaton:</strong></p>
-            <strong>Email:</strong>
-            <input type="text" name="email" class="form-control" value="Email" [(ngModel)]="classifiedAdsForRegister.email">
-            <strong>Phone:</strong>
-            <input type="text" name="phone" class="form-control" value="078111111" [(ngModel)]="classifiedAdsForRegister.phone">
-            <button [disabled]="!createForm.dirty" class="btn btn-success btn-block">Save Changes</button>
+            <div class="mt-2">
+              <strong>Email:</strong>
+              <input
+                type="text"
+                name="email"
+                class="form-control"
+                value="Email"
+                [(ngModel)]="classifiedAdsForRegister.email"
+                #email="ngModel"
+                [ngClass]="{
+                  'is-invalid': createForm.submitted && email.invalid
+                }"
+                required
+                email
+              />
+              <div
+                *ngIf="createForm.submitted && email.invalid"
+                class="invalid-feedback"
+              >
+                <div *ngIf="email.errors['required']">Email is required</div>
+                <div *ngIf="email.errors['required']">
+                  Email must be a valid email address
+                </div>
+              </div>
+            </div>
+            <div class="mt-2">
+              <strong>Phone:</strong>
+              <input
+                type="text"
+                name="phone"
+                class="form-control"
+                value="078111111"
+                [(ngModel)]="classifiedAdsForRegister.phone"
+                #phone="ngModel"
+                [ngClass]="{
+                  'is-invalid': createForm.submitted && phone.invalid
+                }"
+                required
+              />
+              <div
+                *ngIf="createForm.submitted && phone.invalid"
+                class="invalid-feedback"
+              >
+                <div *ngIf="phone.errors['required']">Phone is required</div>
+              </div>
+            </div>
+            <div class="mt-2">
+              <button
+                [disabled]="!createForm.dirty"
+                class="btn btn-success btn-block"
+              >
+                Create Ad
+              </button>
+            </div>
           </div>
         </div>
       </form>

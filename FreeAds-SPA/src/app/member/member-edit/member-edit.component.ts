@@ -13,24 +13,24 @@ import { AuthService } from '../../_services/auth.service';
 })
 export class MemberEditComponent implements OnInit {
   @ViewChild('editForm', { static: true }) editForm: NgForm;
-  /* user: User;
+  user: User;
   @HostListener('window:beforeunload', ['$event'])
   unloadNotification($event: any) {
     if (this.editForm.dirty) {
       return event.returnValue = true;
     }
-  } */
+  }
 
   constructor(private route: ActivatedRoute, private alertify: AlertifyService,
     private userService: UserService, private authService: AuthService) { }
 
-  ngOnInit() { /*
+  ngOnInit() {
     this.route.data.subscribe(data => {
       this.user = data['user'];
-    }); */
+    });
   }
 
-  updateUser() { /*
+  updateUser() {
     let createToken = false;
     this.userService.updateUser(this.authService.decodedToken.nameid, this.user).subscribe(next => {
       this.alertify.success('Profile updated successfully');
@@ -42,7 +42,7 @@ export class MemberEditComponent implements OnInit {
         });
     }, error => {
       this.alertify.error(error);
-    }); */
+    });
   }
 
 }

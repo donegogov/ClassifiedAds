@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace FreeAds.API.Models
 {
     public class Value

@@ -58,14 +58,14 @@ namespace FreeAds.API.Data
 
         public async Task<ClassifiedAds> GetClassifiedAdDetail(int id)
         {
-            var classifiedAd = await _context.ClassifiedAds.Include(p => p.Photos).FirstOrDefaultAsync(ca => ca.Id == id);
+            var classifiedAd = await _context.ClassifiedAds.FirstOrDefaultAsync(ca => ca.Id == id);
 
             return classifiedAd;
         }
 
         public async Task<PagedList<ClassifiedAds>> GetClassifiedAds(ClassifiedAdsParams classifiedAdsParams)
         {
-            var classifiedAds = _context.ClassifiedAds.Where(vd => vd.DateAdded.CalculateValidTo()).Include(p => p.Photos);
+            var classifiedAds = _context.ClassifiedAds.Where(vd => vd.DateAdded.CalculateValidTo());
 
             return await PagedList<ClassifiedAds>.CreateAsync(classifiedAds, classifiedAdsParams.PageNumber, classifiedAdsParams.PageSize);
         }
@@ -74,7 +74,7 @@ namespace FreeAds.API.Data
         {
             var userLikes = await GetUserLikesClassifiedAds(classifiedAdsParams.userId);
 
-            var classifiedAds = _context.ClassifiedAds.Where(ca => userLikes.Contains(ca.Id)).Include(p => p.Photos).AsQueryable();
+            var classifiedAds = _context.ClassifiedAds.Where(ca => userLikes.Contains(ca.Id)).AsQueryable();
 
             return await PagedList<ClassifiedAds>.CreateAsync(classifiedAds, classifiedAdsParams.PageNumber, classifiedAdsParams.PageSize);
         }
@@ -86,7 +86,7 @@ namespace FreeAds.API.Data
 
         public async Task<PagedList<ClassifiedAds>> GetRelevantClassifiedAds(string city, ClassifiedAdsParams classifiedAdsParams)
         {
-            var classifiedAds = _context.ClassifiedAds.Where(vd => vd.DateAdded.CalculateValidTo() && vd.UserId != classifiedAdsParams.userId).OrderByDescending(ca => ca.City.Equals(city)).Include(p => p.Photos);
+            var classifiedAds = _context.ClassifiedAds.Where(vd => vd.DateAdded.CalculateValidTo() && vd.UserId != classifiedAdsParams.userId).OrderByDescending(ca => ca.City.Equals(city));
 
             return await PagedList<ClassifiedAds>.CreateAsync(classifiedAds, classifiedAdsParams.PageNumber, classifiedAdsParams.PageSize);
             
@@ -96,7 +96,7 @@ namespace FreeAds.API.Data
 
         public async Task<IEnumerable<ClassifiedAds>> GetClassifiedAdsForUser(int userId)
         {
-            var classifiedAds = await _context.ClassifiedAds.Where(uid => uid.UserId == userId).Include(p => p.Photos).ToListAsync();
+            var classifiedAds = await _context.ClassifiedAds.Where(uid => uid.UserId == userId).ToListAsync();
 
             return classifiedAds;
         }

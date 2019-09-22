@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace FreeAds.API.Dtos
 {
     public class SearchQueryParametarsDto

@@ -1,7 +1,6 @@
 <form #searchForm="ngForm" class="form-inline" (ngSubmit)="searchClassifiedAds()">
   <div class="row">
-    <div class="">
-      <div class="form-group mb-4 col-sm-3">
+      <div class="form-group mb-4 mr-4">
         <select class="form-control" name="city" [(ngModel)]="searchQueryParametars.city">
           <option *ngFor="let city of cities" 
             value="{{city.cityValue}}" 
@@ -9,10 +8,9 @@
             {{city.cityName}}
           </option>
         </select>
-      </div>
     </div>
     <div class="">
-      <div class="form-group mb-4 col-sm-3">
+      <div class="form-group mb-4 mr-4">
         <select class="form-control" name="category" [(ngModel)]="searchQueryParametars.category">
           <option *ngFor="let category of categories" 
             value="{{category.categoryValue}}" 
@@ -23,13 +21,13 @@
       </div>
     </div>
     <div class="">
-      <div class="form-group mb-4 col-sm-3">
+      <div class="form-group mb-4 mr-4">
         <input class="form-control" type="text" name="query" class="form-control mr-sm-2" placeholder="Search Query"
           [(ngModel)]="searchQueryParametars.query" (keyup)="onKey($event)" required>
       </div>
     </div>
     <div class="">
-      <div class="form-group mb-4 col-sm-3">
+      <div class="form-group mb-4">
         <input class="form-control" type="submit" class="btn btn-success">
       </div>
     </div>

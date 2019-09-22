@@ -32,14 +32,18 @@ namespace FreeAds.API.Data
 
         public async Task<User> GetUser(int id)
         {
-            var user = await _context.Users.Include(u => u.ClassifiedAds).ThenInclude(ca => ca.Photos).FirstOrDefaultAsync(u => u.Id == id);
+            //var user = await _context.Users.Include(u => u.ClassifiedAds).ThenInclude(ca => ca.Photos).FirstOrDefaultAsync(u => u.Id == id);
+            //lazy loading
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == id);
 
             return user;
         }
 
         public async Task<IEnumerable<User>> GetUsers()
         {
-            var users = await _context.Users.Include(u => u.ClassifiedAds).ThenInclude(ca => ca.Photos).ToListAsync();
+            //var users = await _context.Users.Include(u => u.ClassifiedAds).ThenInclude(ca => ca.Photos).ToListAsync();
+            //lazy loading
+            var users = await _context.Users.ToListAsync();
 
             return users;
         }

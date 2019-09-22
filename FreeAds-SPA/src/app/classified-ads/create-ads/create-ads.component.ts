@@ -38,16 +38,21 @@ export class CreateAdsComponent implements OnInit {
   }
 
   createClassifiedAd() {
-    this.classifiedAdsService.createClassifiedAds(this.authServoce.decodedToken.nameid, this.classifiedAdsForRegister).subscribe(next => {
-      this.alertify.success('Successfuly created classified ad');
-      this.createForm.reset();
-      // console.log('Next = ');
-      // console.log(next);
-      this.uploaderChild.initializeUploaderUrl(next.id);
-      this.uploaderChild.uploader.uploadAll();
-    }, error => {
-      // console.log(error);
-    });
+    // console.log(this.classifiedAdsForRegister);
+    if (Array.isArray(this.uploaderChild.uploader.queue) && this.uploaderChild.uploader.queue.length) {
+      this.classifiedAdsService.createClassifiedAds(this.authServoce.decodedToken.nameid, this.classifiedAdsForRegister).subscribe(next => {
+        this.alertify.success('Successfuly created classified ad');
+        this.createForm.reset();
+        // console.log('Next = ');
+        // console.log(next);
+        this.uploaderChild.initializeUploaderUrl(next.id);
+        this.uploaderChild.uploader.uploadAll();
+      }, error => {
+        console.log(error.error);
+      });
+    } else {
+      this.alertify.warning('Must upload at least one image');
+    }
   }
 
   initializeClassfiedAdsForRegister() {
@@ -61,5 +66,4 @@ export class CreateAdsComponent implements OnInit {
       phone: ''
     };
   }
-
 }

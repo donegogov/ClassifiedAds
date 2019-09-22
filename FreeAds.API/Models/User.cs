@@ -12,7 +12,7 @@ namespace FreeAds.API.Models
         public byte[] PasswordHash { get; set; }
         public byte[] PasswordSalt { get; set; }
         public string UserRole { get; set; }
-        public ICollection<ClassifiedAds> ClassifiedAds { get; set; }
-        public ICollection<Like> LikedClassifiedAds { get; set; }
+        public virtual ICollection<ClassifiedAds> ClassifiedAds { get; set; }
+        public virtual ICollection<Like> LikedClassifiedAds { get; set; }
     }
 }

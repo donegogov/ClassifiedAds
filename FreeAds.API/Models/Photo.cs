@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace FreeAds.API.Models
 {
@@ -9,7 +10,7 @@ namespace FreeAds.API.Models
         public DateTime DateAdded { get; set; }
         public bool IsMain { get; set; }
         public string PublicId { get; set; }
-        public ClassifiedAds ClassifiedAds { get; set; }
+        public virtual ClassifiedAds ClassifiedAds { get; set; }
         public int ClassifiedAdsId { get; set; }
     }
 }

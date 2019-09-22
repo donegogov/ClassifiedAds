@@ -18,9 +18,9 @@ namespace FreeAds.API.Models
         public string Email { get; set; }
         [Phone]
         public string Phone { get; set; }
-        public ICollection<Photo> Photos { get; set; }
-        public User User { get; set; }
+        public virtual ICollection<Photo> Photos { get; set; }
+        public virtual User User { get; set; }
         public int UserId { get; set; }
-        public ICollection<Like> LikersUsers { get; set; }
+        public virtual ICollection<Like> LikersUsers { get; set; }
     }
 }
