@@ -70,16 +70,16 @@ namespace FreeAds.API.Data
                 */
 
                 Dictionary<String, String> Category = new Dictionary<string, string>();
-                Category.Add("PC", "PC");
-                Category.Add("Lap Top", "Lap Top");
-                Category.Add("TV", "TV");
-                Category.Add("Phone", "Phone");
+                Category.Add("Мебел", "Mebel");
+                Category.Add("Бела Техника", "BelaTehnika");
+                Category.Add("Електроника", "Elektronika");
+                Category.Add("Останато", "Ostanato");
 
                 foreach (KeyValuePair<string, string> entry in Category)
                 {
                     // do something with entry.Value or entry.Key
                     context.Categories.Add(
-                        new Category(entry.Value, entry.Key)
+                        new Category(entry.Key, entry.Value)
                         );
                 }
 
@@ -109,17 +109,49 @@ namespace FreeAds.API.Data
                 */
 
                 Dictionary<String, String> City = new Dictionary<string, string>();
-                City.Add("Waterford", "Waterford");
-                City.Add("Bancroft", "Bancroft");
-                City.Add("Alamo", "Alamo");
-                City.Add("Martinez", "Martinez");
+                City.Add("Берово", "Berovo");
+                City.Add("Битола", "Bitola");
+                City.Add("Валандово", "Valandovo");
+                City.Add("Велес", "Veles");
 
+                City.Add("Виница", "Vinica");
+                City.Add("Гевгелиjа", "Gevgelija");
+                City.Add("Гостивар", "Gostivar");
+                City.Add("Дебар", "Debar");
+
+                City.Add("Делчево", "Delchsevo");
+                City.Add("Демир Хисар", "DemirHisar");
+                City.Add("Кавадарци", "Kavadarci");
+                City.Add("Кичево", "Kichsevo");
+
+                City.Add("Кочани", "Kochsani");
+                City.Add("Кратово", "Kratovo");
+                City.Add("Крива Паланка", "KrivaPalanka");
+                City.Add("Крушево", "Krushsevo");
+
+                City.Add("Куманово", "Kumanovo");
+                City.Add("Македонски Брод", "MakedonskiBrod");
+                City.Add("Неготино", "Negotino");
+                City.Add("Охрид", "Ohrid");
+
+                City.Add("Прилеп", "Prilep");
+                City.Add("Пробиштип", "Probishstip");
+                City.Add("Радовиш", "Radovishs");
+                City.Add("Ресен", "Resen");
+
+                City.Add("Свети Николе", "SvetiNikole");
+                City.Add("Скопjе", "Skopje");
+                City.Add("Струга", "Struga");
+                City.Add("Струмица", "Strumica");
+
+                City.Add("Тетово", "Tetovo");
+                City.Add("Штип", "SHStip");
 
                 foreach (KeyValuePair<string, string> entry in City)
                 {
                     // do something with entry.Value or entry.Key
                     context.Cities.Add(
-                        new City(entry.Value, entry.Key)
+                        new City(entry.Key, entry.Value)
                         );
                 }
 

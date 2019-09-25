@@ -19,7 +19,8 @@ export class AdsListResolver implements Resolve<ClassifiedAdsList[]> {
         if (!this.authService.loggedIn()) {
             return this.classifiedAdsService.getClassifiedAds(this.pageNumber, this.pageSize).pipe(
                 catchError(error => {
-                    this.alertify.error('Problem retrieving data ' + error);
+                    // this.alertify.error('Problem retrieving data ' + error);
+                    this.alertify.error('Проблем со податоците ' + error);
                     this.router.navigate(['/home']);
                     return of(null);
                 })
@@ -28,7 +29,8 @@ export class AdsListResolver implements Resolve<ClassifiedAdsList[]> {
         return this.classifiedAdsService.getRelevantClassifiedAds(this.pageNumber, this.pageSize,
                     this.authService.decodedToken.nameid).pipe(
             catchError(error => {
-                this.alertify.error('Problem retrieving data ' + error);
+                // this.alertify.error('Problem retrieving data ' + error);
+                this.alertify.error('Проблем со податоците ' + error);
                 this.router.navigate(['/home']);
                 return of(null);
             })

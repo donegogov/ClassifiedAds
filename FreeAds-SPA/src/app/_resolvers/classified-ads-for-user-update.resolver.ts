@@ -15,7 +15,8 @@ export class ClassifiedAdsForUserUpdateResolver implements Resolve<ClassifiedAds
     resolve(route: ActivatedRouteSnapshot): Observable<ClassifiedAdsForUserUpdate> {
         return this.classifiedAdsService.getClassifiedAdsForUserUpdate(route.params['id']).pipe(
             catchError(error => {
-                this.alertify.error('Problem retrieving data ' + error);
+                // this.alertify.error('Problem retrieving data ' + error);
+                this.alertify.error('Проблем со податоците ' + error);
                 this.router.navigate(['/ads-list']);
                 return of(null);
             })

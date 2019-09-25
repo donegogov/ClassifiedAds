@@ -133,7 +133,8 @@ namespace FreeAds.API.Controllers
                 return Ok(classifiedAdsToReturn);
             }
 
-            return BadRequest("Failed to add the Classified Ad");
+            //return BadRequest("Failed to add the Classified Ad");
+            return BadRequest("Грешка при додавање на огласот");
         }
 
         [HttpDelete("{id}")]
@@ -159,7 +160,8 @@ namespace FreeAds.API.Controllers
                 return NoContent();
             }
 
-            throw new Exception($"Updating classified ad {id} failed on save");
+            //throw new Exception($"Updating classified ad {id} failed on save");
+            throw new Exception($"Зачувувањето на огласот со ид= {id} не беше успешно");
         }
 
         [Produces("application/json")]
@@ -178,9 +180,11 @@ namespace FreeAds.API.Controllers
                 _repo.Delete(like);
 
                 if (await _repo.SaveAll())
-                    return Ok("You have disliked classified ad ");
+                    //return Ok("You have disliked classified ad ");
+                    return Ok("Успешно недопаѓање на огласот ");
 
-                return BadRequest("Failed to unlike the classified ad");
+                //return BadRequest("Failed to unlike the classified ad");
+                return BadRequest("Грешно недопаѓање на огласот");
             }
 
             if (await _repo.GetClassifiedAdDetail(classifiedAdId) == null)
@@ -195,9 +199,11 @@ namespace FreeAds.API.Controllers
             _repo.Add<Like>(like);
 
             if (await _repo.SaveAll())
-                return Ok("You have liked classified ad ");
+                //return Ok("You have liked classified ad ");
+                return Ok("Допаѓањето на огласот беше успешно ");
 
-            return BadRequest("Failed to like the classified ad");
+            //return BadRequest("Failed to like the classified ad");
+            return BadRequest("Грешка при допаѓање на огласот");
         }
 
         [HttpGet("user/likes")]

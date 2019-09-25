@@ -6,7 +6,7 @@
         [routerLink]="['/ads-list/', classifiedAd.id]"><i class="fa fa-buysellads"></i></button></li>
       <li *ngIf="loggedIn()" class="list-inline-item"><button class="btn btn-primary"
         (click)="sendLike(classifiedAd.id)"><i class="fa fa-heart"></i></button></li>
-      <li *ngIf="loggedIn()" class="list-inline-item"><button class="btn btn-primary"><i class="fa fa-envelope"></i></button></li>
+     <!-- <li *ngIf="loggedIn()" class="list-inline-item"><button class="btn btn-primary"><i class="fa fa-envelope"></i></button></li> -->
     </ul>
   </div>
   <div class="card-body p-1">
@@ -17,10 +17,10 @@
       {{classifiedAd.description}}
     </p>
     <p class="card-text text-muted text-center mt-2">
-        {{classifiedAdLikes}} likes
+        {{classifiedAdLikes}} допаѓања
       </p>
     <p class="card-text text-muted text-center mt-2">
-      Added {{classifiedAd.age}} ago
+      Додадено пред {{classifiedAd.age}}
     </p>
   </div>
 </div>

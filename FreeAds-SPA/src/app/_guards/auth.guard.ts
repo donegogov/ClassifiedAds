@@ -13,7 +13,8 @@ export class AuthGuard implements CanActivate {
     if (this.authService.loggedIn()) {
       return true;
     }
-    this.alertify.error('Link Not Allowed');
+    // this.alertify.error('Link Not Allowed');
+    this.alertify.error('Линкот не е дозволен');
     this.router.navigate(['/home']);
     return false;
   }

@@ -1,12 +1,13 @@
 <div class="container mt-4">
   <div class="row mb-20">
     <div class="col-sm-4">
-      <h1><strong>Your Ad</strong></h1>
+      <h1><strong>Вашиот Оглас</strong></h1>
     </div>
     <div class="col-sm-8">
       <div *ngIf="editForm.dirty" class="alert alert-info">
-        <strong>Information:</strong> You have made changes. Any unsaved changes
-        will be lost!
+        <!-- <strong>Information:</strong> You have made changes. Any unsaved changes
+        will be lost!-->
+        Зачувајте ги промените на огласот!
       </div>
     </div>
   </div>
@@ -22,7 +23,8 @@
               ></app-photo-editor>
             </p>
             <p class="card-title text-left mb-1 mt-4">
-              <strong>Title:</strong>
+              <!-- <strong>Title:</strong> -->
+              <strong>Наслов:</strong>
               <input
                 type="text"
                 name="title"
@@ -32,7 +34,7 @@
               />
             </p>
             <p class="card-text text-left mt-2">
-              <strong>Description:</strong>
+              <strong><!-- Description -->Опис:</strong>
               <textarea
                 rows="5"
                 name="description"
@@ -42,7 +44,7 @@
               ></textarea>
             </p>
             <p class="card-text text-left mt-2">
-              <strong>City:</strong>
+              <strong><!-- City -->Град:</strong>
               <select
                 class="form-control"
                 name="city"
@@ -50,9 +52,8 @@
               >
                 <option
                   *ngFor="let city of cities"
-                  value="{{ city.cityValue }}"
                   [selected]="
-                    classifiedAdsForUserUpdate.city == city.cityName
+                    classifiedAdsForUserUpdate.city === city.cityName
                       ? true
                       : null
                   "
@@ -62,7 +63,7 @@
               </select>
             </p>
             <p class="card-text text-left mt-2">
-              <strong>Category:</strong>
+              <strong><!-- Category -->Категорија:</strong>
               <select
                 class="form-control"
                 name="category"
@@ -70,21 +71,20 @@
               >
                 <option
                   *ngFor="let category of categories"
-                  value="{{ category.categoryValue }}"
                   [selected]="
-                    classifiedAdsForUserUpdate.category == category.categoryName
+                    classifiedAdsForUserUpdate.category === category.categoryName
                       ? true
                       : null
                   "
                 >
-                  {{ category.categoryName }}
+                  {{ category.categoryName}}
                 </option>
               </select>
             </p>
           </div>
           <div class="card-footer">
-            <p><strong>Contact Informaton:</strong></p>
-            <strong>Email:</strong>
+            <p><strong><!-- Contact Informaton -->Информации за контакт:</strong></p>
+              <strong><!-- Email -->Електронска пошта:</strong>
             <input
               type="text"
               name="email"
@@ -92,7 +92,7 @@
               value="{{ classifiedAdsForUserUpdate.email }}"
               [(ngModel)]="classifiedAdsForUserUpdate.email"
             />
-            <strong>Phone:</strong>
+            <strong><!-- Phone -->Телефон:</strong>
             <input
               type="text"
               name="phone"
@@ -104,7 +104,7 @@
               [disabled]="!editForm.dirty"
               class="btn btn-success btn-block"
             >
-              Save Changes
+              <!-- Save Changes -->ЗАЧУВАЈТЕ ГИ ПРОМЕНИТЕ НА ОГЛАСОТ
             </button>
           </div>
         </div>

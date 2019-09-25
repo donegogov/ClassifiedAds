@@ -1,12 +1,13 @@
 <div class="container mt-4">
   <div class="row mb-20">
     <div class="col-sm-4">
-      <h1><strong>Create Ad</strong></h1>
+      <h1><strong>Регистрирај Оглас</strong></h1>
     </div>
     <div class="col-sm-8">
       <div *ngIf="createForm.dirty" class="alert alert-info">
-        <strong>Information:</strong> You have made changes. Any unsaved changes
-        will be lost!
+        <!-- <strong>Information:</strong> You have made changes. Any unsaved changes
+        will be lost!-->
+        Зачувајте ги промените на огласот! 
         <p></p>
       </div>
     </div>
@@ -23,7 +24,8 @@
               <app-create-ads-photo-editor></app-create-ads-photo-editor>
             </p>
             <div class="card-title text-left mb-1 mt-4">
-              <strong>Title:</strong>
+              <!-- <strong>Title:</strong> -->
+              <strong>Наслов:</strong>
               <input
                 type="text"
                 name="title"
@@ -40,11 +42,11 @@
                 *ngIf="createForm.submitted && title.invalid"
                 class="invalid-feedback"
               >
-                <div *ngIf="title.errors['required']">Title is required</div>
+                <div *ngIf="title.errors['required']"><!-- Title is required-->Насловот е задолжително поле</div>
               </div>
             </div>
             <div class="card-text text-left mt-2">
-              <strong>Description:</strong>
+              <strong><!-- Description -->Опис:</strong>
               <textarea
                 rows="5"
                 name="description"
@@ -62,12 +64,12 @@
                 class="invalid-feedback"
               >
                 <div *ngIf="description.errors['required']">
-                  Description is required
+                  Описот е задолжително поле
                 </div>
               </div>
             </div>
             <div class="card-text text-left mt-2">
-              <strong>City:</strong>
+              <strong><!-- City -->Град:</strong>
               <select
                 class="form-control"
                 name="city"
@@ -92,11 +94,11 @@
                 *ngIf="createForm.submitted && city.invalid"
                 class="invalid-feedback"
               >
-                <div *ngIf="city.errors['required']">City is required</div>
+                <div *ngIf="city.errors['required']"><!-- City is required -->Град е задолжително поле</div>
               </div>
             </div>
             <div class="card-text text-left mt-2">
-              <strong>Category:</strong>
+              <strong><!-- Category -->Категорија:</strong>
               <select
                 class="form-control"
                 name="category"
@@ -123,14 +125,14 @@
                 *ngIf="createForm.submitted && category.invalid"
                 class="invalid-feedback"
               >
-                <div *ngIf="category.errors['required']">Category is required</div>
+                <div *ngIf="category.errors['required']">Категоријата е задолжително поле</div>
               </div>
             </div>
           </div>
           <div class="card-footer">
-            <p><strong>Contact Informaton:</strong></p>
+            <p><strong><!-- Contact Informaton -->Информации за контакт:</strong></p>
             <div class="mt-2">
-              <strong>Email:</strong>
+              <strong><!-- Email -->Електронска пошта:</strong>
               <input
                 type="text"
                 name="email"
@@ -148,14 +150,14 @@
                 *ngIf="createForm.submitted && email.invalid"
                 class="invalid-feedback"
               >
-                <div *ngIf="email.errors['required']">Email is required</div>
-                <div *ngIf="email.errors['required']">
-                  Email must be a valid email address
+                <div *ngIf="email.errors['required']"><!-- Email is required -->Електронска пошта е задолжително поле</div>
+                <div *ngIf="email.errors['email']">
+                  <!-- Email must be a valid email address -->Внесете валидна електронска пошта
                 </div>
               </div>
             </div>
             <div class="mt-2">
-              <strong>Phone:</strong>
+              <strong><!-- Phone -->Телефон:</strong>
               <input
                 type="text"
                 name="phone"
@@ -172,7 +174,7 @@
                 *ngIf="createForm.submitted && phone.invalid"
                 class="invalid-feedback"
               >
-                <div *ngIf="phone.errors['required']">Phone is required</div>
+                <div *ngIf="phone.errors['required']"><!-- Phone is required -->Телефонот е задолжително поле</div>
               </div>
             </div>
             <div class="mt-2">
@@ -180,7 +182,7 @@
                 [disabled]="!createForm.dirty"
                 class="btn btn-success btn-block"
               >
-                Create Ad
+                РЕГИСТРИРАЈ ОГЛАС
               </button>
             </div>
           </div>

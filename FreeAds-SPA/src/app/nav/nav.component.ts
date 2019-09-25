@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 })
 export class NavComponent implements OnInit {
   model: any = {};
+  isCollapsed = false;
 
   constructor(public authService: AuthService, private alertify: AlertifyService, private router: Router) { }
 
@@ -18,7 +19,8 @@ export class NavComponent implements OnInit {
 
   login() {
     this.authService.login(this.model).subscribe(next => {
-      this.alertify.success('Logged in successfuly');
+      // this.alertify.success('Logged in successfuly');
+      this.alertify.success('Успешно сте најавени');
       this.router.navigate(['/ads-list']);
     }, error => {
       this.alertify.error(error);
@@ -32,7 +34,8 @@ export class NavComponent implements OnInit {
   logout() {
     localStorage.removeItem('token');
     this.authService.decodedToken = null;
-    this.alertify.message('logged out');
+    // this.alertify.message('logged out');
+    this.alertify.message('Успешно сте одјавени');
     this.router.navigate(['/home']);
   }
 

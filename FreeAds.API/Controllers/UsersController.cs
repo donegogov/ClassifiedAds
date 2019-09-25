@@ -60,7 +60,8 @@ namespace FreeAds.API.Controllers
                 return NoContent();
             }
 
-            throw new Exception($"Updating user {id} failed on save");
+            //throw new Exception($"Updating user {id} failed on save");
+            throw new Exception($"Грешка при зачувувањето на промените на корисникот {id}");
         }
     }
 }

@@ -94,7 +94,8 @@ namespace FreeAds.API.Controllers
                 return CreatedAtRoute("GetPhoto", new { id = photo.Id }, photoToReturn);
             }
 
-            return BadRequest("Could not add the photo");
+            //return BadRequest("Could not add the photo");
+            return BadRequest("Грешка при додавање на сликата");
         }
 
         [HttpPost("{classifiedAdId}/setMain/{photoId}")]
@@ -116,7 +117,8 @@ namespace FreeAds.API.Controllers
 
             if (photoFromRepo.IsMain)
             {
-                return BadRequest("This is already main photo");
+                //return BadRequest("This is already main photo");
+                return BadRequest("Сликата е веќе главна слика на огласот");
             }
 
             var currentMainPhoto = await _classifiedAdsRepo.GetMainPhotoForClassifiedAd(classifiedAdId);
@@ -127,7 +129,8 @@ namespace FreeAds.API.Controllers
             if (await _classifiedAdsRepo.SaveAll())
                 return NoContent();
 
-            return BadRequest("Could not set the photo to main");
+            //return BadRequest("Could not set the photo to main");
+            return BadRequest("Грешка при поставување на сликата главна слика на огласот");
         }
 
         [HttpDelete("{classifiedAdId}/{photoId}")]
@@ -149,7 +152,8 @@ namespace FreeAds.API.Controllers
 
             if (photoFromRepo.IsMain)
             {
-                return BadRequest("You cannot delete main photo");
+                //return BadRequest("You cannot delete main photo");
+                return BadRequest("Не можете да ја бришете главната слика");
             }
 
             if (photoFromRepo.PublicId != null)
@@ -174,7 +178,8 @@ namespace FreeAds.API.Controllers
                 return Ok();
             }
 
-            return BadRequest("Failed to delete the photo");
+            //return BadRequest("Failed to delete the photo");
+            return BadRequest("Грешка при бришење на сликата");
         }
     }
 }

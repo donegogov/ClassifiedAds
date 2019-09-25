@@ -14,7 +14,8 @@ export class GetCategoriesResolver implements Resolve<Categories[]> {
     resolve(route: ActivatedRouteSnapshot): Observable<Categories[]> {
         return this.constantService.getCategories().pipe(
             catchError(error => {
-                this.alertify.error('Problem retrieving data ' + error);
+                // this.alertify.error('Problem retrieving data ' + error);
+                this.alertify.error('Проблем со податоците ' + error);
                 this.router.navigate(['/home']);
                 return of(null);
             })

@@ -63,7 +63,7 @@ export class SearchAdsComponent implements OnInit {
   // }
 
   searchClassifiedAds() {
-    // console.log(this.searchQueryParametars);
+    console.log(this.searchQueryParametars);
     if (this.authService.loggedIn()) {
       this.classifiedAdsService.searchQuery(this.searchQueryParametars, this.authService.decodedToken.nameid).subscribe(
         res => {

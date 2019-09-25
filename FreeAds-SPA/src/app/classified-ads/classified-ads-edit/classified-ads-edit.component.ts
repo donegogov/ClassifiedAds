@@ -39,12 +39,18 @@ export class ClassifiedAdsEditComponent implements OnInit {
       // console.log(data);
       this.categories = data['categories'];
     });
+    console.log(this.classifiedAdsForUserUpdate);
+
+    console.log(this.cities);
+
+    console.log(this.categories);
   }
 
   updateClassifiedAd() {
     this.classifiedAdsService.updateClassifiedAd(this.authService.decodedToken.nameid,
       this.classifiedAdsForUserUpdate).subscribe(next => {
-      this.alertify.success('Classified Ad updated successfully');
+      // this.alertify.success('Classified Ad updated successfully');
+      this.alertify.success('Промените на огласот се зачувани');
       this.editForm.reset(this.classifiedAdsForUserUpdate);
     }, error => {
       this.alertify.error(error);

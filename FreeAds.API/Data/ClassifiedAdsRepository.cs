@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using FreeAds.API.Dtos;
 using FreeAds.API.Helpers;
@@ -60,6 +61,10 @@ namespace FreeAds.API.Data
         {
             var classifiedAd = await _context.ClassifiedAds.FirstOrDefaultAsync(ca => ca.Id == id);
 
+            classifiedAd.Category = ConvertEngToMkd(classifiedAd.Category);
+
+            classifiedAd.City = ConvertEngToMkd(classifiedAd.City);
+
             return classifiedAd;
         }
 
@@ -114,7 +119,7 @@ namespace FreeAds.API.Data
                         && (queryWords.Any(str => cal.Title.Contains(str, StringComparison.OrdinalIgnoreCase))
                         || queryWords.Any(str => cal.Description.Contains(str, StringComparison.OrdinalIgnoreCase)))
                 select cal
-                ).Include(p => p.Photos).ToListAsync();
+                ).ToListAsync();
 
             if (userId != null)
             {
@@ -159,6 +164,92 @@ namespace FreeAds.API.Data
         {
             return await _context.Likes.CountAsync(l => l.LikedClassifiedAdsId == classifiedAdId);
 
+        }
+
+        public String ConvertEngToMkd(String input)
+        {
+            String expectedMacedonianKirilicaLowerCase = "а б в г д ѓ е ж з ѕ и ј к л љ м н њ о п р с т ќ у ф х ц ч џ ш";
+
+            String expectedMacedonianKirilicaUpperCase = "А Б В Г Д Ѓ Е Ж З Ѕ И Ј К Л Љ М Н Њ О П Р С Т Ќ У Ф Х Ц Ч Џ Ш";
+
+            String expectedMacedonianLatinLowerCase = "a b v g d gjs e zhs z dzs i j k l ljs m n njs o p r s t kjs u f h c chs djs shs";
+
+            String expectedMacedonianLatinUpperCase = expectedMacedonianLatinLowerCase.ToUpper();
+
+            String []expectedMacedonianKirilicaLowerCaseArray = expectedMacedonianKirilicaLowerCase.Split(" ");
+
+            String []expectedMacedonianKirilicaUpperCaseArray = expectedMacedonianKirilicaUpperCase.Split(" ");
+
+            String []expectedMacedonianLatinLowerCaseArray = expectedMacedonianLatinLowerCase.Split(" ");
+
+            String []expectedMacedonianLatinUpperCaseArray = expectedMacedonianLatinUpperCase.Split(" ");
+
+            String result = "";
+            bool secondUpperLetter = true;
+
+            for(int i = 0; i < input.Length; i++)
+            {
+                String c = input[i].ToString();
+
+                if(i < input.Length - 2)
+                {
+                    if(("s".Equals(input[i+2]) || "S".Equals(input[i+2])) && ("gjs".Contains(String.Concat(c, input[i+1], input[i+2])) || 
+                    "zhs".Contains(String.Concat(c, input[i+1], input[i+2])) ||
+                    "dzs".Contains(String.Concat(c, input[i+1], input[i+2])) ||
+                    "ljs".Contains(String.Concat(c, input[i+1], input[i+2])) ||
+                    "njs".Contains(String.Concat(c, input[i+1], input[i+2])) || 
+                    "kjs".Contains(String.Concat(c, input[i+1], input[i+2])) ||
+                    "chs".Contains(String.Concat(c, input[i+1], input[i+2])) ||
+                    "djs".Contains(String.Concat(c, input[i+1], input[i+2])) ||
+                    "shs".Contains(String.Concat(c, input[i+1], input[i+2])) ||
+                    "ZHS".Contains(String.Concat(c, input[i+1], input[i+2])) ||
+                    "DZS".Contains(String.Concat(c, input[i+1], input[i+2])) ||
+                    "LJS".Contains(String.Concat(c, input[i+1], input[i+2])) ||
+                    "NJS".Contains(String.Concat(c, input[i+1], input[i+2])) || 
+                    "KJS".Contains(String.Concat(c, input[i+1], input[i+2])) ||
+                    "CHS".Contains(String.Concat(c, input[i+1], input[i+2])) ||
+                    "DJS".Contains(String.Concat(c, input[i+1], input[i+2])) ||
+                    "SHS".Contains(String.Concat(c, input[i+1], input[i+2]))))
+                    {
+                        c = input.Substring(i, i+2);
+                        i += 2;
+                    }
+                }
+
+                int charPosition = Array.IndexOf(expectedMacedonianLatinUpperCaseArray, c.ToString());
+
+                if(charPosition == -1)
+                {
+                    charPosition = Array.IndexOf(expectedMacedonianLatinLowerCaseArray, c.ToString());
+
+                    if(charPosition == -1)
+                    {
+                        return input;
+                    }
+                    else
+                    {
+                        result += expectedMacedonianKirilicaLowerCaseArray[charPosition];
+                    }
+                }
+                else
+                {
+                    if(!secondUpperLetter)
+                    {
+                        result += " ";
+                        result += expectedMacedonianKirilicaUpperCaseArray[charPosition];
+                        continue;
+                    }
+                    else
+                    {
+                        result += expectedMacedonianKirilicaUpperCaseArray[charPosition];
+                        secondUpperLetter = false;
+                    }
+                }
+
+                
+            }
+
+            return result;
         }
     }
 }

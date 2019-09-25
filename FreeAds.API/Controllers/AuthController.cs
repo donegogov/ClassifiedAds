@@ -33,7 +33,8 @@ namespace FreeAds.API.Controllers
             userForRegisterDto.Username = userForRegisterDto.Username.ToLower();
 
             if (await _repo.UserExists(userForRegisterDto.Username))
-                return BadRequest("Username already exists");
+                //return BadRequest("Username already exists");
+                return BadRequest("Корисничкото име веќе постои");
             
             var userToCreate = new User
             {

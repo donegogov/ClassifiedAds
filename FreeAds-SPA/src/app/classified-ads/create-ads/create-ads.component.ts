@@ -38,10 +38,11 @@ export class CreateAdsComponent implements OnInit {
   }
 
   createClassifiedAd() {
-    // console.log(this.classifiedAdsForRegister);
+    console.log(this.classifiedAdsForRegister);
     if (Array.isArray(this.uploaderChild.uploader.queue) && this.uploaderChild.uploader.queue.length) {
       this.classifiedAdsService.createClassifiedAds(this.authServoce.decodedToken.nameid, this.classifiedAdsForRegister).subscribe(next => {
-        this.alertify.success('Successfuly created classified ad');
+        // this.alertify.success('Successfuly created classified ad');
+        this.alertify.success('Огласот беше успешно регистриран');
         this.createForm.reset();
         // console.log('Next = ');
         // console.log(next);
@@ -51,7 +52,8 @@ export class CreateAdsComponent implements OnInit {
         console.log(error.error);
       });
     } else {
-      this.alertify.warning('Must upload at least one image');
+      // this.alertify.warning('Must upload at least one image');
+      this.alertify.warning('Внесете барем една слика на огласот');
     }
   }
 

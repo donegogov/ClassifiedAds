@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using FreeAds.API.Dtos;
@@ -24,6 +25,7 @@ namespace FreeAds.API.Data
         Task<Like> GetLike(int userId, int classifiedAdId);
         Task<PagedList<ClassifiedAds>> GetUserLikedClassifiedAds(ClassifiedAdsParams classifiedAdsParams);
         Task<int> GetNumberOfLikesOfClassifiedAd(int classifiedAdId);
+        String ConvertEngToMkd(String input);
 
     }
 }
