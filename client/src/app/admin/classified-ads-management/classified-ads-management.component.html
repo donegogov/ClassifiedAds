@@ -1,0 +1,59 @@
+<!-- <p>user-management works!</p> -->
+
+<div class="row mt-2">
+  <div class="col-xs-12 col-lg-12">
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" style="text-align: left;">
+            <!-- <ng-container matColumnDef="id">
+              <th mat-header-cell *matHeaderCellDef> ID </th>
+              <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+            </ng-container> -->
+            <ng-container matColumnDef="username">
+              <th mat-header-cell *matHeaderCellDef> Username </th>
+              <td mat-cell *matCellDef="let element"> {{element.username}} </td>
+            </ng-container>
+            <ng-container matColumnDef="roles">
+              <th mat-header-cell *matHeaderCellDef> Active Roles </th>
+              <td mat-cell *matCellDef="let element"> {{element.roles}} </td>
+            </ng-container>
+              <ng-container matColumnDef="title">
+                <th mat-header-cell *matHeaderCellDef> Title </th>
+                <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+              </ng-container>
+              <ng-container matColumnDef="description">
+                <th mat-header-cell *matHeaderCellDef> Description </th>
+                <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+              </ng-container>
+              <ng-container matColumnDef="email">
+                <th mat-header-cell *matHeaderCellDef> Email </th>
+                <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+              </ng-container>
+              <ng-container matColumnDef="phone-number">
+                <th mat-header-cell *matHeaderCellDef> Phone </th>
+                <td mat-cell *matCellDef="let element"> {{element.phone}} </td>
+              </ng-container>
+              <ng-container matColumnDef="status">
+                <th mat-header-cell *matHeaderCellDef> Status </th>
+                <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+              </ng-container>
+            <ng-container matColumnDef="approve-or-dissapprove">
+              <th mat-header-cell *matHeaderCellDef> Photos Approve Or Dissapprove </th>
+              <td mat-cell *matCellDef="let row"> <button mat-button (click)="openDialog(row)">Edit Classified Ads</button>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          <!-- <tr>
+              <th style="width: 30%;">Username</th>
+              <th style="width: 40%;">Active Roles</th>
+              <th style="width: 30%;"></th>
+          </tr>
+          <tr *ngFor="let user of users">
+              <td>{{user.username}}</td>
+              <td>{{user.roles}}</td>
+              <td><button class="btn btn-info">Edit Roles</button></td>
+          </tr> -->
+      </table>
+  </div>
+</div>
+

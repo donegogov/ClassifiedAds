@@ -1,0 +1,14 @@
+.dropdown-toggle, .dropdown-item {
+    cursor: pointer;
+}
+
+
+
+.navbar {
+    background: #7986cb;
+    /* color: white; */
+    }
+
+    .navbar a {
+        color: #fff; /* // applies to all of the ul links */
+        }

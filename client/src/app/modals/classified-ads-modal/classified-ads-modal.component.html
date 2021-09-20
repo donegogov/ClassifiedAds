@@ -1,0 +1,21 @@
+<p>classified-ads-modal works!</p>
+<h2 mat-dialog-title>Edit Classified Ads</h2>
+<mat-dialog-content class="mat-typography" style="width: 500px;">
+  <div [formGroup]="approveOrDissapproveForm">
+    <p><mat-checkbox formControlName="approve" [(ngModel)]="approveOrDissapproveData.is_approved_checked">Approve</mat-checkbox></p>
+    <p><mat-checkbox formControlName="dissapprove" [(ngModel)]="approveOrDissapproveData.is_dissapproved_checked">Dissapprove</mat-checkbox></p>
+  </div>
+  <ngx-masonry [options]="myOptions" class="masonry" [ordered]="true">
+    <div ngxMasonryItem [prepend]="false" *ngFor="let image of photos;index as idx" class="masonryItem">
+      <img [src]="image.url" width="100%">
+    </div>
+  </ngx-masonry>
+  <div [formGroup]="approveOrDissapproveForm">
+    <p><mat-checkbox formControlName="approve" [(ngModel)]="approveOrDissapproveData.is_approved_checked">Approve</mat-checkbox></p>
+    <p><mat-checkbox formControlName="dissapprove" [(ngModel)]="approveOrDissapproveData.is_dissapproved_checked">Dissapprove</mat-checkbox></p>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close (click)="onNoClick()">Cancel</button>
+  <button mat-button [mat-dialog-close]="approveOrDissapproveData" cdkFocusInitial>Save Changes</button>
+</mat-dialog-actions>

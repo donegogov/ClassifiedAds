@@ -1,0 +1,66 @@
+<nav  class="navbar navbar-expand-lg navbar1">
+  <div class="container">
+  <a class="navbar-brand" [routerLink]="['/home']">СОЛИДАРНОСТ.МК</a>
+
+  <button
+    class="navbar-toggler"
+    type="button"
+    (click)="collapse.toggle()"
+    aria-controls="main-nav"
+    aria-expanded="false"
+    aria-label="Navigáció kapcsoló"
+  >
+    <span
+      class="navbar-toggler-icon d-flex align-items-center justify-content-center"
+    >
+    </span>
+  </button>
+  <ngx-navbar-collapse id="main-nav" #collapse="ngxNavbarCollapse" >
+
+    <ul class="navbar-nav mr-auto">
+        <li class="nav-item mr-2" routerLinkActive="active">
+          <a mat-button color="primary" class="nav-link" [routerLink]="['/ads-list']">РЕКЛАМИ</a>
+        </li>
+      <li class="nav-item" *appHasRole='["Member", "Admin", "Moderator"]'>
+        <ul  class="navbar-nav mr-auto">
+          <!-- <li class="nav-item" routerLinkActive="active">
+            <a class="nav-link" [routerLink]="['/member-list']">Members</a>
+          </li> -->
+          <li class="nav-item mr-2" routerLinkActive="active">
+            <a mat-button color="primary" class="nav-link" [routerLink]="['/create-ads']">+ОГЛАС</a>
+          </li>
+          <li *appHasRole='["Admin", "Moderator"]' class="nav-item" routerLinkActive="active">
+            <a  mat-button color="primary" class="nav-link" [routerLink]="['/admin']">Admin</a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <div *ngIf="(authService.currentUser$ | async) as user" class="dropdown" dropdown>
+      <a class="dropdown-toggle text-light" dropdownToggle>
+        Добредојдовте {{user.username | titlecase}}
+      </a>
+
+      <div  class="dropdown-menu mt-3" *dropdownMenu>
+          <a class="dropdown-item" [routerLink]="['/member/edit']" style="color: #3f51b5;">
+            <i class="fa fa-user"></i> Edit Profile
+          </a>
+        <a class="dropdown-item" [routerLink]="['/classified-ads-user-list', user.id]" style="color: #3f51b5;">
+          <i class="fa fa-buysellads"></i> Измени оглас</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" (click)="logout(); collapse.toggle()" style="color: #3f51b5;">
+          <i class="fa fa-sign-out"></i> Одјава
+        </a>
+      </div>
+    </div>
+
+    <form *ngIf="(authService.currentUser$ | async) === null" #loginForm="ngForm" class="form-inline my-2 my-lg-0" (ngSubmit)="login()">
+      <input class="form-control mr-sm-2" type="text" name="username" placeholder="Корисничко име"
+        required [(ngModel)]="model.username">
+      <input class="form-control mr-sm-2" type="password" name="password" placeholder="Лозинка"
+        required [(ngModel)]="model.password">
+      <button [disabled]='!loginForm.valid' mat-raised-button color="primary" style="color:white" class="my-2 my-sm-0" type="submit" (click)="collapse.toggle()">Најави се</button>
+    </form>
+
+  </ngx-navbar-collapse>
+</div>
+</nav>

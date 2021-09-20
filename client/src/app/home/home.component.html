@@ -1,0 +1,27 @@
+<div class="container mt-5">
+  <div *ngIf="!registerMode" style="text-align: center">
+    <h5>Демо корисници</h5>
+    <h6>Корисничко име - Лозинка</h6>
+    <h6>Администратор корисник: Admin - P@ssw0rd</h6>
+    <h6>Обичен корисник: Cole - Password123</h6>
+    <h2 style="color: #7986cb;">Подари на некој што му е најпотребно и направи добро дело</h2>
+    <h6>Веб страната е програмирана со помош на .net core и angular</h6>
+    <h6>Програмскиот код е open source и можете да го видите на следниов линк</h6>
+    <h6>https://github.com/donegogov/ClassifiedAds</h6>
+    <h6>Секаков вид на грешки и багови пишете ни на емаил solidarnost.mkd@gmail.com</h6>
+    <h6>Facebook фан страна <a href="https://www.facebook.com/solidarnost.mk">Солидарност.мк</a></h6>
+    <!-- <p style="color: #7986cb;" class="lead" *ngIf="(authService.currentUser$ | async) === null">Регистрирај се</p> -->
+    <div class="text-center mt-5">
+      <button *ngIf="(authService.currentUser$ | async) === null" mat-raised-button class="mr-2" (click)="showRegister()">Креирај Сметка</button>
+      <button mat-raised-button class="mr-2"  [routerLink]="['/ads-list']"><i class="fa fa-search"></i>Огласи</button>
+    </div>
+  </div>
+
+  <div *ngIf="registerMode" class="container">
+    <div class="row justify-content-center">
+      <div class="col-sm-12 col-md-12 col-lg-4">
+        <app-register (cancelRegister)="cancelRegisterMode($event)"></app-register>
+      </div>
+    </div>
+  </div>
+</div>

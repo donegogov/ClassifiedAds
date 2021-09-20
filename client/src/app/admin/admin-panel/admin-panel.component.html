@@ -1,0 +1,37 @@
+<div class="container text-center" >
+    <div class="row">
+        <div class="col-xs-12 col-lg-12">
+            <h2>Admin Panel</h2>
+                <!-- <mat-tab-group animationDuration="2000ms">
+                    <mat-tab label="User management">
+                        <div class="example-small-box mat-elevation-z4">
+                            <app-user-management></app-user-management>
+                        </div>
+                    </mat-tab>
+                    <mat-tab label="Classified ads management">
+                        <div class="example-small-box mat-elevation-z4">
+                            <app-classified-ads-management></app-classified-ads-management>
+                        </div>
+                    </mat-tab>
+                </mat-tab-group> -->
+                <mat-tab-group mat-align-tabs="start">
+                    <mat-tab label="User management">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-xs-12 col-lg-12">
+                                    <app-user-management [users]="usersForManagement"></app-user-management>
+                                </div>
+                            </div>
+                        </div>
+                    </mat-tab>
+                    <mat-tab label="Classified ads management"><div class="container">
+                        <div class="row">
+                            <div class="col-xs-12 col-lg-12">
+                                <app-classified-ads-management [usersWithClassifiedAds]="users"></app-classified-ads-management>
+                            </div>
+                        </div>
+                    </div></mat-tab>
+                  </mat-tab-group>
+        </div>
+    </div>
+</div>

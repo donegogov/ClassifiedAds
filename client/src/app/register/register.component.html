@@ -1,0 +1,60 @@
+<form [formGroup]="registerForm" (ngSubmit)="register()" class="register-container">
+  <!-- <h2 class="text-center" style="color: #7986cb;">Регистрирај се</h2>
+  <br/> -->
+
+  <!-- <div class="register-container">
+    <mat-form-field appearance="fill">
+      <mat-label>Enter your emailЕмаил</mat-label>
+      <input matInput placeholder="emailname@example.com" formControlName="email" required>
+      <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+    </mat-form-field>
+  </div> -->
+
+  <div class="register-container">
+    <mat-form-field appearance="fill">
+      <mat-label><!-- Enter your email -->Корисничко име</mat-label>
+      <input matInput placeholder="ExampleUserName" formControlName="username" required>
+      <mat-error *ngIf="username.invalid">Изберете корисничко име</mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="register-container">
+    <mat-form-field appearance="fill">
+      <mat-label>Град</mat-label>
+      <mat-select formControlName="city" >
+        <mat-option *ngFor="let city of cities" value="{{ city.cityValue }}">
+          {{ city.cityName }}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="city.invalid">Изберете град</mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="register-container">
+    <mat-form-field appearance="fill">
+      <mat-label>Лозинка</mat-label>
+      <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
+      <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+      <mat-error *ngIf="password.invalid">Внесете лозинка</mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="register-container mb-5">
+    <mat-form-field appearance="fill">
+      <mat-label>Лозинка</mat-label>
+      <input matInput [type]="hideConfirmPassword ? 'password' : 'text'" formControlName="confirmPassword">
+      <button mat-icon-button matSuffix (click)="hideConfirmPassword = !hideConfirmPassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+      <mat-error *ngIf="confirmPassword.hasError('notEquivalent')">Двете лозинки треба да се исти</mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="text-center">
+    <button mat-raised-button type="submit" class="mr-2">КРЕИРАЈ СМЕТКА</button>
+    <!-- <button mat-raised-button  (click)="cancel()">
+      Не фала
+    </button> -->
+  </div>
+</form>
