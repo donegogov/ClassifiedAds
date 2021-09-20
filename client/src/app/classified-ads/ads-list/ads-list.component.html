@@ -1,0 +1,29 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-12 col-lg-12">
+    <app-search-ads></app-search-ads>
+  </div>
+</div>
+  <div class="row mt-5">
+    <ngx-masonry [options]="myOptions" class="masonry" [ordered]="true">
+      <div ngxMasonryItem [prepend]="false" *ngFor="let classifiedAd of classifiedAdsList" class="col-xs-12 col-sm-12 col-md-4 col-lg-3 masonryItem">
+        <app-classified-ads-card [classifiedAd]="classifiedAd"></app-classified-ads-card>
+      </div>
+    </ngx-masonry>
+  </div>
+</div>
+
+<div class="d-flex justify-content-center">
+  <pagination [boundaryLinks]="true"
+    [totalItems]="pagination.totalItems"
+    [itemsPerPage]="pagination.itemsPerPage"
+    [(ngModel)]="pagination.currentPage"
+    (pageChanged)="pageChanged($event)"
+    previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;">
+  </pagination>
+</div>
+<!-- <mat-paginator [pageSize]="pagination.itemsPerPage" [(ngModel)]="paginationModel"
+(page)="pageChanged($event)"
+ [length]="pagination.totalItems" [pageSizeOptions]="pageSizeOptions" [pageIndex]="pagination.currentPage">
+</mat-paginator>
+ -->

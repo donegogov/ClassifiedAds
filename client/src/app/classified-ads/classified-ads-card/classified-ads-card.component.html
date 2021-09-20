@@ -1,0 +1,53 @@
+<!-- <div class="card mb-4">
+  <div class="card-img-wrapper">
+    <img class="card-img-top" src="{{classifiedAd.photoUrl}}" alt="{{classifiedAd.photoUrl}}">
+    <ul class="list-inline classified-ads-icons animate text-center">
+      <li class="list-inline-item">
+        <button mat-raised-button color="primary" [routerLink]="['/ads-list/',  classifiedAd.id]"><i class="fa fa-buysellads"></i>
+        </button>
+      </li>
+      <li *appHasRole='["Member"]' class="list-inline-item"><button mat-icon-button color="primary"
+        (click)="sendLike(classifiedAd.id)"><i class="fa fa-heart"></i></button></li>
+     <li *ngIf="loggedIn()" class="list-inline-item"><button class="btn btn-primary"><i class="fa fa-envelope"></i></button></li>
+    </ul>
+  </div>
+  <div class="card-body p-1">
+    <h6 class="card-title text-center mb-1">
+      {{classifiedAd.title}}
+    </h6>
+    <p class="card-text text-center mt-2">
+      {{classifiedAd.description}}
+    </p>
+    <p class="card-text text-muted text-center mt-2">
+        {{classifiedAdLikes}} допаѓања
+      </p>
+    <p class="card-text text-muted text-center mt-2">
+      Додадено пред {{classifiedAd.age}}
+    </p>
+  </div>
+</div> -->
+<mat-card class="ca-card">
+  <mat-card-header>
+    <!-- <div mat-card-avatar class="example-header-image" [ngStyle]="{'background-image': 'url(' + classifiedAd.photoUrl + ')'}">
+    </div>
+    <mat-card-title [routerLink]="['/ads-list/',  classifiedAd.id]" style="cursor: pointer;">{{classifiedAd.title}}</mat-card-title> -->
+    <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
+  </mat-card-header>
+  <img mat-card-image src="{{classifiedAd.photoUrl}}" alt="Photo of a {{classifiedAd.title}}"
+  [routerLink]="['/ads-list/',  classifiedAd.id]" style="cursor: pointer;">
+  <mat-card-content>
+    <h6 class="" [routerLink]="['/ads-list/',  classifiedAd.id]" style="cursor: pointer;">
+      {{classifiedAd.title}}
+    </h6>
+    <p>
+      {{classifiedAd.description}}
+    </p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button *appHasRole='["Member"]' (click)="sendLike(classifiedAd.id)">
+      <mat-icon *ngIf="is_liked" aria-hidden="false" aria-label="Example home icon">favorite</mat-icon>
+      <mat-icon *ngIf="!is_liked" aria-hidden="false" aria-label="Example home icon">favorite_border</mat-icon>
+    {{classifiedAdLikes}}</button>
+    <!-- <button mat-button>SHARE</button> -->
+  </mat-card-actions>
+</mat-card>

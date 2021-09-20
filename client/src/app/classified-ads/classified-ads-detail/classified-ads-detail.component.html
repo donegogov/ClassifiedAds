@@ -1,0 +1,68 @@
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+        <!-- <ngx-gallery [options]="galleryOptions" [images]="galleryImages"></ngx-gallery> -->
+        <!-- <mat-grid-list cols="3" rowHeight="500px">
+          <mat-grid-tile
+              *ngFor="let image of images"
+              [colspan]="1"
+              [rowspan]="1">
+          </mat-grid-tile>
+        </mat-grid-list> -->
+        <ngx-masonry [options]="myOptions" class="masonry" [ordered]="true">
+          <div ngxMasonryItem [prepend]="false" *ngFor="let image of images;index as idx" class="masonryItem">
+            <img [src]="image.big" width="100%">
+          </div>
+        </ngx-masonry>
+
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+      <div class="card">
+        <div class="card-body">
+          <p class="card-title text-left mt-2">
+            <span>Објавено од </span>
+            {{classifiedAdsDetail.userPublishedUserName}}
+          </p>
+          <p class="card-title text-left mt-2">
+            <span>Наслов:</span>
+            {{classifiedAdsDetail.title}}
+          </p>
+          <p class="card-text text-left mt-2">
+              <!-- <strong>Description:</strong> -->
+              <span>Опис:</span>
+              {{classifiedAdsDetail.description}}
+            </p>
+          <p class="card-text text-left mt-2">
+              <!-- <strong>City:</strong> -->
+              <span>Град:</span>
+              {{classifiedAdsDetail.city}}
+            </p>
+          <p class="card-text text-left mt-2">
+              <!-- <strong>Category:</strong> -->
+              <span>Категорија:</span>
+              {{classifiedAdsDetail.category}}
+            </p>
+          <!--<p class="card-text text-left mt-2">
+               <strong>Date Added:</strong>
+              <strong>Category:</strong>
+              {{classifiedAdsDetail.dataAdded}}
+            </p> -->
+           <!-- <p class="card-text text-left mt-2">
+              <strong>Valid To:</strong>
+              {{classifiedAdsDetail.validTo}}
+            </p> -->
+        </div>
+        <div class="card-footer">
+          <!-- <p><strong>Contact Informaton:</strong></p> -->
+          <!-- <p class="card-text text-left"><span>Информации за контакт</span></p> -->
+          <!-- <strong>Email:</strong> -->
+          <span>Електронска пошта:</span>
+          <p class="card-text text-left">{{classifiedAdsDetail.email}}</p>
+          <!-- <strong>Phone:</strong> -->
+          <span>Телефон:</span>
+          <p class="card-text text-left">{{classifiedAdsDetail.phone}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

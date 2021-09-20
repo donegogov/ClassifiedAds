@@ -1,0 +1,11 @@
+@use "@material/image-list";
+
+.my-image-list {
+    @include image-list.standard-columns(5);
+  }
+  
+  @media (max-width: 599px) {
+    .my-image-list {
+      @include image-list.standard-columns(3);
+    }
+  }

@@ -1,0 +1,198 @@
+<div class="container mt-4">
+  <div class="row mb-20">
+    <div class="col-sm-4">
+      <h3>Вашиот Оглас</h3>
+    </div>
+    <div class="col-sm-8">
+      <div *ngIf="editForm.dirty" class="alert alert-info">
+        <!-- <strong>Information:</strong> You have made changes. Any unsaved changes
+        will be lost!-->
+        Зачувајте ги промените на огласот!
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <form [formGroup]="editForm" (ngSubmit)="updateClassifiedAd()">
+        <div class="card">
+          <div class="card-body">
+            <p class="mt-2">
+              <app-photo-editor
+                [photos]="classifiedAdsForUserUpdate.photos"
+                [classifiedAdId]="classifiedAdsForUserUpdate.id"
+              ></app-photo-editor>
+            </p>
+            <!-- <div class="card-title text-left mb-1 mt-4">
+              <strong>Title:</strong>
+              <label>Наслов</label>
+              <input
+                type="text"
+                name="title"
+                formControlName="title"
+                class="form-control"
+                value="Title"
+                [(ngModel)]="classifiedAdsForRegister.title"
+                required
+              />
+              <p style="color: red;" *ngIf="is_title_invalid"> Title is required>Насловот е задолжително поле</p>
+            </div> -->
+            <div class="register-container">
+              <mat-form-field appearance="fill">
+                <mat-label><!-- Enter your email -->Наслов</mat-label>
+                <input matInput name="title" placeholder="Пример: Подарувам..." formControlName="title" [(ngModel)]="classifiedAdsForUserUpdate.title" required>
+                <mat-error *ngIf="is_title_invalid">Наслов е задолжително поле</mat-error>
+              </mat-form-field>
+            </div>
+
+            <!-- <div class="card-text text-left mt-2">
+              <label>DescriptionОпис</label>
+              <textarea
+                rows="5"
+                name="description"
+                formControlName="description"
+                class="form-control"
+                value="Description"
+                [(ngModel)]="classifiedAdsForRegister.description"
+                required
+              ></textarea>
+              <p style="color: red;" *ngIf="is_description_invalid">
+                  Описот е задолжително поле
+              </p>
+            </div> -->
+            <div class="register-container">
+              <mat-form-field appearance="fill">
+                <mat-label><!-- Enter your email -->Опис</mat-label>
+                <textarea matInput name="description" placeholder="Пример: Подарувам..." formControlName="description"
+                [(ngModel)]="classifiedAdsForUserUpdate.description" required></textarea>
+                <mat-error *ngIf="is_description_invalid">Описот е задолжително поле</mat-error>
+              </mat-form-field>
+            </div>
+
+            <!-- <div class="card-text text-left mt-2">
+              <label> City Град</label>
+              <select
+                class="form-control"
+                name="city"
+                formControlName="city"
+                [(ngModel)]="classifiedAdsForRegister.city"
+                required
+              >
+                <option
+                  *ngFor="let city of cities"
+                  value="{{ city.cityValue }}"
+                  [selected]="
+                    classifiedAdsForRegister.city == city.cityName ? true : null
+                  "
+                >
+                  {{ city.cityName }}
+                </option>
+              </select>
+              <p style="color: red;" *ngIf="is_city_invalid">> City is required Град е задолжително поле</p>
+            </div> -->
+            <div class="register-container">
+              <mat-form-field appearance="fill">
+                <mat-label>Град</mat-label>
+                <mat-select name="city" formControlName="city" [(ngModel)]="classifiedAdsForUserUpdate.city" required
+                [(value)]="classifiedAdsForUserUpdate.city">
+                  <mat-option *ngFor="let city of cities" value="{{ city.cityValue }}">
+                    {{ city.cityName }}</mat-option>
+                </mat-select>
+                <mat-error *ngIf="is_city_invalid">Град е задолжително поле</mat-error>
+              </mat-form-field>
+            </div>
+
+            <!-- <div class="card-text text-left mt-2">
+              <label>- Category Категорија</label>
+              <select
+                class="form-control"
+                name="category"
+                formControlName="category"
+                [(ngModel)]="classifiedAdsForRegister.category"
+                required
+              >
+                <option
+                  *ngFor="let category of categories"
+                  value="{{ category.categoryValue }}"
+                  [selected]="
+                    classifiedAdsForRegister.category == category.categoryName
+                      ? true
+                      : null
+                  "
+                >
+                  {{ category.categoryName }}
+                </option>
+              </select>
+              <p style="color: red;" *ngIf="is_category_invalid">Категоријата е задолжително поле</p>
+            </div> -->
+            <div class="register-container">
+              <mat-form-field appearance="fill">
+                <mat-label>Категорија</mat-label>
+                <mat-select name="category" formControlName="category" [(ngModel)]="classifiedAdsForUserUpdate.category" required
+                [(value)]="classifiedAdsForUserUpdate.category">
+                  <mat-option *ngFor="let category of categories" value="{{ category.categoryName }}">
+                    {{ category.categoryName }}</mat-option>
+                </mat-select>
+                <mat-error *ngIf="is_category_invalid">Категорија е задолжително поле</mat-error>
+              </mat-form-field>
+            </div>
+
+          </div>
+          <div class="card-footer">
+            <p><label> <!-- Contact Informaton --> Информации за контакт</label></p>
+            <!-- <div class="mt-2">
+              <label> Email Електронска пошта</label>
+              <input
+                type="text"
+                name="email"
+                formControlName="email"
+                class="form-control"
+                value="Email"
+                [(ngModel)]="classifiedAdsForRegister.email"
+                required
+                email
+              />
+                <p style="color: red;" *ngIf="is_email_invalid"> Email is required Електронска пошта е задолжително поле</p>
+                 <div *ngIf="email.errors['email']">
+                 Email must be a valid email address Внесете валидна електронска пошта
+                </div>
+            </div> -->
+            <div class="register-container">
+              <mat-form-field appearance="fill">
+                <mat-label><!-- Enter your email -->Електронска пошта</mat-label>
+                <input matInput name="email" placeholder="example@mail.com" formControlName="email" [(ngModel)]="classifiedAdsForUserUpdate.email" required>
+                <mat-error *ngIf="is_email_invalid">Електронска пошта е задолжително поле</mat-error>
+              </mat-form-field>
+            </div>
+
+            <!-- <div class="mt-2">
+              <label> Phone Телефон</label>
+              <input
+                type="text"
+                name="phone"
+                formControlName="phone"
+                class="form-control"
+                value="078111111"
+                [(ngModel)]="classifiedAdsForRegister.phone"
+                required
+              />
+              <p style="color: red;" *ngIf="is_phone_invalid"> Phone is required Телефонот е задолжително поле</p>
+            </div> -->
+            <div class="register-container">
+              <mat-form-field appearance="fill">
+                <mat-label><!-- Enter your email -->Телефон</mat-label>
+                <input matInput name="phone" placeholder="078123456" formControlName="phone" [(ngModel)]="classifiedAdsForUserUpdate.phone" required>
+                <mat-error *ngIf="is_phone_invalid">Телефон е задолжително поле</mat-error>
+              </mat-form-field>
+            </div>
+            <button mat-raised-button color="primary"
+              [disabled]="!editForm.dirty"
+              class="mt-2 text-center" style="width: 100%;"
+            >
+              <!-- Save Changes -->ЗАЧУВАЈТЕ ГИ ПРОМЕНИТЕ НА ОГЛАСОТ
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
