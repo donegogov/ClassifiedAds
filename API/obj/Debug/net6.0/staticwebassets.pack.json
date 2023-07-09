@@ -1,0 +1,89 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\donat\\OneDrive\\Desktop\\ClassifiedAds\\API\\wwwroot\\3rdpartylicenses.txt",
+      "PackagePath": "staticwebassets\\3rdpartylicenses.txt"
+    },
+    {
+      "Id": "C:\\Users\\donat\\OneDrive\\Desktop\\ClassifiedAds\\API\\wwwroot\\assets\\img\\facebook-og.jpg",
+      "PackagePath": "staticwebassets\\assets\\img\\facebook-og.jpg"
+    },
+    {
+      "Id": "C:\\Users\\donat\\OneDrive\\Desktop\\ClassifiedAds\\API\\wwwroot\\favicon.ico",
+      "PackagePath": "staticwebassets\\favicon.ico"
+    },
+    {
+      "Id": "C:\\Users\\donat\\OneDrive\\Desktop\\ClassifiedAds\\API\\wwwroot\\fontawesome-webfont.1e59d2330b4c6deb84b3.ttf",
+      "PackagePath": "staticwebassets\\fontawesome-webfont.1e59d2330b4c6deb84b3.ttf"
+    },
+    {
+      "Id": "C:\\Users\\donat\\OneDrive\\Desktop\\ClassifiedAds\\API\\wwwroot\\fontawesome-webfont.20fd1704ea223900efa9.woff2",
+      "PackagePath": "staticwebassets\\fontawesome-webfont.20fd1704ea223900efa9.woff2"
+    },
+    {
+      "Id": "C:\\Users\\donat\\OneDrive\\Desktop\\ClassifiedAds\\API\\wwwroot\\fontawesome-webfont.8b43027f47b20503057d.eot",
+      "PackagePath": "staticwebassets\\fontawesome-webfont.8b43027f47b20503057d.eot"
+    },
+    {
+      "Id": "C:\\Users\\donat\\OneDrive\\Desktop\\ClassifiedAds\\API\\wwwroot\\fontawesome-webfont.c1e38fd9e0e74ba58f7a.svg",
+      "PackagePath": "staticwebassets\\fontawesome-webfont.c1e38fd9e0e74ba58f7a.svg"
+    },
+    {
+      "Id": "C:\\Users\\donat\\OneDrive\\Desktop\\ClassifiedAds\\API\\wwwroot\\fontawesome-webfont.f691f37e57f04c152e23.woff",
+      "PackagePath": "staticwebassets\\fontawesome-webfont.f691f37e57f04c152e23.woff"
+    },
+    {
+      "Id": "C:\\Users\\donat\\OneDrive\\Desktop\\ClassifiedAds\\API\\wwwroot\\index.html",
+      "PackagePath": "staticwebassets\\index.html"
+    },
+    {
+      "Id": "C:\\Users\\donat\\OneDrive\\Desktop\\ClassifiedAds\\API\\wwwroot\\main-es2015.0fdf5e0595ba2a02456a.js",
+      "PackagePath": "staticwebassets\\main-es2015.0fdf5e0595ba2a02456a.js"
+    },
+    {
+      "Id": "C:\\Users\\donat\\OneDrive\\Desktop\\ClassifiedAds\\API\\wwwroot\\main-es5.0fdf5e0595ba2a02456a.js",
+      "PackagePath": "staticwebassets\\main-es5.0fdf5e0595ba2a02456a.js"
+    },
+    {
+      "Id": "C:\\Users\\donat\\OneDrive\\Desktop\\ClassifiedAds\\API\\wwwroot\\polyfills-es2015.9fef08d0fd8bd7df9e78.js",
+      "PackagePath": "staticwebassets\\polyfills-es2015.9fef08d0fd8bd7df9e78.js"
+    },
+    {
+      "Id": "C:\\Users\\donat\\OneDrive\\Desktop\\ClassifiedAds\\API\\wwwroot\\polyfills-es5.8c5a6c837e74b237845e.js",
+      "PackagePath": "staticwebassets\\polyfills-es5.8c5a6c837e74b237845e.js"
+    },
+    {
+      "Id": "C:\\Users\\donat\\OneDrive\\Desktop\\ClassifiedAds\\API\\wwwroot\\runtime-es2015.245bcd6d15cc8ef9a200.js",
+      "PackagePath": "staticwebassets\\runtime-es2015.245bcd6d15cc8ef9a200.js"
+    },
+    {
+      "Id": "C:\\Users\\donat\\OneDrive\\Desktop\\ClassifiedAds\\API\\wwwroot\\runtime-es5.245bcd6d15cc8ef9a200.js",
+      "PackagePath": "staticwebassets\\runtime-es5.245bcd6d15cc8ef9a200.js"
+    },
+    {
+      "Id": "C:\\Users\\donat\\OneDrive\\Desktop\\ClassifiedAds\\API\\wwwroot\\scripts.ed13fff0d6de6ae65147.js",
+      "PackagePath": "staticwebassets\\scripts.ed13fff0d6de6ae65147.js"
+    },
+    {
+      "Id": "C:\\Users\\donat\\OneDrive\\Desktop\\ClassifiedAds\\API\\wwwroot\\styles.8ee44ae2fdb3b39b889c.css",
+      "PackagePath": "staticwebassets\\styles.8ee44ae2fdb3b39b889c.css"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.FreeAds.API.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.build.FreeAds.API.props",
+      "PackagePath": "build\\FreeAds.API.props"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.buildMultiTargeting.FreeAds.API.props",
+      "PackagePath": "buildMultiTargeting\\FreeAds.API.props"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.buildTransitive.FreeAds.API.props",
+      "PackagePath": "buildTransitive\\FreeAds.API.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

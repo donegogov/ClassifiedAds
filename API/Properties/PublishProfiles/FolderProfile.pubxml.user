@@ -1,10 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <!--
-https://go.microsoft.com/fwlink/?LinkID=208121. 
+https://go.microsoft.com/fwlink/?LinkID=208121.
 -->
-<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project>
   <PropertyGroup>
-    <_PublishTargetUrl>D:\BLUESUNDISK\FreeAds - angular .net core\FreeAds.API\bin\Release\net5.0\publish\</_PublishTargetUrl>
-    <History>True|2021-07-31T05:14:52.5965755Z;True|2021-07-31T01:42:16.3583514+02:00;True|2021-07-31T01:20:24.1720696+02:00;True|2021-07-30T08:21:39.4853271+02:00;True|2021-07-30T07:52:47.0179630+02:00;True|2021-07-30T04:29:03.8138686+02:00;True|2021-07-30T03:47:25.2495317+02:00;True|2021-07-30T03:29:43.0157814+02:00;True|2021-07-30T03:05:03.0161969+02:00;True|2021-07-30T02:54:26.4528260+02:00;True|2021-07-30T02:41:32.8719138+02:00;True|2021-07-30T01:23:12.9428267+02:00;True|2021-07-29T06:43:42.9473187+02:00;</History>
+    <_PublishTargetUrl>C:\Users\donat\OneDrive\Desktop\ClassifiedAds\API\bin\Release\net6.0\publish\</_PublishTargetUrl>
+    <History>True|2023-07-09T20:21:06.8986108Z;</History>
+    <LastFailureDetails />
   </PropertyGroup>
 </Project>

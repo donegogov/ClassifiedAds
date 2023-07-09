@@ -3,7 +3,24 @@
   <hr />
 
   <div class="form-group">
-    <strong>Корисничко име:</strong>
+    <strong>Емаил</strong>
+    <input
+      [ngClass]="{
+        'is-invalid':
+          (registerForm.get('email').errors &&
+          registerForm.get('email').touched) ||
+          (submited && registerForm.get('email').errors)
+      }"
+      type="text"
+      class="form-control"
+      formControlName="email"
+      placeholder="Емаил"
+    />
+    <div class="invalid-feedback">Внесете Емаил адреса</div>
+  </div>
+
+  <div class="form-group">
+    <strong>Корисничко име</strong>
     <input
       [ngClass]="{
         'is-invalid':
@@ -19,7 +36,7 @@
     <div class="invalid-feedback">Изберете корисничко име</div>
   </div>
   <div class="form-group">
-    <strong>Град:</strong>
+    <strong>Град</strong>
     <select
       class="form-control"
       formControlName="city"
@@ -37,7 +54,7 @@
     </div>
   </div>
   <div class="form-group">
-    <strong>Лозинка:</strong>
+    <strong>Лозинка</strong>
     <input
       [ngClass]="{
         'is-invalid':
@@ -80,7 +97,7 @@
     </div>
   </div>
   <div class="form-group">
-    <strong>Потврди лозинка:</strong>
+    <strong>Потврди лозинка</strong>
     <input
       [ngClass]="{
         'is-invalid':

@@ -40,14 +40,17 @@ namespace FreeAds.API.Controllers
 
             userForRegisterDto.Username = userForRegisterDto.Username.ToLower();
 
-            var user = await _userManager.Users.SingleOrDefaultAsync(x => x.UserName == userForRegisterDto.Username.ToLower());
+            var user = await _userManager.Users.SingleOrDefaultAsync(x =>
+                x.UserName == userForRegisterDto.Username.ToLower() &&
+                x.Email.ToLower() == userForRegisterDto.Email.ToLower());
 
             if (user != null)
                 //return BadRequest("Username already exists");
                 return BadRequest("Корисничкото име веќе постои");
-            
+
             var userToCreate = new AppUser
             {
+                Email = userForRegisterDto.Email.ToLower(),
                 UserName = userForRegisterDto.Username.ToLower(),
                 City = userForRegisterDto.City
             };
