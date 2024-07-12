@@ -1,0 +1,8 @@
+LIVE PROJECT FOR THIS WEBSITE CAN BE FOUND HERE http://solidarnost.de/
+THIS PROJECT CONTAIN ANGULAR FRONT END AND .NET CORE BACKEND
+
+HOW TO USE?
+1. Install backend
+2. Install frontend
+
+Enjoy!
